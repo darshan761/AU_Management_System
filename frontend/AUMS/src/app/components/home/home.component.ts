@@ -13,8 +13,7 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
 
   data: Users;
-
-  constructor(private http: HttpClient) { }
+  options = ['react','angular'];
 
   ngOnInit() {
     // const url = "http://localhost:4200/api/user";
@@ -22,6 +21,7 @@ export class HomeComponent implements OnInit {
     //   this.data = res
     //   console.log(this.data)
     // })
+  
     this.data = new Users();
     this.data.id =  localStorage.getItem('userId');
     this.data.email = localStorage.getItem('userEmail');
@@ -29,19 +29,12 @@ export class HomeComponent implements OnInit {
     console.log(this.data);
   }
 
-  // users = new Users();  
-  // constructor(public OAuth: AuthService,    private router: Router) { }  
-  // ngOnInit() {  
-  //   this.users = JSON.parse(localStorage.getItem('users'));  
-  //   console.log(this.users.id);  
-  // }  
-  // logout() {  
-  //  alert(1);  
-  //   this.OAuth.signOut().then(data => {  
-  //     debugger;  
-  //     // this.router.navigate([`/login`]);  
-  //   });  
-  // }  
+  constructor(public OAuth: AuthService,    private router: Router) { }
 
-
+  logout() {
+   alert(1);
+   this.OAuth.signOut().then(_data =>{
+    this.router.navigate([`/login`]);
+   });
+  }
 }

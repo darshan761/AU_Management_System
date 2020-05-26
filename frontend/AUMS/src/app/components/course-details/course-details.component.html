@@ -1,2 +1,23 @@
 <app-navbar></app-navbar>
 <p>course-details works!</p>
+<mat-card class="example-card">
+    <mat-card-header>
+        <!-- <div mat-card-avatar class="example-header-image"></div> -->
+        <mat-card-title>{{course.courseName}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <p>Skills</p>
+        <mat-chip-list *ngFor="let skill of skills" aria-label="Fish selection">
+            <mat-chip color="primary" selected>{{skill}}</mat-chip>
+        </mat-chip-list>
+        <p>prerequisites</p>
+        <mat-chip-list *ngFor="let prereq of prerequisites" aria-label="Fish selection">
+            <mat-chip color="primary" selected>{{prereq}}</mat-chip>
+        </mat-chip-list>
+        <p>
+            Description: {{course.courseDesc}}
+        </p>
+    </mat-card-content>
+</mat-card>
+<app-instructor></app-instructor>
+<app-training></app-training>

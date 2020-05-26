@@ -3,38 +3,27 @@
  */
 package com.accolite.aums.models;
 
+import java.sql.Blob;
+
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
  * @author darshan
  *
  */
+@Getter @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
-	@Getter @Setter
+	
 	private int userId;
-	
-	@Getter @Setter
 	private String userName;
-	
-	@Getter @Setter
-	private String name;
-	
-	@Getter @Setter
-    public String email ;
-	
-	@Getter @Setter
-    public String provider;
-	
-	@Getter @Setter
-    public String providerId ;
-	
-	@Getter @Setter
-    public String image;
-	
-	@Getter @Setter
-    public String token ;
-	
-	@Getter @Setter
-    public String idToken ;
+	private String userEmail;
+    private String userDesignation;
+    private String userLocation;
+    private Blob userImage;
+
 }

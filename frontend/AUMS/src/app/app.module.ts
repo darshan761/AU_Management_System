@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule }    from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,7 +13,18 @@ import { GoogleLoginProvider, AuthService, AuthServiceConfig } from 'angular-6-s
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-
+import { InstructorComponent } from './components/instructor/instructor.component';
+import {  MatSelectModule } from '@angular/material';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { ReactiveFormsModule } from '@angular/forms';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { CoursesComponent } from './components/courses/courses.component';
+import {MatTableModule} from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material';
+import {MatCardModule} from '@angular/material/card';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatChipsModule} from '@angular/material/chips';
 
 export function configs(){
   const config = new AuthServiceConfig(
@@ -34,7 +45,9 @@ export function configs(){
     HomeComponent,
     CourseDetailsComponent,
     TrainingComponent,
-    NavbarComponent
+    NavbarComponent,
+    InstructorComponent,
+    CoursesComponent
     ],
   imports: [
     BrowserModule,
@@ -42,14 +55,24 @@ export function configs(){
     HttpClientModule,
     BrowserAnimationsModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatSelectModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatCardModule,
+    MatToolbarModule,
+    MatChipsModule
   ],
   providers: [
-    AuthService,  
-    {  
-      provide: AuthServiceConfig,  
-      useFactory: configs  
-    } 
+    AuthService,
+    {
+      provide: AuthServiceConfig,
+      useFactory: configs
+    }
   ],
   bootstrap: [AppComponent]
 })

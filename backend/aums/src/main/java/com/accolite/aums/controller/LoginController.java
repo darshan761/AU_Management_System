@@ -22,7 +22,7 @@ public class LoginController {
 	public User getUser() {
 		User user = new User();
 		user.setUserId(69);
-		user.setName("Darshan");
+		user.setUserName("Darshan");
 		return user;
 	}
 	

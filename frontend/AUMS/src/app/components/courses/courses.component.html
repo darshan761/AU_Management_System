@@ -1,0 +1,31 @@
+<mat-toolbar>
+    My Courses
+</mat-toolbar>
+<li *ngFor="let course of CourseList">
+    <mat-card class="example-card">
+        <mat-card-header>
+            <!-- <div mat-card-avatar class="example-header-image"></div> -->
+            <mat-card-title>{{course.courseName}}</mat-card-title>
+            <!-- <mat-card-subtitle>{{course.skills}}</mat-card-subtitle> -->
+        </mat-card-header>
+        <mat-card-content>
+            <p>
+                {{course.courseDesc}}
+            </p>
+        </mat-card-content>
+        <mat-card-actions>
+            <div class="example-button-container">
+                <button mat-fab color="primary" [routerLink]="['/course', course.courseId]" aria-label="Example icon button with a home icon">
+                            <mat-icon>visibility</mat-icon>
+                          </button> &nbsp;
+                <button mat-fab color="primary" [routerLink]="['/course', course.courseId]" aria-label="Example icon button with a edit icon">
+                                <mat-icon>edit</mat-icon>
+                              </button> &nbsp;
+                <button mat-fab color="primary" [routerLink]="['/course', course.courseId]" aria-label="Example icon button with a delete icon">
+                          <mat-icon>delete</mat-icon>
+                        </button>
+            </div>
+        </mat-card-actions>
+    </mat-card>
+
+</li>

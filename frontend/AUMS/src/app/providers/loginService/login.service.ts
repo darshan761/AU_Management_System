@@ -10,7 +10,7 @@ export class LoginService {
   constructor(private http: HttpClient) { }
 
   Savesresponse(response) {
-    this.url = "http:localhost:4200/api/login/savesResponse";
+    this.url = 'http:localhost:4200/api/login/savesResponse';
     return this.http.post(this.url, response);
   }
 
