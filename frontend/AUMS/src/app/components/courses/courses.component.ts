@@ -11,22 +11,6 @@ import { CourseService } from 'src/app/providers/courseService/course.service';
 })
 export class CoursesComponent implements OnInit {
 
-   course1: Course = {
-    id: 1,
-    name: 'React',
-    description: 'My Description',
-    skills : 'ReactJS, React-native',
-    prerequisites: 'HTML,JSX'
-  };
-
-  course2: Course = {
-    id: 2,
-    name: 'Angular',
-    description: 'Your Description',
-    skills : 'ReactJS, React-native',
-    prerequisites: 'HTML,JSX'
-  };
-
   CourseList = [];
 
   constructor(private courseService: CourseService) { }

@@ -1,1 +1,12 @@
-<p>navbar works!</p>
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <span>AUMS</span>
+        <span class="example-spacer"></span>
+        <a class="example-icon" routerLink="/manage">Manage Courses</a>
+        <a class="example-icon" routerLink="/training">Assigned Courses</a>
+        <a class="example-icon" routerLink="/courses">View All Courses</a>
+        <button mat-fab color="accent" (click)="logout()" aria-label="Example icon button with a home icon">
+            <mat-icon>logout</mat-icon>
+          </button>
+    </mat-toolbar-row>
+</mat-toolbar>

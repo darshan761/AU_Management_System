@@ -18,9 +18,17 @@ public interface CourseService {
 	 
 	 public Course findCourseById(int id);
 	 
+	 public List<Course> findCoursesByUserId(int id);
+	 
 	 public void addCourse(Course course);
 	 
 	 public void updateCourse(Course course);
 	 
 	 public void deleteCourse(int id);
+
+	/**
+	 * @param id
+	 * @return
+	 */
+	List<Course> findCoursesByInstructorId(int id);
 }

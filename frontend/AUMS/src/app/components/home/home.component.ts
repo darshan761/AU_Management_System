@@ -13,27 +13,19 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
 
   data: Users;
-  options = ['react','angular'];
+  options = ['react', 'angular'];
 
   ngOnInit() {
-    // const url = "http://localhost:4200/api/user";
-    // this.http.get(url).subscribe((res)=>{
-    //   this.data = res
-    //   console.log(this.data)
-    // })
-  
     this.data = new Users();
-    this.data.id =  localStorage.getItem('userId');
-    this.data.email = localStorage.getItem('userEmail');
-    this.data.name = localStorage.getItem('userName');
-    console.log(this.data);
+    this.data.email = sessionStorage.getItem('userEmail');
+    this.data.name = sessionStorage.getItem('userName');
   }
 
-  constructor(public OAuth: AuthService,    private router: Router) { }
+  constructor(public OAuth: AuthService, private router: Router) { }
 
   logout() {
    alert(1);
-   this.OAuth.signOut().then(_data =>{
+   this.OAuth.signOut().then(data =>{
     this.router.navigate([`/login`]);
    });
   }

@@ -41,6 +41,18 @@ public class CourseController {
 		return courseService.findCourseById(id);
 	}
 	
+	@GetMapping("/creator/{id}")
+	public List<Course> getCourseByCreatorId(@PathVariable("id") int id) {
+		
+		return courseService.findCoursesByUserId(id);
+	}
+	
+	@GetMapping("/instructor/{id}")
+	public List<Course> getCourseByInstructorId(@PathVariable("id") int id) {
+		
+		return courseService.findCoursesByInstructorId(id);
+	}
+	
 	@PostMapping("/add")
 	public void addCourse(@RequestBody Course course) {
 		courseService.addCourse(course);

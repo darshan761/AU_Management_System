@@ -54,4 +54,14 @@ public class CourseDaoImpl implements CourseDao {
 
 	}
 
+	@Override
+	public List<Course> findCoursesByUserId(int id) {
+		return jdbcTemplate.query(Queries.GET_COURSES_OF_CREATOR, CourseRowMapper.CourseRowMapperLambda, id);	
+	}
+
+
+	public List<Course> findCoursesByInstructorId(int id) {
+		return jdbcTemplate.query(Queries.GET_COURSES_OF_TRAINER, CourseRowMapper.CourseRowMapperLambda, id);
+	}
+
 }

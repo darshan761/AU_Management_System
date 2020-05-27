@@ -34,6 +34,11 @@ public class CourseServiceImpl implements CourseService{
 	}
 
 	@Override
+	public List<Course> findCoursesByUserId(int id) {
+		return courseDao.findCoursesByUserId(id);
+	}
+	
+	@Override
 	public void addCourse(Course course) {
 		courseDao.addCourse(course);
 		
@@ -49,6 +54,10 @@ public class CourseServiceImpl implements CourseService{
 	public void deleteCourse(int id) {
 		courseDao.deleteCourse(id);
 		
+	}
+	@Override
+	public List<Course> findCoursesByInstructorId(int id) {
+		return courseDao.findCoursesByInstructorId(id);
 	}
 	
 	

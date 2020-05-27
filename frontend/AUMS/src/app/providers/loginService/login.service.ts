@@ -6,12 +6,16 @@ import { HttpClient } from '@angular/common/http'
 })
 export class LoginService {
 
-  url;
+  private GET_USER = '/api/user/';
+  user: any;
+
   constructor(private http: HttpClient) { }
 
-  Savesresponse(response) {
-    this.url = 'http:localhost:4200/api/login/savesResponse';
-    return this.http.post(this.url, response);
+  async Savesresponse(response) {
+    await this.http.get(this.GET_USER + response.email).subscribe((data: any[])=>{
+    this.user = data;
+    sessionStorage.setItem('userId', this.user.userId);
+    });
   }
 
 }

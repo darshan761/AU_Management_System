@@ -44,6 +44,14 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
+	public User findUserByEmail(String email) {
+		String query = "SELECT * FROM user WHERE user_email = ?";
+		RowMapper<User> rowMapper = new BeanPropertyRowMapper<>(User.class);
+
+		return jdbcTemplate.queryForObject(query, rowMapper, email);
+	}
+	
+	@Override
 	public void addUser(User user) {
 //		String query = "INSERT INTO employees(employee_id, first_name, last_name, email, phone, job_title) VALUES(?, ?, ?, ?, ?, ?)";
 //		  jdbcTemplate.update(query, user.getEmployeeId(), employee.getFirstName(), employee.getLastName(), employee.getEmail(), employee.getPhone(), employee.getJobTitle());

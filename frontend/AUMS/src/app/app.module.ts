@@ -25,6 +25,8 @@ import { MatPaginatorModule } from '@angular/material';
 import {MatCardModule} from '@angular/material/card';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatChipsModule} from '@angular/material/chips';
+import { ManageCourseComponent } from './components/manage-course/manage-course.component';
+import { TrainingDetailsComponent } from './components/training-details/training-details.component';
 
 export function configs(){
   const config = new AuthServiceConfig(
@@ -47,8 +49,10 @@ export function configs(){
     TrainingComponent,
     NavbarComponent,
     InstructorComponent,
-    CoursesComponent
-    ],
+    CoursesComponent,
+    ManageCourseComponent,
+    TrainingDetailsComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

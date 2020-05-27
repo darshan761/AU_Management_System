@@ -10,6 +10,7 @@ import { Course } from 'src/app/models/Course';
 export class CourseService {
 
   private GET_ALL_COURSES = '/api/course/';
+  userId = sessionStorage.getItem('userId');
   constructor(private http: HttpClient) { }
 
   getAllCourse(){
@@ -19,4 +20,12 @@ export class CourseService {
   getCourseById(id) {
    return this.http.get(this.GET_ALL_COURSES + id);
    }
+
+   getCourseByCreatorId() {
+    return this.http.get(this.GET_ALL_COURSES + '/creator/' + this.userId);
+    }
+
+    getCourseByInstructorId() {
+      return this.http.get(this.GET_ALL_COURSES + '/instructor/' + this.userId);
+      }
 }

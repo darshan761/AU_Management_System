@@ -18,7 +18,12 @@ public class Queries {
 	public static final String CREATE_COURSE = "INSERT INTO course(course_id, course_name, course_desc, course_skills, course_prerequisites, course_location, creator_id) VALUES(?, ?, ?, ?, ?, ?, ?)";
 	public static final String UPDATE_COURSE = "UPDATE course SET course_name=?, course_desc=?, course_skills=?, course_prerequisites=?, course_location=?, creator_id=? WHERE course_id =?";
 	public static final String DELETE_COURSE = "DELETE FROM course WHERE course_id=?";
-
+	
+	public static final String GET_COURSES_OF_CREATOR = "SELECT * from course where course.creator_id = ?";
+	public static final String GET_COURSES_OF_TRAINER = "select * from course JOIN training ON course.course_id = training.course_id and training.instructor_id = ?";
+	public static final String GET_COURSES_OF_BOTH = GET_COURSES_OF_CREATOR + "UNION [DISTINCT]" + GET_COURSES_OF_TRAINER;
+	
+	
 	public static final String GET_ALL_INSTRUCTORS = "SELECT * FROM user JOIN instructor ON user.user_id = instructor.instructor_id";
 	public static final String GET_INSTRUCTOR_BY_ID = "SELECT * FROM user JOIN instructor ON user.user_id = instructor.instructor_id where user.user_id=?";
 	public static final String CREATE_INSTRUCTOR = "INSERT INTO instructor(instructor_id, active) VALUES(?, ?)";

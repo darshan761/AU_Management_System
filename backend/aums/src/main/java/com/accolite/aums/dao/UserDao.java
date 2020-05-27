@@ -5,10 +5,6 @@ package com.accolite.aums.dao;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
-
 import com.accolite.aums.models.User;
 
 /**
@@ -19,6 +15,8 @@ public interface UserDao {
 	 public List<User> getAllUsers();
 	 
 	 public User findUserById(int id);
+	 
+	 public User findUserByEmail(String email);
 	 
 	 public void addUser(User user);
 	 

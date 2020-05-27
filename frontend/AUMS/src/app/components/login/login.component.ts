@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   response;
   googleLogoURL = 'https://raw.githubusercontent.com/fireflysemantics/logo/master/Google.svg';
   users = new Users();
+  userfromEmail: any;
 
   constructor(
     public OAuth: AuthService,
@@ -23,42 +24,26 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer
-  ) { this.matIconRegistry.addSvgIcon(
-    'logo',
-    this.domSanitizer.bypassSecurityTrustResourceUrl(this.googleLogoURL)); }
+  ) { this.matIconRegistry.addSvgIcon('logo', this.domSanitizer.bypassSecurityTrustResourceUrl(this.googleLogoURL)); }
 
   ngOnInit() {
+    if(sessionStorage.getItem('userId')){
+      this.router.navigate([`/home`]);
+    }
   }
 
-  public SignIn(provider: string) {
+  public async SignIn(provider: string) {
     let platformProvider;
-    if(provider == 'google') {
+    if(provider === 'google') {
       platformProvider = GoogleLoginProvider.PROVIDER_ID;
     }
 
     this.OAuth.signIn(platformProvider).then(users => {
       console.log(users);
-      this.users = users;
-
-      localStorage.setItem('userId', this.users.id);
-      localStorage.setItem('userEmail', this.users.email);
-      localStorage.setItem('userName', this.users.name);
-      // console.log(localStorage.getItem('users'));
+      this.loginService.Savesresponse(users);
+      sessionStorage.setItem('userEmail', users.email);
+      sessionStorage.setItem('userName', users.name);
       this.router.navigate([`/home`]);
-      // this.Savesresponse(users);
-    })
+    });
   }
-
-  Savesresponse(users: Users) {
-    this.loginService.Savesresponse(users).subscribe((res: any) => {
-      debugger;  
-      console.log(res);
-      this.users = res;
-      this.response = res.userDetail;
-      localStorage.setItem('users', JSON.stringify( this.users));  
-      console.log(localStorage.setItem('users', JSON.stringify(this.users)));  
-      this.router.navigate([`/home`]);  
-    })  
-  }  
-
 }

@@ -17,6 +17,8 @@ public interface CourseDao {
 	 
 	 public Course findCourseById(int id);
 	 
+	 public List<Course> findCoursesByUserId(int id);
+	 
 	 public void addCourse(Course course);
 	 
 	 public void updateCourse(Course course);

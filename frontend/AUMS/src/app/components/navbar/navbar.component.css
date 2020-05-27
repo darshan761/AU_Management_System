@@ -1,0 +1,11 @@
+.example-icon {
+    padding: 0 14px;
+}
+
+a {
+    color: aliceblue;
+}
+
+a:hover {
+    text-decoration: none;
+}

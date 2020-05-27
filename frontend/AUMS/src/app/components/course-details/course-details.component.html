@@ -1,5 +1,39 @@
 <app-navbar></app-navbar>
-<p>course-details works!</p>
+
+<form [formGroup]="courseForm">
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Course Title</mat-label>
+            <input matInput placeholder="Eg: React" value="{{course.courseName}}" disabled>
+            <mat-icon matSuffix>edit</mat-icon>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Course Description</mat-label>
+            <textarea matInput disabled>{{course.courseDesc}} </textarea>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Course PreRequisites</mat-label>
+            <input matInput placeholder="Eg: JS,HTML,etc" value="{{course.courseSkill}}" disabled>
+            <mat-icon matSuffix>edit</mat-icon>
+        </mat-form-field>
+    </p>
+
+
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Course Skills</mat-label>
+            <input matInput placeholder="Eg: ReactJS" value="{{course.coursePrerequisites}}" disabled>
+            <mat-icon matSuffix>edit</mat-icon>
+        </mat-form-field>
+    </p>
+
+</form>
+
+
 <mat-card class="example-card">
     <mat-card-header>
         <!-- <div mat-card-avatar class="example-header-image"></div> -->

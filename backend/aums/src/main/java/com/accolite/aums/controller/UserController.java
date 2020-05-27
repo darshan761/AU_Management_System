@@ -19,7 +19,7 @@ import com.accolite.aums.service.impl.UserServiceImpl;
  *
  */
 @RestController
-@RequestMapping("user")
+@RequestMapping("api/user")
 public class UserController {
 	
 	@Autowired
@@ -31,10 +31,16 @@ public class UserController {
 		return userService.getAllUsers();
 	}
 	
-	@GetMapping(value= "/{id}")
-	public User getUser(@PathVariable("id") int id) {
+//	@GetMapping(value= "/{id}")
+//	public User getUser(@PathVariable("id") int id) {
+//		
+//		return userService.findUserById(id);
+//	}
+	
+	@GetMapping(value= "/{email}")
+	public User getUserByEmail(@PathVariable("email") String email) {
 		
-		return userService.findUserById(id);
+		return userService.findUserByEmail(email);
 	}
 
 }
