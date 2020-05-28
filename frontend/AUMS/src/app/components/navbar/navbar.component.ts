@@ -24,4 +24,10 @@ export class NavbarComponent implements OnInit {
     // });
    }
 
+   getUrl()
+  {
+    return 'url(' + sessionStorage.getItem("userImg") + ')';
+
+  }
+
 }

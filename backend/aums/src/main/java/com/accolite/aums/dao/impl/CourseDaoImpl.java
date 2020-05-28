@@ -36,7 +36,7 @@ public class CourseDaoImpl implements CourseDao {
 
 	@Override
 	public void addCourse(Course course) {
-		jdbcTemplate.update(Queries.CREATE_COURSE, course.getCourseId(), course.getCourseName(), course.getCourseDesc(),
+		jdbcTemplate.update(Queries.CREATE_COURSE, course.getCourseName(), course.getCourseDesc(),
 				course.getCourseSkill(), course.getCoursePrerequisites(), course.getCourseLocation(),
 				course.getCreatorId());
 	}
@@ -44,8 +44,7 @@ public class CourseDaoImpl implements CourseDao {
 	@Override
 	public void updateCourse(Course course) {
 		jdbcTemplate.update(Queries.UPDATE_COURSE, course.getCourseName(), course.getCourseDesc(),
-				course.getCourseSkill(), course.getCoursePrerequisites(), course.getCourseLocation(),
-				course.getCreatorId(), course.getCourseId());
+				course.getCourseSkill(), course.getCoursePrerequisites(), course.getCourseLocation(), course.getCourseId());
 	}
 
 	@Override

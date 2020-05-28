@@ -27,6 +27,11 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatChipsModule} from '@angular/material/chips';
 import { ManageCourseComponent } from './components/manage-course/manage-course.component';
 import { TrainingDetailsComponent } from './components/training-details/training-details.component';
+import { AddCourseComponent } from './components/add-course/add-course.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { MatDialogModule, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
 
 export function configs(){
   const config = new AuthServiceConfig(
@@ -51,8 +56,10 @@ export function configs(){
     InstructorComponent,
     CoursesComponent,
     ManageCourseComponent,
-    TrainingDetailsComponent
-  ],
+    TrainingDetailsComponent,
+    AddCourseComponent,
+    PageNotFoundComponent
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -69,15 +76,21 @@ export function configs(){
     MatPaginatorModule,
     MatCardModule,
     MatToolbarModule,
-    MatChipsModule
+    MatChipsModule,
+    MatDialogModule,
+    MatSnackBarModule
   ],
   providers: [
     AuthService,
     {
       provide: AuthServiceConfig,
       useFactory: configs
-    }
+    },
+    { provide: MatDialogRef, useValue: {} }
   ],
+    entryComponents: [
+        InstructorComponent
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

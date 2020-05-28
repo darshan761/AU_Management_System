@@ -19,13 +19,11 @@
                 <button mat-fab color="accent" [routerLink]="['/course', course.courseId]" aria-label="Example icon button with a home icon">
                                 <mat-icon>visibility</mat-icon>
                               </button> &nbsp;
-                <button mat-fab color="accent" [routerLink]="['/course', course.courseId]" aria-label="Example icon button with a edit icon">
-                                    <mat-icon>edit</mat-icon>
-                                  </button> &nbsp;
+
                 <button mat-fab color="accent" [routerLink]="['/course', course.courseId]" aria-label="Example icon button with a delete icon">
                               <mat-icon>delete</mat-icon>
                             </button>&nbsp;
-                <button mat-fab color="accent" [routerLink]="['/course', course.courseId]" aria-label="Example icon button with a delete icon">
+                <button mat-fab color="accent" (click)="openDialog()" aria-label="Example icon button with a delete icon">
                                 <mat-icon>person_add</mat-icon>
                               </button>
             </div>
@@ -34,6 +32,6 @@
 
 </li>
 
-<button mat-fab color="accent" aria-label="Example icon button with a home icon">
+<button mat-fab color="accent" routerLink="/cours/add">
         <mat-icon>add</mat-icon>
       </button>

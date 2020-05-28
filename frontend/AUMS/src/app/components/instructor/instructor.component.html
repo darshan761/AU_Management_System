@@ -1,1 +1,12 @@
-<p>instructor works!</p>
+<h1 mat-dialog-title>Assign Instructor</h1>
+<!-- <div mat-dialog-content>
+    <p>Search</p>
+    <mat-form-field>
+        <mat-label>Favorite Animal</mat-label>
+
+    </mat-form-field>
+</div> -->
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Assign</button>
+</div>

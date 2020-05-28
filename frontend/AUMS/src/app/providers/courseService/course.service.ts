@@ -1,31 +1,55 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { Course } from 'src/app/models/Course';
-
+import { catchError, retry } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CourseService {
 
-  private GET_ALL_COURSES = '/api/course/';
   userId = sessionStorage.getItem('userId');
+  headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+  private ROOT_COURSE = '/api/course/';
+  private GET_COURSE_BY_CREATOR = this.ROOT_COURSE + '/creator/' + this.userId;
+  private GET_COURSE_BY_INSTRUCTOR = this.ROOT_COURSE + '/instructor/' + this.userId;
+
+  // userId = sessionStorage.getItem('userId');
   constructor(private http: HttpClient) { }
 
-  getAllCourse(){
-    return this.http.get(this.GET_ALL_COURSES);
+  getAllCourse() {
+    return this.http.get(this.ROOT_COURSE);
   }
 
   getCourseById(id) {
-   return this.http.get(this.GET_ALL_COURSES + id);
-   }
+   return this.http.get(this.ROOT_COURSE + id);
+  }
 
-   getCourseByCreatorId() {
-    return this.http.get(this.GET_ALL_COURSES + '/creator/' + this.userId);
+  addCourse(course) {
+    this.http.post(this.ROOT_COURSE + '/add/', course).subscribe(data=>{
+      console.log('data');
+    });
+    console.log(course);
+  }
+
+  getCourseByCreatorId() {
+    return this.http.get(this.GET_COURSE_BY_CREATOR);
+  }
+
+  getCourseByInstructorId() {
+      return this.http.get(this.GET_COURSE_BY_INSTRUCTOR);
+  }
+
+  updateCourse(course) {
+    this.http.post(this.ROOT_COURSE + '/save', course).subscribe(data =>{
+      console.log(data);
+    });
+  }
+
+  handleError(error: HttpErrorResponse){
+    console.log('lalalalalalalala', error.message);
+    return throwError(error);
     }
-
-    getCourseByInstructorId() {
-      return this.http.get(this.GET_ALL_COURSES + '/instructor/' + this.userId);
-      }
 }

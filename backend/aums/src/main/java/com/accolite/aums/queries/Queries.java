@@ -3,6 +3,8 @@
  */
 package com.accolite.aums.queries;
 
+import org.springframework.jdbc.core.PreparedStatementCreator;
+
 /**
  * @author darshan
  *
@@ -15,12 +17,12 @@ public class Queries {
 
 	public static final String GET_ALL_COURSES = "SELECT * from course";
 	public static final String GET_COURSE_BY_ID = "SELECT * FROM course WHERE course_id = ?";
-	public static final String CREATE_COURSE = "INSERT INTO course(course_id, course_name, course_desc, course_skills, course_prerequisites, course_location, creator_id) VALUES(?, ?, ?, ?, ?, ?, ?)";
-	public static final String UPDATE_COURSE = "UPDATE course SET course_name=?, course_desc=?, course_skills=?, course_prerequisites=?, course_location=?, creator_id=? WHERE course_id =?";
+	public static final String CREATE_COURSE = "INSERT INTO course(course_name, course_desc, course_skills, course_prerequisites, course_location, creator_id) VALUES(?, ?, ?, ?, ?, ?)";
+	public static final String UPDATE_COURSE = "UPDATE course SET course_name=?, course_desc=?, course_skills=?, course_prerequisites=?, course_location=? WHERE course_id =?";
 	public static final String DELETE_COURSE = "DELETE FROM course WHERE course_id=?";
 	
 	public static final String GET_COURSES_OF_CREATOR = "SELECT * from course where course.creator_id = ?";
-	public static final String GET_COURSES_OF_TRAINER = "select * from course JOIN training ON course.course_id = training.course_id and training.instructor_id = ?";
+	public static final String GET_COURSES_OF_TRAINER = "SELECT * from course JOIN training ON course.course_id = training.course_id and training.instructor_id = ?";
 	public static final String GET_COURSES_OF_BOTH = GET_COURSES_OF_CREATOR + "UNION [DISTINCT]" + GET_COURSES_OF_TRAINER;
 	
 	

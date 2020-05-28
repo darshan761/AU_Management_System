@@ -58,8 +58,9 @@ public class CourseController {
 		courseService.addCourse(course);
 	}
 	
-	@PutMapping("/save")
+	@PostMapping("/save")
 	public void updateCourse(@RequestBody Course course) {
+		System.out.println(course);
 		courseService.updateCourse(course);
 	}
 	

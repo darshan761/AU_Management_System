@@ -43,6 +43,7 @@ export class LoginComponent implements OnInit {
       this.loginService.Savesresponse(users);
       sessionStorage.setItem('userEmail', users.email);
       sessionStorage.setItem('userName', users.name);
+      sessionStorage.setItem('userImg', users.image);
       this.router.navigate([`/home`]);
     });
   }

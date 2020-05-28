@@ -7,6 +7,8 @@ import { TrainingComponent } from './components/training/training.component';
 import { CoursesComponent } from './components/courses/courses.component';
 import { ManageCourseComponent } from './components/manage-course/manage-course.component';
 import { TrainingDetailsComponent } from './components/training-details/training-details.component';
+import { AddCourseComponent } from './components/add-course/add-course.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 
 const routes: Routes = [
@@ -16,7 +18,9 @@ const routes: Routes = [
   { path: 'courses', component: CoursesComponent},
   { path: 'manage', component: ManageCourseComponent},
   { path: 'course/:id', component: CourseDetailsComponent },
-  { path: 'training', component: TrainingDetailsComponent}
+  { path: 'cours/add', component: AddCourseComponent},
+  { path: 'training', component: TrainingDetailsComponent},
+  { path: '**', component: PageNotFoundComponent }
 
 ];
 
