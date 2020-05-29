@@ -34,20 +34,25 @@ public class InstructorDaoImpl implements InstructorDao{
 		return jdbcTemplate.queryForObject(Queries.GET_INSTRUCTOR_BY_ID, InstructorRowMapper.InstructorRowMapperLambda, id);
 	}
 
-	@Override
-	public void addInstructor(Instructor instructor) {
-		jdbcTemplate.update(Queries.CREATE_INSTRUCTOR, instructor.getUserId(), instructor.isActive());		
-	}
+//	@Override
+//	public void addInstructor(Instructor instructor) {
+//		jdbcTemplate.update(Queries.CREATE_INSTRUCTOR, instructor.getUserId(), instructor.isActive());		
+//	}
 
-	@Override
-	public void updateInstructor(Instructor instructor) {
-		jdbcTemplate.update(Queries.UPDATE_INSTRUCTOR, instructor.isActive(),instructor.getInstructorId());
-	}
+//	@Override
+//	public void updateInstructor(Instructor instructor) {
+//		jdbcTemplate.update(Queries.UPDATE_INSTRUCTOR,instructor.getInstructorId());
+//	}
 
 	@Override
 	public void deleteInstructor(int id) {
 		jdbcTemplate.update(Queries.DELETE_INSTRUCTOR, id);
 		
+	}
+
+	@Override
+	public List<Instructor> findInstructorByCourseId(int id) {
+		return jdbcTemplate.query(Queries.GET_INSTRUCTORS_BY_COURSE, InstructorRowMapper.InstructorRowMapperLambda, id);
 	}
 
 }

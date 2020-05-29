@@ -48,6 +48,10 @@ export class CourseService {
     });
   }
 
+  deleteCourse(courseId) {
+    this.http.delete(this.ROOT_COURSE +  '/delete/' + courseId).subscribe();
+  }
+
   handleError(error: HttpErrorResponse){
     console.log('lalalalalalalala', error.message);
     return throwError(error);

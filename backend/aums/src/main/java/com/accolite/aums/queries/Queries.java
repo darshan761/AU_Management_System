@@ -28,13 +28,14 @@ public class Queries {
 	
 	public static final String GET_ALL_INSTRUCTORS = "SELECT * FROM user JOIN instructor ON user.user_id = instructor.instructor_id";
 	public static final String GET_INSTRUCTOR_BY_ID = "SELECT * FROM user JOIN instructor ON user.user_id = instructor.instructor_id where user.user_id=?";
+	public static final String GET_INSTRUCTORS_BY_COURSE = "SELECT * FROM user JOIN training ON user.user_id = training.instructor_id and training.course_id =?";
 	public static final String CREATE_INSTRUCTOR = "INSERT INTO instructor(instructor_id, active) VALUES(?, ?)";
 	public static final String UPDATE_INSTRUCTOR = "UPDATE instructor SET active=? where instructor_id = ?";
 	public static final String DELETE_INSTRUCTOR = "DELETE FROM instructor WHERE instructor_id=?";
 	
 	public static final String GET_ALL_TRAINING = "SELECT * from training";
 	public static final String GET_TRAINING_BY_ID = "SELECT * FROM training WHERE training_id = ?";
-	public static final String CREATE_TRAINING = "INSERT INTO training(training_id, creator_id, instructor_id, training_feedback) VALUES(?, ?, ?, ?)";
+	public static final String CREATE_TRAINING = "INSERT INTO training(course_id, instructor_id, training_feedback) VALUES( ?, ?, ?)";
 	public static final String UPDATE_TRAINING = "UPDATE training SET creator_id=?, instructor_id=?, training_feedback=? where training_id=?";
 	public static final String DELETE_TRAINING = "DELETE FROM training WHERE training_id=?";
 	

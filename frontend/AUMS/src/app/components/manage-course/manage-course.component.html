@@ -2,12 +2,12 @@
 <mat-toolbar color="primary">
     Manage Courses
 </mat-toolbar>
-<li *ngFor="let course of CourseList">
+<p *ngFor="let course of CourseList; let i = index">
     <mat-card class="example-card">
         <mat-card-header>
             <!-- <div mat-card-avatar class="example-header-image"></div> -->
             <mat-card-title>{{course.courseName}}</mat-card-title>
-            <!-- <mat-card-subtitle>{{course.skills}}</mat-card-subtitle> -->
+            <button mat-stroked-button (click)="showInstructor(course.courseId, i)" color="accent">Instructors</button>
         </mat-card-header>
         <mat-card-content>
             <p>
@@ -16,21 +16,26 @@
         </mat-card-content>
         <mat-card-actions>
             <div class="example-button-container">
-                <button mat-fab color="accent" [routerLink]="['/course', course.courseId]" aria-label="Example icon button with a home icon">
-                                <mat-icon>visibility</mat-icon>
-                              </button> &nbsp;
-
-                <button mat-fab color="accent" [routerLink]="['/course', course.courseId]" aria-label="Example icon button with a delete icon">
-                              <mat-icon>delete</mat-icon>
-                            </button>&nbsp;
-                <button mat-fab color="accent" (click)="openDialog()" aria-label="Example icon button with a delete icon">
-                                <mat-icon>person_add</mat-icon>
-                              </button>
+                <mat-icon color="accent" [routerLink]="['/course', course.courseId]">visibility</mat-icon>
+                &nbsp;
+                <mat-icon color="accent" (click)="deleteCourse(course.courseId)">delete</mat-icon>
+                &nbsp;
+                <mat-icon color="accent" (click)="openDialog(course.courseId)">person_add</mat-icon>
             </div>
         </mat-card-actions>
+        <div *ngIf="!isShowDiv[i]">
+            <p *ngFor="let instructor of InstructorList">
+                <span *ngIf="instructor.courseId == course.courseId">
+                    <mat-icon color="primary">person</mat-icon> {{instructor.userName}}
+                     <mat-icon (click)="deleteInstructor(instructor.trainingId)">delete_outline</mat-icon>                
+                </span>
+            </p>
+
+        </div>
+
     </mat-card>
 
-</li>
+</p>
 
 <button mat-fab color="accent" routerLink="/cours/add">
         <mat-icon>add</mat-icon>

@@ -33,19 +33,24 @@ public class InstructorServiceImpl implements InstructorService{
 		return instructorDaoImpl.findInstructorById(id);
 	}
 
-	@Override
-	public void addInstructor(Instructor instructor) {
-		instructorDaoImpl.addInstructor(instructor);		
-	}
-
-	@Override
-	public void updateInstructor(Instructor instructor) {
-		instructorDaoImpl.updateInstructor(instructor);		
-	}
+//	@Override
+//	public void addInstructor(Instructor instructor) {
+//		instructorDaoImpl.addInstructor(instructor);		
+//	}
+//
+//	@Override
+//	public void updateInstructor(Instructor instructor) {
+//		instructorDaoImpl.updateInstructor(instructor);		
+//	}
 
 	@Override
 	public void deleteInstructor(int id) {
 		instructorDaoImpl.deleteInstructor(id);		
+	}
+
+	@Override
+	public List<Instructor> findInstructorByCourseId(int id) {
+		return instructorDaoImpl.findInstructorByCourseId(id);
 	}
 
 }

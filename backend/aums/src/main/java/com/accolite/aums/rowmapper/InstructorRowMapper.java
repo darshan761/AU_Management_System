@@ -24,7 +24,8 @@ public class InstructorRowMapper {
 		instructor.setUserId(rs.getInt(ColumnNames.USER_ID));
 		instructor.setUserName(rs.getString(ColumnNames.USER_NAME));
 		instructor.setUserEmail(rs.getString(ColumnNames.USER_EMAIL));
-		instructor.setActive(rs.getBoolean(ColumnNames.INSTRUCTOR_ACTIVE));
+		instructor.setTrainingId(rs.getInt(ColumnNames.TRAINING_ID));
+		instructor.setCourseId(rs.getInt(ColumnNames.COURSE_ID));
 		instructor.setUserImage(rs.getBlob(ColumnNames.USER_IMAGE));
 		instructor.setUserLocation(rs.getString(ColumnNames.USER_LOCATION));
 		instructor.setInstructorId(rs.getInt(ColumnNames.INSTRUCTOR_ID));

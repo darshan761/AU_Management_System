@@ -1,12 +1,16 @@
 <h1 mat-dialog-title>Assign Instructor</h1>
-<!-- <div mat-dialog-content>
-    <p>Search</p>
-    <mat-form-field>
-        <mat-label>Favorite Animal</mat-label>
-
+<form class="example-form" [formGroup]>
+    <mat-form-field class="example-full-width">
+        <mat-label>Instructor Name</mat-label>
+        <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                {{option.userEmail}}
+            </mat-option>
+        </mat-autocomplete>
     </mat-form-field>
-</div> -->
+</form>
 <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Cancel</button>
-    <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Assign</button>
+    <button mat-button (click)="assignInstructor()">Assign</button>
 </div>

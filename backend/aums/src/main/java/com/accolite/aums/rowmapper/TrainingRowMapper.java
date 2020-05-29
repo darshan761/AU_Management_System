@@ -19,7 +19,6 @@ public class TrainingRowMapper {
 	public static final RowMapper<Training> TrainingRowMapperLambda = (rs, rowNum) -> {
 
 		Training training = new Training();
-		training.setTrainingId(rs.getInt(ColumnNames.TRAINING_ID));
 		training.setFeedback(rs.getString(ColumnNames.TRAINING_FEEDBACK));
 		training.setCourseId(rs.getInt(ColumnNames.COURSE_ID));
 		training.setInstructorId(rs.getInt(ColumnNames.INSTRUCTOR_ID));

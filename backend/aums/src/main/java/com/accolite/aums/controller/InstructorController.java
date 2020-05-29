@@ -42,15 +42,21 @@ public class InstructorController {
 		return instructorService.findInstructorById(id);
 	}
 	
-	@PostMapping("/add")
-	public void addInstructor(@RequestBody Instructor instructor) {
-		instructorService.addInstructor(instructor);
+	@GetMapping("/course/{id}")
+	public List<Instructor> getInstructorByCourseId(@PathVariable("id") int id) {
+		
+		return instructorService.findInstructorByCourseId(id);
 	}
 	
-	@PutMapping("/save")
-	public void updateInstructor(@RequestBody Instructor instructor) {
-		instructorService.updateInstructor(instructor);
-	}
+//	@PostMapping("/add")
+//	public void addInstructor(@RequestBody Instructor instructor) {
+//		instructorService.addInstructor(instructor);
+//	}
+//	
+//	@PutMapping("/save")
+//	public void updateInstructor(@RequestBody Instructor instructor) {
+//		instructorService.updateInstructor(instructor);
+//	}
 	
 	@DeleteMapping("/delete/{id}")
 	public void deleteInstructor(@PathVariable("id") int id) {

@@ -18,5 +18,6 @@ import lombok.Setter;
 public class Instructor extends User {
 
 	private int instructorId;
-	private boolean active;
+	private int trainingId;
+	private int courseId;
 }

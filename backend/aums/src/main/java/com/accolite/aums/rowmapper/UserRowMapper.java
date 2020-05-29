@@ -22,6 +22,7 @@ public class UserRowMapper implements RowMapper<User> {
 		User user = new User();
 		user.setUserId(rs.getInt(ColumnNames.USER_ID));
 		user.setUserEmail(rs.getString(ColumnNames.USER_EMAIL));
+		user.setUserName(rs.getString(ColumnNames.USER_NAME));
 		user.setUserDesignation(rs.getString(ColumnNames.USER_DESIGNATION));
 		user.setUserLocation(rs.getString(ColumnNames.USER_LOCATION));
 		user.setUserImage(rs.getBlob(ColumnNames.USER_IMAGE));

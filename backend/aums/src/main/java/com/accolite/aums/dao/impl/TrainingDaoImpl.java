@@ -36,7 +36,7 @@ public class TrainingDaoImpl implements TrainingDao {
 
 	@Override
 	public void addTraining(Training training) {
-		jdbcTemplate.update(Queries.CREATE_TRAINING, training.getTrainingId(), training.getCourseId(), training.getInstructorId(), training.getFeedback());
+		jdbcTemplate.update(Queries.CREATE_TRAINING, training.getCourseId(), training.getInstructorId(), training.getFeedback());
 		
 	}
 

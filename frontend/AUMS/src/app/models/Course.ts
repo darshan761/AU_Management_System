@@ -1,7 +1,10 @@
+import { Instructor } from './Instructor';
+
 export class Course {
-    id: number;
-    name: string;
-    description: string;
-    skills: string;
-    prerequisites: string;
+    courseId: number;
+    courseName: string;
+    courseSkill: string;
+    courseLocation: string;
+    coursePrerequisites: string;
+    instructor: Instructor[];
 }

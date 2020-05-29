@@ -31,6 +31,7 @@ import { AddCourseComponent } from './components/add-course/add-course.component
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { MatDialogModule, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 
 export function configs(){
@@ -78,7 +79,8 @@ export function configs(){
     MatToolbarModule,
     MatChipsModule,
     MatDialogModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatExpansionModule
   ],
   providers: [
     AuthService,

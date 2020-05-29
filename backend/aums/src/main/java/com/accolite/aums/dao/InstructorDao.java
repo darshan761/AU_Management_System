@@ -17,9 +17,11 @@ public interface InstructorDao {
 
 	public Instructor findInstructorById(int id);
 
-	public void addInstructor(Instructor instructor);
-
-	public void updateInstructor(Instructor instructor);
+//	public void addInstructor(Instructor instructor);
+//
+//	public void updateInstructor(Instructor instructor);
 
 	public void deleteInstructor(int id);
+
+	public List<Instructor> findInstructorByCourseId(int id);
 }

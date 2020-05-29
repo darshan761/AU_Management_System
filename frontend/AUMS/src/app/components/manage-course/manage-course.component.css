@@ -13,3 +13,8 @@
     box-shadow: 5px 5px 5px 5px #aaaaaa;
     border-radius: 25px;
 }
+
+.mat-icon:hover {
+    cursor: pointer;
+    color: black;
+}
