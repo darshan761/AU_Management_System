@@ -44,5 +44,5 @@ public class Queries {
 	public static final String GET_TRAINING_ID_FROM_MATERIAL = "SELECT training_id FROM training JOIN course ON training.course_id = course.course_id where training.course_id =? and training.instructor_id =?";
 	public static final String CREATE_TRAINING_MATERIAL = "INSERT INTO training_material(training_id, training_file, training_file_name, training_file_type, training_file_size) VALUES(?,?,?,?,?)";
 	public static final String UPDATE_TRAINING_MATERIAL = "UPDATE training_material SET file_name=?, file_type=?, file=? where training_id=?";
-	public static final String DELETE_TRAINING_MATERIAL = "DELETE FROM training_material WHERE training_id=?";
+	public static final String DELETE_TRAINING_MATERIAL = "DELETE FROM training_material WHERE training_file_id=?";
 }

@@ -24,10 +24,10 @@
         </mat-card-actions>
 
         <div *ngIf="!isShowDiv[i]">
-            <p *ngFor="let training of TrainingList">
+            <p *ngFor="let training of TrainingList;let j= index">
                 <span *ngIf="training.courseId == course.courseId">
                             <mat-icon color="primary">file_copy</mat-icon> <a (click)="downloadFile(training.file, training.fileType)">{{training.fileName}}</a>
-                             <mat-icon (click)="deleteInstructor(training.trainingId)">delete_outline</mat-icon>                
+                             <mat-icon (click)="deleteTraining(training.fileId)">delete_outline</mat-icon>                
                         </span>
             </p>
 

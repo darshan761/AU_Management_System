@@ -39,5 +39,6 @@ public class ColumnNames {
 	public static final String FILE_NAME = "training_file_name";
 	public static final String FILE_TYPE = "training_file_type";
 	public static final String FILE = "training_file";
+	public static final String FILE_ID = "training_file_id";
 	
 }

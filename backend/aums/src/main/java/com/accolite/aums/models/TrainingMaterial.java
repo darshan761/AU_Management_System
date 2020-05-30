@@ -20,6 +20,7 @@ import lombok.Setter;
 public class TrainingMaterial  {
 	
 	private int trainingId;
+	private int fileId;
 	private int instructorId;
 	private int courseId;
 	

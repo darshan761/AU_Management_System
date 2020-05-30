@@ -15,7 +15,7 @@ export class TrainingService {
     return this.http.get('api/training/material/'+courseId+'/'+this.userId );
   }
 
-  deleteTraining(trainingId) {
-    this.http.delete('api/training/material/delete/', trainingId);
+  deleteTraining(fileId) {
+    this.http.delete('api/training/material/delete/'+ fileId ).subscribe();
   }
 }

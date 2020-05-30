@@ -21,7 +21,7 @@ public class TrainingMaterialRowMapper {
 	public static final RowMapper<TrainingMaterial> TrainingMaterialRowMapperLambda = (rs, rowNum) -> {
 
 		TrainingMaterial trainingMaterial = new TrainingMaterial();
-		
+		trainingMaterial.setFileId(rs.getInt(ColumnNames.FILE_ID));
 		trainingMaterial.setTrainingId(rs.getInt(ColumnNames.TRAINING_ID));
 		trainingMaterial.setFileName(rs.getString(ColumnNames.FILE_NAME));
 		trainingMaterial.setFileType(rs.getString(ColumnNames.FILE_TYPE));

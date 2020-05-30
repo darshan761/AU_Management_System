@@ -42,9 +42,7 @@ export class TrainingDetailsComponent implements OnInit {
     this.isShowDiv[index] = !this.isShowDiv[index];
     this.trainingService.getTrainingByInstructor(courseId).subscribe((data:any)=>{
       this.TrainingList = data;
-      console.log('frg',this.TrainingList);
     });
-    console.log(this.TrainingList);
   }
 
    base64ToArrayBuffer(base64) {
@@ -56,7 +54,7 @@ export class TrainingDetailsComponent implements OnInit {
     }
     return bytes.buffer;
   }
-  
+
 
   downloadFile(data, type){
     console.log(typeof data);
@@ -66,9 +64,10 @@ export class TrainingDetailsComponent implements OnInit {
     window.open(url);
   }
 
-  deleteTraining(trainingId){
-    if(confirm('You Sure want to delete the Instructor?')){
-      this.trainingService.deleteTraining(trainingId);
+  deleteTraining(fileId){
+    console.log(fileId);
+    if(confirm('You Sure want to delete the Training Material?')){
+      this.trainingService.deleteTraining(fileId);
       this.ngOnInit();
     }
   }
