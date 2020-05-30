@@ -33,6 +33,21 @@ export class UserService {
     });
   }
 
+  addTrainingMaterial(fileList, courseId, instructorId){
+    const formData: FormData = new FormData();
+    for(let i of fileList){
+      formData.append('file[]', i);
+    }
+
+    formData.append('courseId', courseId);
+    formData.append('instructorId', instructorId);
+    console.log(fileList, courseId, instructorId);
+    let headers =  {headers: new  HttpHeaders({ enctype:"multipart/form-data"})};
+
+    this.http.post('api/training/material/add',formData, headers).subscribe();
+    console.log('hola!', formData.get('courseId'));
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.

@@ -13,8 +13,8 @@ export class CourseService {
   headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
   private ROOT_COURSE = '/api/course/';
-  private GET_COURSE_BY_CREATOR = this.ROOT_COURSE + '/creator/' + this.userId;
-  private GET_COURSE_BY_INSTRUCTOR = this.ROOT_COURSE + '/instructor/' + this.userId;
+  private GET_COURSE_BY_CREATOR = this.ROOT_COURSE + 'creator/' + this.userId;
+  private GET_COURSE_BY_INSTRUCTOR = this.ROOT_COURSE + 'instructor/' + this.userId;
 
   // userId = sessionStorage.getItem('userId');
   constructor(private http: HttpClient) { }
@@ -28,7 +28,7 @@ export class CourseService {
   }
 
   addCourse(course) {
-    this.http.post(this.ROOT_COURSE + '/add/', course).subscribe(data=>{
+    this.http.post(this.ROOT_COURSE + 'add/', course).subscribe(data=>{
       console.log('data');
     });
     console.log(course);

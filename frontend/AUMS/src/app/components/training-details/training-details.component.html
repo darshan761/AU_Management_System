@@ -2,7 +2,7 @@
 <mat-toolbar color="primary">
     Courses Assigned to You
 </mat-toolbar>
-<li *ngFor="let course of CourseList">
+<li *ngFor="let course of CourseList; let i = index">
     <mat-card class="example-card">
         <mat-card-header>
             <!-- <div mat-card-avatar class="example-header-image"></div> -->
@@ -14,19 +14,24 @@
                 {{course.courseDesc}}
             </p>
         </mat-card-content>
+
         <mat-card-actions>
             <div class="example-button-container">
-                <button mat-fab color="primary" [routerLink]="['/course', course.courseId]" aria-label="Example icon button with a home icon">
-                                <mat-icon>visibility</mat-icon>
-                              </button> &nbsp;
-                <button mat-fab color="primary" [routerLink]="['/course', course.courseId]" aria-label="Example icon button with a edit icon">
-                                    <mat-icon>edit</mat-icon>
-                                  </button> &nbsp;
-                <button mat-fab color="primary" [routerLink]="['/course', course.courseId]" aria-label="Example icon button with a delete icon">
-                              <mat-icon>delete</mat-icon>
-                            </button>
+                <mat-icon color="primary" (click)="openDialog(course.courseId)">add</mat-icon>
+                <button mat-stroked-button (click)="showTraining(course.courseId, i)" color="accent">view Training</button>
+                <!-- <mat-icon color="primary">delete</mat-icon> -->
             </div>
         </mat-card-actions>
+
+        <div *ngIf="!isShowDiv[i]">
+            <p *ngFor="let training of TrainingList">
+                <span *ngIf="training.courseId == course.courseId">
+                            <mat-icon color="primary">file_copy</mat-icon> <a (click)="downloadFile(training.file, training.fileType)">{{training.fileName}}</a>
+                             <mat-icon (click)="deleteInstructor(training.trainingId)">delete_outline</mat-icon>                
+                        </span>
+            </p>
+
+        </div>
     </mat-card>
 
 </li>

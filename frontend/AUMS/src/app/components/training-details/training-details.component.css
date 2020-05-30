@@ -14,7 +14,13 @@
     border-radius: 25px;
 }
 
-button {
+
+/* button {
     width: 10%;
     height: 10%;
+} */
+
+.mat-icon:hover {
+    cursor: pointer;
+    color: red;
 }

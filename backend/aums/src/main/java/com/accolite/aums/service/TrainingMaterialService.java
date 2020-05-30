@@ -3,9 +3,14 @@
  */
 package com.accolite.aums.service;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
-import com.accolite.aums.models.Training;
+import javax.sql.rowset.serial.SerialException;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import com.accolite.aums.models.TrainingMaterial;
 
 /**
@@ -13,14 +18,14 @@ import com.accolite.aums.models.TrainingMaterial;
  *
  */
 public interface TrainingMaterialService {
-	
+
 	public List<TrainingMaterial> getAllTrainingMaterials();
 
-	public TrainingMaterial findTrainingMaterialById(int id);
-
-	public void addTrainingMaterial(TrainingMaterial trainingMaterial);
+	public List<TrainingMaterial> findTrainingMaterialById(int courseId, int instructorId);
 
 	public void updateTrainingMaterial(TrainingMaterial trainingMaterial);
 
 	public void deleteTrainingMaterial(int id);
+
+	public void addTrainingMaterial(MultipartFile[] file, int courseId, int instructorId) throws SerialException, IOException, SQLException;
 }

@@ -3,7 +3,7 @@
  */
 package com.accolite.aums.models;
 
-import java.sql.Blob;
+import java.io.File;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,10 +17,13 @@ import lombok.Setter;
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TrainingMaterial {
+public class TrainingMaterial  {
 	
 	private int trainingId;
-	private Blob file;
+	private int instructorId;
+	private int courseId;
+	
+	private byte[] file;
 	private String fileName;
 	private String fileType;
 }

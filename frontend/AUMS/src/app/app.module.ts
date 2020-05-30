@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { DragDropDirective } from './drag-drop.directive';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -32,6 +33,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { MatDialogModule, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { MatFileUploadModule } from 'angular-material-fileupload';
 
 
 export function configs(){
@@ -59,7 +61,8 @@ export function configs(){
     ManageCourseComponent,
     TrainingDetailsComponent,
     AddCourseComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    DragDropDirective
     ],
   imports: [
     BrowserModule,
@@ -80,7 +83,8 @@ export function configs(){
     MatChipsModule,
     MatDialogModule,
     MatSnackBarModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatFileUploadModule
   ],
   providers: [
     AuthService,
@@ -91,7 +95,8 @@ export function configs(){
     { provide: MatDialogRef, useValue: {} }
   ],
     entryComponents: [
-        InstructorComponent
+        InstructorComponent,
+        TrainingComponent
     ],
   bootstrap: [AppComponent]
 })

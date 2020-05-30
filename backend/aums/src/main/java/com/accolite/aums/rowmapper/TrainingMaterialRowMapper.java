@@ -3,6 +3,8 @@
  */
 package com.accolite.aums.rowmapper;
 
+import java.util.Base64;
+
 import org.springframework.jdbc.core.RowMapper;
 
 import com.accolite.aums.constants.ColumnNames;
@@ -19,11 +21,17 @@ public class TrainingMaterialRowMapper {
 	public static final RowMapper<TrainingMaterial> TrainingMaterialRowMapperLambda = (rs, rowNum) -> {
 
 		TrainingMaterial trainingMaterial = new TrainingMaterial();
+		
 		trainingMaterial.setTrainingId(rs.getInt(ColumnNames.TRAINING_ID));
 		trainingMaterial.setFileName(rs.getString(ColumnNames.FILE_NAME));
 		trainingMaterial.setFileType(rs.getString(ColumnNames.FILE_TYPE));
-		trainingMaterial.setFile(rs.getBlob(ColumnNames.FILE));
+		trainingMaterial.setCourseId(rs.getInt(ColumnNames.COURSE_ID));
+		trainingMaterial.setInstructorId(rs.getInt(ColumnNames.INSTRUCTOR_ID));
+		trainingMaterial.setFile(rs.getBlob(ColumnNames.FILE).getBytes(1, (int)rs.getBlob(ColumnNames.FILE).length()));	
+		
 		return trainingMaterial;
 		
 	};
+
+
 }

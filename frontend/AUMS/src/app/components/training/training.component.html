@@ -1,2 +1,14 @@
-<p>
-    training works!</p>
+<div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (onFileDropped)="uploadFile($event)">
+    <input style="display:none" type="file" #fileInput (change)="uploadFile($event.target.files)">
+</div>
+<div class="files-list" *ngFor="let file of files;let i= index">
+    <p> {{ file.name }} </p>
+    <button class="delete-file" (click)="deleteAttachment(i)">
+        <mat-icon>delete</mat-icon>
+          </button>
+</div>
+
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-button (click)="addFiles()">Add File</button>
+</div>

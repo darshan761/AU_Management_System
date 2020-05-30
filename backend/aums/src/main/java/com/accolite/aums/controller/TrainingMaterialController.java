@@ -3,7 +3,11 @@
  */
 package com.accolite.aums.controller;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
+
+import javax.sql.rowset.serial.SerialException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,7 +17,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.accolite.aums.models.TrainingMaterial;
 import com.accolite.aums.service.impl.TrainingMaterialServiceImpl;
@@ -35,15 +41,16 @@ public class TrainingMaterialController {
 		return trainingMaterialService.getAllTrainingMaterials();
 	}
 	
-	@GetMapping("/{id}")
-	public TrainingMaterial gettrainingMaterialService(@PathVariable("id") int id) {
+	@GetMapping("/{courseId}/{instructorId}")
+	public List<TrainingMaterial> getTrainingMaterialById(@PathVariable("courseId") int courseId,@PathVariable("instructorId") int instructorId) {
 		
-		return trainingMaterialService.findTrainingMaterialById(id);
+		return trainingMaterialService.findTrainingMaterialById(courseId, instructorId);
 	}
 	
 	@PostMapping("/add")
-	public void addTraining(@RequestBody TrainingMaterial trainingMaterial) {
-		trainingMaterialService.addTrainingMaterial(trainingMaterial);
+	public void addTraining(@RequestParam("file[]") MultipartFile[] file, @RequestParam("courseId") Integer courseId,
+            @RequestParam("instructorId") int instructorId) throws SerialException, IOException, SQLException {
+		trainingMaterialService.addTrainingMaterial(file, courseId, instructorId);
 	}
 	
 	@PutMapping("/save")

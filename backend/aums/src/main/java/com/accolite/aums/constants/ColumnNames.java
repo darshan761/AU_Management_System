@@ -36,8 +36,8 @@ public class ColumnNames {
 	public static final String TRAINING_FEEDBACK = "training_feedback";
 	
 	// Training Table Columns
-	public static final String FILE_NAME = "file_name";
-	public static final String FILE_TYPE = "file_type";
-	public static final String FILE = "file";
+	public static final String FILE_NAME = "training_file_name";
+	public static final String FILE_TYPE = "training_file_type";
+	public static final String FILE = "training_file";
 	
 }

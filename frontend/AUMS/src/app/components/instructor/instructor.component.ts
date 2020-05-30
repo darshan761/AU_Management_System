@@ -8,6 +8,7 @@ import { Users } from 'src/app/models/Users';
 import { UserService } from 'src/app/providers/userService/user.service';
 import { Course } from 'src/app/models/Course';
 import { Training } from 'src/app/models/Training';
+
 export interface User {
   userName: string;
   userEmail: string;
@@ -71,10 +72,9 @@ export class InstructorComponent  implements OnInit{
     return this.userList.filter(option => option.userEmail.toLowerCase().indexOf(filterValue) === 0);
   }
 
-  assignInstructor(){
+  assignInstructor() {
     this.training.instructorId = this.myControl.value.userId;
     this.training.courseId = this.data;
-    console.log('print hojaa', typeof this.data);
     this.userService.addInstructor(this.training);
     this.dialogRef.close();
   }

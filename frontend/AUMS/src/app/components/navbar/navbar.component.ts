@@ -15,9 +15,10 @@ export class NavbarComponent implements OnInit {
   }
 
   logout() {
-    alert("Log Out");
-    sessionStorage.clear();
-    this.router.navigate([`/login`]);
+    if(confirm("Do you want to logout?")){
+      sessionStorage.clear();
+      this.router.navigate([`/login`]);
+    }
     // this.OAuth.signOut().then(data =>{
     //   sessionStorage.setItem('userId', undefined);
     //   this.router.navigate([`/login`]);

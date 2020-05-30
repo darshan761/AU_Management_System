@@ -5,9 +5,9 @@
         <a class="example-icon" routerLink="/manage">Manage Courses</a>
         <a class="example-icon" routerLink="/training">Assigned Courses</a>
         <a class="example-icon" routerLink="/courses">View All Courses</a>
-        <button mat-fab color="accent" (click)="logout()">
-            <mat-icon>exit_to_app</mat-icon>
-          </button>
+
+        <mat-icon color="accent" (click)="logout()">exit_to_app</mat-icon>
+
         <div [ngStyle]="{'background-image': getUrl()}" mat-card-avatar class="example-header-image"></div>
     </mat-toolbar-row>
 </mat-toolbar>

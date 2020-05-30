@@ -23,7 +23,6 @@ public class TrainingRowMapper {
 		training.setCourseId(rs.getInt(ColumnNames.COURSE_ID));
 		training.setInstructorId(rs.getInt(ColumnNames.INSTRUCTOR_ID));
 		return training;
-		
 	};
 
 }

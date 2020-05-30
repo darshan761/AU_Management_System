@@ -3,7 +3,13 @@
  */
 package com.accolite.aums.dao;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
+
+import javax.sql.rowset.serial.SerialException;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import com.accolite.aums.models.TrainingMaterial;
 
@@ -14,9 +20,9 @@ import com.accolite.aums.models.TrainingMaterial;
 public interface TrainingMaterialDao {
 	public List<TrainingMaterial> getAllTrainingMaterials();
 
-	public TrainingMaterial findTrainingMaterialById(int id);
+	public List<TrainingMaterial> findTrainingMaterialById(int courseId, int instructorId);
 
-	public void addTrainingMaterial(TrainingMaterial trainingMaterial);
+	public void addTrainingMaterial(MultipartFile[] files, int courseId,int  instructorId) throws IOException, SerialException, SQLException;
 
 	public void updateTrainingMaterial(TrainingMaterial trainingMaterial);
 
