@@ -34,6 +34,7 @@ import { MatDialogModule, MatDialog, MatDialogRef } from '@angular/material/dial
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { MatFileUploadModule } from 'angular-material-fileupload';
+import { ChartsModule } from 'ng2-charts';
 
 
 export function configs(){
@@ -84,7 +85,8 @@ export function configs(){
     MatDialogModule,
     MatSnackBarModule,
     MatExpansionModule,
-    MatFileUploadModule
+    MatFileUploadModule,
+    ChartsModule
   ],
   providers: [
     AuthService,

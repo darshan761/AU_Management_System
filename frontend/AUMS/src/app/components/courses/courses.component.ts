@@ -1,8 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, Optional } from '@angular/core';
+import {FormControl} from '@angular/forms';
 import { Course } from 'src/app/models/Course';
 import { Observable, throwError } from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
 import { catchError, retry } from 'rxjs/operators';
 import { CourseService } from 'src/app/providers/courseService/course.service';
+import { ManageCourseComponent } from '../manage-course/manage-course.component';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { TrainingService } from 'src/app/providers/trainingService/training.service';
+import { UserService } from 'src/app/providers/userService/user.service';
 
 @Component({
   selector: 'app-courses',
@@ -12,15 +18,67 @@ import { CourseService } from 'src/app/providers/courseService/course.service';
 export class CoursesComponent implements OnInit {
 
   CourseList = [];
+  TrainingList = [ ];
+  InstructorList = [];
+  isShowDiv: boolean[]= new Array(100);
+  filteredCourseList : Observable<Course[]>;
+  myControl = new FormControl();
 
-  constructor(private courseService: CourseService) { }
+  constructor(private courseService: CourseService, private trainingService: TrainingService,private userService:UserService) { }
 
   ngOnInit() {
     // this.courseService.getAllCourse().subscribe((data: Course) => this.CourseList );
+    this.isShowDiv.fill( true);
     this.courseService.getAllCourse().subscribe((data: any[])=>{
       console.log(data);
       this.CourseList = data;
+      this.filteredCourseList = this.myControl.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => typeof value === 'string' ? value : value.userEmail),
+        map(name => name ? this._filter(name) : this.CourseList.slice())
+      );
     });
+  }
+
+  private _filter(name: string) {
+    const filterValue = name.toLowerCase();
+    console.log(name);
+    return this.CourseList.filter(course => course.courseName.toLowerCase().indexOf(filterValue) === 0);
+  }
+
+  showTraining(courseId){
+    // this.isShowDiv[index] = !this.isShowDiv[index];
+    this.trainingService.getTrainingByInstructor(courseId).subscribe((data:any)=>{
+      this.TrainingList = data;
+    });
+  }
+
+  showInstructor(courseId, index){
+    this.isShowDiv[index] = !this.isShowDiv[index];
+    this.userService.getInstructorByCourse(courseId).subscribe((data:any)=>{
+      this.InstructorList = data;
+      this.showTraining(courseId);
+    });
+  }
+
+  base64ToArrayBuffer(base64) {
+    let binary_string = window.atob(base64);
+    let len = binary_string.length;
+    let bytes = new Uint8Array(len);
+    for (let i = 0; i < len; i++) {
+        bytes[i] = binary_string.charCodeAt(i);
+    }
+    return bytes.buffer;
+  }
+
+
+  downloadFile(data, type){
+    console.log(typeof data);
+    let byteArray = this.base64ToArrayBuffer(data);
+    const blob = new Blob([byteArray], { type: type });
+    const url = window.URL.createObjectURL(blob);
+    window.open(url);
   }
 
 

@@ -21,8 +21,11 @@
     "@angular/platform-browser": "~8.2.14",
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
+    "@swimlane/ngx-charts": "^14.0.0",
     "angular-6-social-login": "^1.1.1",
     "angular-material-fileupload": "^2.0.0",
+    "chart.js": "^2.9.3",
+    "ng2-charts": "^2.3.2",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"

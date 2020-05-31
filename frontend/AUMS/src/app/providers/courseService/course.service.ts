@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Observable, throwError } from 'rxjs';
 import { Course } from 'src/app/models/Course';
 import { catchError, retry } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class CourseService {
   private GET_COURSE_BY_INSTRUCTOR = this.ROOT_COURSE + 'instructor/' + this.userId;
 
   // userId = sessionStorage.getItem('userId');
-  constructor(private http: HttpClient) { }
+  constructor(private router:Router, private http: HttpClient) { }
 
   getAllCourse() {
     return this.http.get(this.ROOT_COURSE);
@@ -30,6 +31,7 @@ export class CourseService {
   addCourse(course) {
     this.http.post(this.ROOT_COURSE + 'add/', course).subscribe(data=>{
       console.log('data');
+      this.router.navigate([`/manage`]);
     });
     console.log(course);
   }

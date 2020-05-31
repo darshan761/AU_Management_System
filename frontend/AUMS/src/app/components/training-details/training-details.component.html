@@ -30,7 +30,7 @@
                              <mat-icon (click)="deleteTraining(training.fileId)">delete_outline</mat-icon>                
                         </span>
             </p>
-
+            <span *ngIf="TrainingList.length == 0">NO Training Material uploaded</span>
         </div>
     </mat-card>
 

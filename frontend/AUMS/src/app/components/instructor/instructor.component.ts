@@ -37,8 +37,12 @@ export class InstructorComponent  implements OnInit{
     private userService: UserService) {
       this.userService.getAllUsers().subscribe((response:any) =>{
         this.userList = response;
-        this.received = true;
-        this.ngOnInit();
+        this.filteredOptions = this.myControl.valueChanges
+        .pipe(
+          startWith(''),
+          map(value => typeof value === 'string' ? value : value.userEmail),
+          map(name => name ? this._filter(name) : this.userList.slice())
+        );
         // console.log(this.userList);
       });
     }
@@ -52,12 +56,12 @@ export class InstructorComponent  implements OnInit{
 
     console.log(this.userList);
     if (this.received) {
-      this.filteredOptions = this.myControl.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => typeof value === 'string' ? value : value.userEmail),
-        map(name => name ? this._filter(name) : this.userList.slice())
-      );
+      // this.filteredOptions = this.myControl.valueChanges
+      // .pipe(
+      //   startWith(''),
+      //   map(value => typeof value === 'string' ? value : value.userEmail),
+      //   map(name => name ? this._filter(name) : this.userList.slice())
+      // );
     }
   }
 

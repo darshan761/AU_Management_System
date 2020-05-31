@@ -7,14 +7,19 @@
     background-size: cover;
 }
 
+.search {
+    display: flex;
+    justify-content: center;
+}
+
+.mat-icon {
+    height: 40px;
+    align-self: flex-end;
+}
+
 .mat-card {
     margin: auto;
     width: 60%;
     box-shadow: 5px 5px 5px 5px #aaaaaa;
     border-radius: 25px;
-}
-
-button {
-    width: 10%;
-    height: 10%;
 }

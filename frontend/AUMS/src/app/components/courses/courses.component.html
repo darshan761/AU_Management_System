@@ -2,7 +2,15 @@
 <mat-toolbar color="primary">
     All Courses
 </mat-toolbar>
-<li *ngFor="let course of CourseList">
+<div class="search">
+    <mat-icon>search</mat-icon>
+    <mat-form-field class="example-full-width">
+        <mat-label>Search by Course Name</mat-label>
+        <input type="text" matInput [formControl]="myControl">
+    </mat-form-field>
+</div>
+
+<p *ngFor="let course of filteredCourseList| async; let i = index">
     <mat-card class="example-card">
         <mat-card-header>
             <div mat-card-avatar class="example-header-image"></div>
@@ -23,6 +31,22 @@
                 <mat-chip color="primary" selected>{{course.coursePrerequisites}}</mat-chip>
             </p>
         </mat-card-content>
+        <button mat-stroked-button (click)="showInstructor(course.courseId,i)" color="accent">view Training Info</button>
+        <div *ngIf="!isShowDiv[i]">
+            <p *ngFor="let instructor of InstructorList">
+                <span *ngIf="instructor.courseId == course.courseId">
+                        <mat-icon color="primary">person</mat-icon> {{instructor.userName}}          
+                </span>
+                <li *ngFor="let training of TrainingList;let j= index">
+
+                    <!-- <span *ngIf="training.instuctorId == instructor.userId"> -->
+                    <mat-icon color="primary">file_copy</mat-icon> <a (click)="downloadFile(training.file, training.fileType)">{{training.fileName}}</a>
+                    <!-- </span> -->
+                </li>
+            </p>
+            <span *ngIf="InstructorList.length == 0">NO Instructor Assigned Yet</span>
+
+        </div>
     </mat-card>
 
-</li>
+</p>

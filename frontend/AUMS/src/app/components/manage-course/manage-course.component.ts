@@ -5,6 +5,9 @@ import { UserService } from 'src/app/providers/userService/user.service';
 import { Router } from '@angular/router';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { InstructorComponent } from '../instructor/instructor.component';
+import { AddCourseComponent } from '../add-course/add-course.component';
+import { CoursesComponent } from '../courses/courses.component';
+import { CourseDetailsComponent } from '../course-details/course-details.component';
 
 // export interface DialogData {
 //   animal: string;
@@ -26,8 +29,31 @@ export class ManageCourseComponent implements OnInit {
 
   openDialog(courseId): void {
     const dialogRef = this.dialog.open(InstructorComponent, {
-      width: '600px',
-      height: '350px',
+      width: '60%',
+      height: '40%',
+      data: courseId
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  openCreateDialog() {
+    const dialogRef = this.dialog.open(AddCourseComponent, {
+      width: '60%',
+      height: '90%'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  openViewCourseDialog( courseId) {
+    const dialogRef = this.dialog.open(CourseDetailsComponent, {
+      width: '60%',
+      height: '90%',
       data: courseId
     });
 

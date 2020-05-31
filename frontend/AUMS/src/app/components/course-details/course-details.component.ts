@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, Optional } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CourseService } from 'src/app/providers/courseService/course.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { FormGroup, FormControl } from '@angular/forms';
+import { ManageCourseComponent } from '../manage-course/manage-course.component';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-course-details',
@@ -26,11 +28,12 @@ export class CourseDetailsComponent implements OnInit {
     courseId: new FormControl('')
   });
 
-  constructor(private snackBar: MatSnackBar, private route: Router, private router: ActivatedRoute, private courseService: CourseService) { }
+  constructor(public dialogRef: MatDialogRef<ManageCourseComponent>,
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: number, private snackBar: MatSnackBar, private route: Router, private router: ActivatedRoute, private courseService: CourseService) { }
 
   ngOnInit() {
     this.router.params.subscribe(params => {
-      this.courseId = +params['id'];
+      this.courseId = this.data;
       this.courseService.getCourseById(this.courseId).subscribe((data:any)=>{
       console.log(data);
       this.course = data;

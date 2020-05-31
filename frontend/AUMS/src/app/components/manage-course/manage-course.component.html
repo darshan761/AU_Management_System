@@ -16,7 +16,7 @@
         </mat-card-content>
         <mat-card-actions>
             <div class="example-button-container">
-                <mat-icon color="accent" [routerLink]="['/course', course.courseId]">visibility</mat-icon>
+                <mat-icon color="accent" (click)="openViewCourseDialog(course.courseId)">visibility</mat-icon>
                 &nbsp;
                 <mat-icon color="accent" (click)="deleteCourse(course.courseId)">delete</mat-icon>
                 &nbsp;
@@ -30,6 +30,7 @@
                      <mat-icon (click)="deleteInstructor(instructor.trainingId)">delete_outline</mat-icon>                
                 </span>
             </p>
+            <span *ngIf="InstructorList.length == 0">NO INstructor Assigned yet</span>
 
         </div>
 
@@ -37,6 +38,6 @@
 
 </p>
 
-<button mat-fab color="accent" routerLink="/cours/add">
+<button mat-fab color="accent" (click)="openCreateDialog()">
         <mat-icon>add</mat-icon>
       </button>
