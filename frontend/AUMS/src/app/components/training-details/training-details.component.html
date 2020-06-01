@@ -30,6 +30,10 @@
                              <mat-icon (click)="deleteTraining(training.fileId)">delete_outline</mat-icon>                
                         </span>
             </p>
+            <span *ngIf="TrainingList.length != 0">
+                    <input type="email" matInput [formControl]="myControl" placeholder="Enter EmailID">
+                    <button mat-stroked-button [disabled]="!myControl.valid" (click)="sendEmail(course.courseId)" color="accent">Send Email</button>
+            </span>
             <span *ngIf="TrainingList.length == 0">NO Training Material uploaded</span>
         </div>
     </mat-card>

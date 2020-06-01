@@ -53,6 +53,11 @@ public class CourseController {
 		return courseService.findCoursesByInstructorId(id);
 	}
 	
+	@GetMapping("/count")
+	public int getCourseCount() {
+		return courseService.getCourseCount();
+	}
+	
 	@PostMapping("/add")
 	public void addCourse(@RequestBody Course course) {
 		courseService.addCourse(course);

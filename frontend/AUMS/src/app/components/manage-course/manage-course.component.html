@@ -2,7 +2,14 @@
 <mat-toolbar color="primary">
     Manage Courses
 </mat-toolbar>
-<p *ngFor="let course of CourseList; let i = index">
+<div class="search">
+    <mat-icon>search</mat-icon>
+    <mat-form-field class="example-full-width">
+        <mat-label>Search by Course Name</mat-label>
+        <input type="text" matInput [formControl]="myControl">
+    </mat-form-field>
+</div>
+<p *ngFor="let course of filteredCourseList | async ; let i = index">
     <mat-card class="example-card">
         <mat-card-header>
             <!-- <div mat-card-avatar class="example-header-image"></div> -->
@@ -38,6 +45,6 @@
 
 </p>
 
-<button mat-fab color="accent" (click)="openCreateDialog()">
+<button class="add" mat-fab color="accent" (click)="openCreateDialog()">
         <mat-icon>add</mat-icon>
       </button>

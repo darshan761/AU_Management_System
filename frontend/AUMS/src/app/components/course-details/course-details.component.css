@@ -9,6 +9,7 @@ form {
     width: 400px;
 }
 
-input {
-    color: black;
+input,
+textarea {
+    color: grey;
 }

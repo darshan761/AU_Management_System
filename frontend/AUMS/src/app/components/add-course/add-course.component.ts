@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CourseService } from 'src/app/providers/courseService/course.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
@@ -13,12 +13,12 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 export class AddCourseComponent implements OnInit {
 
   courseForm = new FormGroup({
-    courseName: new FormControl(''),
-    courseDesc: new FormControl(''),
-    courseSkill: new FormControl(''),
-    coursePrerequisites: new FormControl(''),
-    courseLocation: new FormControl(''),
-    creatorId: new FormControl('')
+    courseName: new FormControl('', Validators.required),
+    courseDesc: new FormControl('', Validators.required),
+    courseSkill: new FormControl('', Validators.required),
+    coursePrerequisites: new FormControl('', Validators.required),
+    courseLocation: new FormControl('', Validators.required),
+    creatorId: new FormControl('', Validators.required)
   });
 
   constructor(private snackBar: MatSnackBar, private router: Router, private courseService: CourseService) { }

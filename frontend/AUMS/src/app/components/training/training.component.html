@@ -1,5 +1,5 @@
 <div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (onFileDropped)="uploadFile($event)">
-    <input style="display:none" type="file" #fileInput (change)="uploadFile($event.target.files)">
+    <input style="display:none" type="file" #fileInput (change)="uploadFile($event.target.files)" required>
 </div>
 <div class="files-list" *ngFor="let file of files;let i= index">
     <p> {{ file.name }} </p>
@@ -9,6 +9,6 @@
 </div>
 
 <div mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">Cancel</button>
-    <button mat-button (click)="addFiles()">Add File</button>
+    <button mat-stroked-button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-stroked-button mat-button [disabled]="files.length == 0" (click)="addFiles()">Add File</button>
 </div>

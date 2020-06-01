@@ -37,7 +37,7 @@
         </mat-form-field>
     </p>
     <p>
-        <button mat-fab color="accent" type="submit">
+        <button [disabled]="!courseForm.valid" mat-fab color="accent" type="submit">
                 <mat-icon>save</mat-icon>
         </button>
     </p>

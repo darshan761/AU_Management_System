@@ -35,6 +35,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { MatFileUploadModule } from 'angular-material-fileupload';
 import { ChartsModule } from 'ng2-charts';
+import {MatGridListModule} from '@angular/material/grid-list';
+import { FormsModule } from '@angular/forms';
 
 
 export function configs(){
@@ -86,7 +88,9 @@ export function configs(){
     MatSnackBarModule,
     MatExpansionModule,
     MatFileUploadModule,
-    ChartsModule
+    ChartsModule,
+    MatGridListModule,
+    FormsModule
   ],
   providers: [
     AuthService,

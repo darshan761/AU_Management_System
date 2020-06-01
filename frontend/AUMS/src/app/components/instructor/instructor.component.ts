@@ -1,7 +1,7 @@
 import { Component, Inject, Optional, OnInit } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { ManageCourseComponent } from '../manage-course/manage-course.component';
-import {FormControl} from '@angular/forms';
+import {FormControl, Validators} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { Users } from 'src/app/models/Users';
@@ -25,7 +25,7 @@ export class InstructorComponent  implements OnInit{
 
   courseId;
   training = new Training();
-  myControl = new FormControl();
+  myControl = new FormControl('', Validators.required);
   userList: User[ ];
   filteredOptions: Observable<User[]>;
 

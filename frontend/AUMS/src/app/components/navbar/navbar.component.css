@@ -4,10 +4,17 @@
 
 a {
     color: aliceblue;
+    padding: 10px;
 }
 
 a:hover {
     text-decoration: none;
+    background-color: white;
+}
+
+a:focus {
+    text-decoration: none;
+    background-color: white;
 }
 
 .example-header-image {
@@ -17,4 +24,12 @@ a:hover {
 
 .mat-icon:hover {
     cursor: pointer;
+}
+
+a:hover {
+    color: black;
+}
+
+.mat-icon {
+    float: left;
 }

@@ -11,6 +11,6 @@
     </mat-form-field>
 </form>
 <div mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">Cancel</button>
-    <button mat-button (click)="assignInstructor()">Assign</button>
+    <button mat-stroked-button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-stroked-button mat-button [disabled]="!myControl.valid" (click)="assignInstructor()">Assign</button>
 </div>

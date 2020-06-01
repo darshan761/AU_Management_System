@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Users } from 'src/app/models/Users';
 import { SocialLoginModule, AuthServiceConfig, AuthService } from 'angular-6-social-login';
 import { Router } from '@angular/router';
+import { CourseService } from 'src/app/providers/courseService/course.service';
 
 
 @Component({
@@ -13,7 +14,7 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
 
   data: Users;
-
+  count;
   public barChartOptions = {
     scaleShowVerticalLines: false,
     responsive: true
@@ -36,9 +37,10 @@ export class HomeComponent implements OnInit {
     this.data = new Users();
     this.data.email = sessionStorage.getItem('userEmail');
     this.data.name = sessionStorage.getItem('userName');
+    this.getCourseCount();
   }
 
-  constructor(public OAuth: AuthService, private router: Router) { }
+  constructor(private courseService: CourseService, public OAuth: AuthService, private router: Router) { }
 
   logout() {
    alert(1);
@@ -46,5 +48,11 @@ export class HomeComponent implements OnInit {
     this.router.navigate([`/login`]);
    });
   }
-  
+
+  getCourseCount() {
+    return this.courseService.getCourseCount().subscribe((data)=>{
+      this.count = data;
+    });
+  }
+
 }

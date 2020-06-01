@@ -2,7 +2,7 @@ import { Component, OnInit, Inject, Optional } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CourseService } from 'src/app/providers/courseService/course.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ManageCourseComponent } from '../manage-course/manage-course.component';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
@@ -16,16 +16,17 @@ export class CourseDetailsComponent implements OnInit {
   isDisabled = true;
   courseId: any;
   course: any;
+  inputColor = 'grey';
   skills = [];
   prerequisites = [];
 
   courseForm = new FormGroup({
-    courseName: new FormControl(''),
-    courseDesc: new FormControl(''),
-    courseSkill: new FormControl(''),
-    coursePrerequisites: new FormControl(''),
-    courseLocation: new FormControl(''),
-    courseId: new FormControl('')
+    courseName: new FormControl('', Validators.required),
+    courseDesc: new FormControl('', Validators.required),
+    courseSkill: new FormControl('', Validators.required),
+    coursePrerequisites: new FormControl('', Validators.required),
+    courseLocation: new FormControl('', Validators.required),
+    courseId: new FormControl('', Validators.required)
   });
 
   constructor(public dialogRef: MatDialogRef<ManageCourseComponent>,
@@ -66,12 +67,17 @@ export class CourseDetailsComponent implements OnInit {
   }
 
   enable() {
+    this.inputColor = 'black';
     this.isDisabled = false;
  }
 
  disable(){
-    this.isDisabled = true;
+  this.inputColor = 'grey';
+  this.isDisabled = true;
  }
 
+ getColor(){
+   return this.inputColor;
+ }
 
 }

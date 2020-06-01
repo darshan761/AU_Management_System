@@ -18,4 +18,8 @@ export class TrainingService {
   deleteTraining(fileId) {
     this.http.delete('api/training/material/delete/'+ fileId ).subscribe();
   }
+
+  sendMail(email) {
+    return this.http.post('api/training/material/mail', email);
+  }
 }

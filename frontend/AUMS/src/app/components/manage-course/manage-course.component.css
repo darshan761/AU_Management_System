@@ -18,3 +18,23 @@
     cursor: pointer;
     color: black;
 }
+
+.add {
+    bottom: 100px;
+    float: right;
+    position: fixed;
+}
+
+mat-stroked-button {
+    float: right;
+}
+
+.search {
+    display: flex;
+    justify-content: center;
+}
+
+.mat-icon {
+    height: 40px;
+    align-self: flex-end;
+}

@@ -2,35 +2,35 @@
     <p>
         <mat-form-field appearance="outline">
             <mat-label>Course Title</mat-label>
-            <input matInput placeholder="Eg: React" formControlName="courseName" [readonly]='isDisabled'>
+            <input [style.color]="getColor()" matInput placeholder="Eg: React" formControlName="courseName" [readonly]='isDisabled'>
             <mat-icon matSuffix>edit</mat-icon>
         </mat-form-field>
     </p>
     <p>
         <mat-form-field appearance="outline">
             <mat-label>Course Description</mat-label>
-            <textarea matInput formControlName="courseDesc" [readonly]='isDisabled'> </textarea>
+            <textarea [style.color]="getColor()" matInput formControlName="courseDesc" [readonly]='isDisabled'> </textarea>
         </mat-form-field>
     </p>
 
     <p>
         <mat-form-field appearance="outline">
             <mat-label>Course Location</mat-label>
-            <input matInput placeholder="Eg: Mumbai,Bengaluru,etc" formControlName="courseLocation" [readonly]='isDisabled'>
+            <input [style.color]="getColor()" matInput placeholder="Eg: Mumbai,Bengaluru,etc" formControlName="courseLocation" [readonly]='isDisabled'>
             <mat-icon matSuffix>edit</mat-icon>
         </mat-form-field>
     </p>
     <p>
         <mat-form-field appearance="outline">
             <mat-label>Course PreRequisites</mat-label>
-            <input matInput placeholder="Eg: JS,HTML,etc" formControlName="courseSkill" [readonly]='isDisabled'>
+            <input [style.color]="getColor()" matInput placeholder="Eg: JS,HTML,etc" formControlName="courseSkill" [readonly]='isDisabled'>
             <mat-icon matSuffix>edit</mat-icon>
         </mat-form-field>
     </p>
     <p>
         <mat-form-field appearance="outline">
             <mat-label>Course Skills</mat-label>
-            <input matInput placeholder="Eg: ReactJS" formControlName="coursePrerequisites" [readonly]='isDisabled'>
+            <input [style.color]="getColor()" matInput placeholder="Eg: ReactJS" formControlName="coursePrerequisites" [readonly]='isDisabled'>
             <mat-icon matSuffix>edit</mat-icon>
         </mat-form-field>
     </p>
@@ -38,7 +38,7 @@
         <button mat-fab color="accent" type="button" (click)="enable()" aria-label="Example icon button with a edit icon">
                 <mat-icon>edit</mat-icon>
             </button>
-        <button mat-fab color="accent" type="submit" aria-label="Example icon button with a edit icon">
+        <button mat-fab color="accent" [disabled]="!courseForm.valid" type="submit" aria-label="Example icon button with a edit icon">
                 <mat-icon>save</mat-icon>
         </button>
     </p>

@@ -4,6 +4,16 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 import { TrainingComponent } from '../training/training.component';
 import { TrainingService } from 'src/app/providers/trainingService/training.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { FormControl, Validators } from '@angular/forms';
+
+ class Email {
+	subject: string;
+  message; string;
+  recepient: string;
+  courseId: number;
+  instructor: string;
+}
 
 @Component({
   selector: 'app-training-details',
@@ -15,8 +25,10 @@ export class TrainingDetailsComponent implements OnInit {
   CourseList = [ ];
   TrainingList = [ ];
   isShowDiv: boolean[]= new Array(100);
+  email = new Email();
+  myControl = new FormControl('', [Validators.email, Validators.required]);
   fileUrl;
-  constructor(private sanitizer: DomSanitizer, private trainingService: TrainingService, private courseService: CourseService, public dialog: MatDialog) { }
+  constructor(private snackBar: MatSnackBar, private sanitizer: DomSanitizer, private trainingService: TrainingService, private courseService: CourseService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.isShowDiv.fill( true);
@@ -70,6 +82,24 @@ export class TrainingDetailsComponent implements OnInit {
       this.trainingService.deleteTraining(fileId);
       this.ngOnInit();
     }
+  }
+
+  sendEmail(courseId) {
+    this.email.subject = 'AUMS: Training Material Uploaded!';
+    this.email.message = 'Training Material is Uploaded!';
+    this.email.recepient = this.myControl.value;
+    this.email.courseId = courseId;
+    this.email.instructor = sessionStorage.getItem('userName');
+    this.trainingService.sendMail(this.email).subscribe((data)=>{
+    this.openSnackBar('Email Sent Successfully', 'Done!');
+    }
+    );
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 5000,
+    });
   }
 
 }

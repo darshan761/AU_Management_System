@@ -60,5 +60,7 @@ public class CourseServiceImpl implements CourseService{
 		return courseDao.findCoursesByInstructorId(id);
 	}
 	
-	
+	public int getCourseCount() {
+		return courseDao.getCourseCount();
+	}
 }

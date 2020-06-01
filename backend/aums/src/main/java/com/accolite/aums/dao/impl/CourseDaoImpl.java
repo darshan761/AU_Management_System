@@ -62,5 +62,9 @@ public class CourseDaoImpl implements CourseDao {
 	public List<Course> findCoursesByInstructorId(int id) {
 		return jdbcTemplate.query(Queries.GET_COURSES_OF_TRAINER, CourseRowMapper.CourseRowMapperLambda, id);
 	}
+	
+	public int getCourseCount() {
+		return jdbcTemplate.queryForObject(Queries.GET_COURSE_COUNT, Integer.class);
+	}
 
 }
