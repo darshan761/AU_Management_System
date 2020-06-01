@@ -31,12 +31,6 @@ public class UserController {
 		return userService.getAllUsers();
 	}
 	
-//	@GetMapping(value= "/{id}")
-//	public User getUser(@PathVariable("id") int id) {
-//		
-//		return userService.findUserById(id);
-//	}
-	
 	@GetMapping(value= "/{email}")
 	public User getUserByEmail(@PathVariable("email") String email) {
 		

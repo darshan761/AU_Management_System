@@ -18,10 +18,6 @@ public interface UserDao {
 	 
 	 public User findUserByEmail(String email);
 	 
-	 public void addUser(User user);
-	 
-	 public void updateUser(User user);
-	 
 	 public void deleteUser(int id);
 
 }

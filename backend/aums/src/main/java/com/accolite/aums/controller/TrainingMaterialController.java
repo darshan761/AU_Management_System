@@ -16,14 +16,13 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.accolite.aums.dto.ResponseDto;
 import com.accolite.aums.models.Email;
 import com.accolite.aums.models.TrainingMaterial;
 import com.accolite.aums.service.impl.EmailServiceImpl;
@@ -44,35 +43,31 @@ public class TrainingMaterialController {
 	private EmailServiceImpl emailService;
 
 	@GetMapping("/")
-	public List<TrainingMaterial> getAlltrainingMaterials() {
+	public ResponseDto getAlltrainingMaterials() {
 		
 		return trainingMaterialService.getAllTrainingMaterials();
 	}
 	
 	@GetMapping("/{courseId}/{instructorId}")
-	public List<TrainingMaterial> getTrainingMaterialById(@PathVariable("courseId") int courseId,@PathVariable("instructorId") int instructorId) {
+	public ResponseDto getTrainingMaterialById(@PathVariable("courseId") int courseId,@PathVariable("instructorId") int instructorId) {
 		
 		return trainingMaterialService.findTrainingMaterialById(courseId, instructorId);
 	}
 	
 	@PostMapping("/add")
-	public void addTraining(@RequestParam("file[]") MultipartFile[] file, @RequestParam("courseId") Integer courseId,
+	public ResponseDto addTraining(@RequestParam("file[]") MultipartFile[] file, @RequestParam("courseId") Integer courseId,
             @RequestParam("instructorId") int instructorId) throws SerialException, IOException, SQLException {
-		trainingMaterialService.addTrainingMaterial(file, courseId, instructorId);
+		return trainingMaterialService.addTrainingMaterial(file, courseId, instructorId);
 	}
 	
-	@PutMapping("/save")
-	public void updateTraining(@RequestBody TrainingMaterial trainingMaterial) {
-		trainingMaterialService.updateTrainingMaterial(trainingMaterial);
-	}
 	
 	@DeleteMapping("/delete/{id}")
-	public void deleteTrainingMaterial(@PathVariable("id") int id) {
-		trainingMaterialService.deleteTrainingMaterial(id);
+	public ResponseDto deleteTrainingMaterial(@PathVariable("id") int id) {
+		return trainingMaterialService.deleteTrainingMaterial(id);
 	}
 	
 	@PostMapping("/mail")
-	public void sendEmail(@RequestBody Email email) throws MailException, MessagingException {
-		emailService.sendEmail(email);
+	public ResponseDto sendEmail(@RequestBody Email email) throws MailException, MessagingException {
+		return emailService.sendEmail(email);
 	}
 }

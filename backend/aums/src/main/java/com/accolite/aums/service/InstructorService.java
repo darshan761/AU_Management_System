@@ -3,25 +3,18 @@
  */
 package com.accolite.aums.service;
 
-import java.util.List;
-
-import com.accolite.aums.models.Course;
-import com.accolite.aums.models.Instructor;
+import com.accolite.aums.dto.ResponseDto;
 
 /**
  * @author darshan
  *
  */
 public interface InstructorService {
-	public List<Instructor> getAllInstructors();
+	public ResponseDto getAllInstructors();
 
-	public Instructor findInstructorById(int id);
+	public ResponseDto findInstructorById(int id);
 
-//	public void addInstructor(Instructor instructor);
-//
-//	public void updateInstructor(Instructor instructor);
+	public ResponseDto deleteInstructor(int id);
 
-	public void deleteInstructor(int id);
-
-	public List<Instructor> findInstructorByCourseId(int id);
+	public ResponseDto findInstructorByCourseId(int id);
 }

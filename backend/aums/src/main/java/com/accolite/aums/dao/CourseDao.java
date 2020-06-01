@@ -5,23 +5,23 @@ package com.accolite.aums.dao;
 
 import java.util.List;
 
+import com.accolite.aums.dto.ResponseDto;
 import com.accolite.aums.models.Course;
-import com.accolite.aums.models.User;
 
 /**
  * @author darshan
  *
  */
 public interface CourseDao {
-	public List<Course> getAllCourses();
+	public ResponseDto getAllCourses();
 	 
-	 public Course findCourseById(int id);
+	 public ResponseDto findCourseById(int id);
 	 
-	 public List<Course> findCoursesByUserId(int id);
+	 public ResponseDto findCoursesByUserId(int id);
 	 
-	 public void addCourse(Course course);
+	 public ResponseDto addCourse(Course course);
 	 
-	 public void updateCourse(Course course);
+	 public ResponseDto updateCourse(Course course);
 	 
-	 public void deleteCourse(int id);
+	 public ResponseDto deleteCourse(int id);
 }

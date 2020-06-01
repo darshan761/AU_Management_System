@@ -38,22 +38,4 @@ public class UserServiceImpl implements UserService {
 		return userDao.findUserByEmail(email);
 	}
 
-	@Override
-	public void addUser(User user) {
-		userDao.addUser(user);
-
-	}
-
-	@Override
-	public void updateUser(User user) {
-		userDao.updateUser(user);
-
-	}
-
-	@Override
-	public void deleteUser(int id) {
-		userDao.deleteUser(id);
-
-	}
-
 }

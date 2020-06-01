@@ -6,6 +6,7 @@ import { TrainingService } from 'src/app/providers/trainingService/training.serv
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormControl, Validators } from '@angular/forms';
+import { ApiResponse } from 'src/app/models/ApiResponse';
 
  class Email {
 	subject: string;
@@ -33,8 +34,8 @@ export class TrainingDetailsComponent implements OnInit {
   ngOnInit() {
     this.isShowDiv.fill( true);
     this.courseService.getCourseByInstructorId().subscribe((data:any)=>{
-      console.log(data);
-      this.CourseList = data;
+      console.log(data.data);
+      this.CourseList = data.data;
     });
   }
 
@@ -52,8 +53,8 @@ export class TrainingDetailsComponent implements OnInit {
 
   showTraining(courseId, index){
     this.isShowDiv[index] = !this.isShowDiv[index];
-    this.trainingService.getTrainingByInstructor(courseId).subscribe((data:any)=>{
-      this.TrainingList = data;
+    this.trainingService.getTrainingByInstructor(courseId).subscribe((response: ApiResponse)=>{
+      this.TrainingList = response.data;
     });
   }
 

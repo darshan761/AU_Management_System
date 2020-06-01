@@ -4,6 +4,7 @@ import { Users } from 'src/app/models/Users';
 import { SocialLoginModule, AuthServiceConfig, AuthService } from 'angular-6-social-login';
 import { Router } from '@angular/router';
 import { CourseService } from 'src/app/providers/courseService/course.service';
+import { ApiResponse } from 'src/app/models/ApiResponse';
 
 
 @Component({
@@ -50,8 +51,8 @@ export class HomeComponent implements OnInit {
   }
 
   getCourseCount() {
-    return this.courseService.getCourseCount().subscribe((data)=>{
-      this.count = data;
+    return this.courseService.getCourseCount().subscribe((response: ApiResponse)=>{
+      this.count = response.data;
     });
   }
 

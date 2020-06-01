@@ -3,8 +3,7 @@
  */
 package com.accolite.aums.dao;
 
-import java.util.List;
-
+import com.accolite.aums.dto.ResponseDto;
 import com.accolite.aums.models.Training;
 
 /**
@@ -12,13 +11,11 @@ import com.accolite.aums.models.Training;
  *
  */
 public interface TrainingDao {
-	public List<Training> getAllTrainings();
+	public ResponseDto getAllTrainings();
 	 
-	 public Training findTrainingById(int id);
+	 public ResponseDto findTrainingById(int id);
 	 
-	 public void addTraining(Training training);
-	 
-	 public void updateTraining(Training training);
-	 
-	 public void deleteTraining(int id);
+	 public ResponseDto addTraining(Training training);
+	 	 
+	 public ResponseDto deleteTraining(int id);
 }

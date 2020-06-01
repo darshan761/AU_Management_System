@@ -3,12 +3,11 @@
  */
 package com.accolite.aums.service.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.accolite.aums.dao.impl.TrainingDaoImpl;
+import com.accolite.aums.dto.ResponseDto;
 import com.accolite.aums.models.Training;
 import com.accolite.aums.service.TrainingService;
 
@@ -23,30 +22,24 @@ public class TrainingServiceImpl implements TrainingService{
 	private TrainingDaoImpl trainingDao;
 	
 	@Override
-	public List<Training> getAllTrainings() {
+	public ResponseDto getAllTrainings() {
 		return trainingDao.getAllTrainings();
 	}
 
 	@Override
-	public Training findTrainingById(int id) {
+	public ResponseDto findTrainingById(int id) {
 		return trainingDao.findTrainingById(id);
 	}
 
 	@Override
-	public void addTraining(Training training) {
-		trainingDao.addTraining(training);
+	public ResponseDto addTraining(Training training) {
+		return trainingDao.addTraining(training);
 		
 	}
 
 	@Override
-	public void updateTraining(Training training) {
-		trainingDao.updateTraining(training);
-		
-	}
-
-	@Override
-	public void deleteTraining(int id) {
-		trainingDao.deleteTraining(id);
+	public ResponseDto deleteTraining(int id) {
+		return trainingDao.deleteTraining(id);
 		
 	}
 

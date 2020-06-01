@@ -13,6 +13,7 @@ import { Observable } from 'rxjs';
 import { Course } from 'src/app/models/Course';
 import { FormControl } from '@angular/forms';
 import { startWith, map } from 'rxjs/operators';
+import { ApiResponse } from 'src/app/models/ApiResponse';
 
 // export interface DialogData {
 //   animal: string;
@@ -71,9 +72,9 @@ export class ManageCourseComponent implements OnInit {
 
   ngOnInit() {
     this.isShowDiv.fill( true);
-    this.courseService.getCourseByCreatorId().subscribe((data:any)=>{
-      console.log(data);
-      this.CourseList = data;
+    this.courseService.getCourseByCreatorId().subscribe((response: ApiResponse) => {
+      console.log(response);
+      this.CourseList = response.data;
       this.filteredCourseList = this.myControl.valueChanges
       .pipe(
         startWith(''),
@@ -91,8 +92,8 @@ export class ManageCourseComponent implements OnInit {
 
   showInstructor(courseId, index){
     this.isShowDiv[index] = !this.isShowDiv[index];
-    this.userService.getInstructorByCourse(courseId).subscribe((data:any)=>{
-      this.InstructorList = data;
+    this.userService.getInstructorByCourse(courseId).subscribe((response: ApiResponse)=>{
+      this.InstructorList = response.data;
     });
   }
 

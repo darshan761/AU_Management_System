@@ -3,14 +3,12 @@
  */
 package com.accolite.aums.service.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.accolite.aums.dao.impl.CourseDaoImpl;
+import com.accolite.aums.dto.ResponseDto;
 import com.accolite.aums.models.Course;
-import com.accolite.aums.models.User;
 import com.accolite.aums.service.CourseService;
 
 /**
@@ -24,43 +22,43 @@ public class CourseServiceImpl implements CourseService{
 	private CourseDaoImpl courseDao;
 
 	@Override
-	public List<Course> getAllCourses() {
+	public ResponseDto getAllCourses() {
 		return courseDao.getAllCourses();
 	}
 
 	@Override
-	public Course findCourseById(int id) {
+	public ResponseDto findCourseById(int id) {
 		return courseDao.findCourseById(id);
 	}
 
 	@Override
-	public List<Course> findCoursesByUserId(int id) {
+	public ResponseDto findCoursesByUserId(int id) {
 		return courseDao.findCoursesByUserId(id);
 	}
 	
 	@Override
-	public void addCourse(Course course) {
-		courseDao.addCourse(course);
+	public ResponseDto addCourse(Course course) {
+		return courseDao.addCourse(course);
 		
 	}
 
 	@Override
-	public void updateCourse(Course course) {
-		courseDao.updateCourse(course);
+	public ResponseDto updateCourse(Course course) {
+		return courseDao.updateCourse(course);
 		
 	}
 
 	@Override
-	public void deleteCourse(int id) {
-		courseDao.deleteCourse(id);
+	public ResponseDto deleteCourse(int id) {
+		return courseDao.deleteCourse(id);
 		
 	}
 	@Override
-	public List<Course> findCoursesByInstructorId(int id) {
+	public ResponseDto findCoursesByInstructorId(int id) {
 		return courseDao.findCoursesByInstructorId(id);
 	}
 	
-	public int getCourseCount() {
+	public ResponseDto getCourseCount() {
 		return courseDao.getCourseCount();
 	}
 }

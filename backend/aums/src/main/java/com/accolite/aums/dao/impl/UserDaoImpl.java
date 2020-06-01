@@ -50,20 +50,6 @@ public class UserDaoImpl implements UserDao {
 
 		return jdbcTemplate.queryForObject(query, rowMapper, email);
 	}
-	
-	@Override
-	public void addUser(User user) {
-//		String query = "INSERT INTO employees(employee_id, first_name, last_name, email, phone, job_title) VALUES(?, ?, ?, ?, ?, ?)";
-//		  jdbcTemplate.update(query, user.getEmployeeId(), employee.getFirstName(), employee.getLastName(), employee.getEmail(), employee.getPhone(), employee.getJobTitle());
-	}
-
-	@Override
-	public void updateUser(User user) {
-//		String query = "UPDATE employees SET first_name=?, last_name=?, email=?, phone=?, job_title=? WHERE employee_id=?";
-//		  jdbcTemplate.update(query, employee.getFirstName(), employee.getLastName(), employee.getEmail(), employee.getPhone(), employee.getJobTitle(), employee.getEmployeeId());
-//		  
-
-	}
 
 	@Override
 	public void deleteUser(int id) {

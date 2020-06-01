@@ -10,8 +10,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.accolite.aums.dao.InstructorDao;
+import com.accolite.aums.dto.ResponseDto;
+import com.accolite.aums.enums.ResponseType;
 import com.accolite.aums.models.Instructor;
 import com.accolite.aums.queries.Queries;
+import com.accolite.aums.rowmapper.CourseRowMapper;
 import com.accolite.aums.rowmapper.InstructorRowMapper;
 
 /**
@@ -25,34 +28,58 @@ public class InstructorDaoImpl implements InstructorDao{
 	private JdbcTemplate jdbcTemplate;
 	
 	@Override
-	public List<Instructor> getAllInstructors() {
-		return jdbcTemplate.query(Queries.GET_ALL_INSTRUCTORS, InstructorRowMapper.InstructorRowMapperLambda);
+	public ResponseDto getAllInstructors() { 
+		ResponseDto response = new ResponseDto();		
+		try {
+			response.setData(jdbcTemplate.query(Queries.GET_ALL_INSTRUCTORS, InstructorRowMapper.InstructorRowMapperLambda));
+			response.setResponseType(ResponseType.SUCCESS);
+		} catch (Exception e) {
+			response.setResponseType(ResponseType.FAILURE);
+			response.setMsg(e.toString());
+		}
+		return response;
 	}
 
 	@Override
-	public Instructor findInstructorById(int id) {
-		return jdbcTemplate.queryForObject(Queries.GET_INSTRUCTOR_BY_ID, InstructorRowMapper.InstructorRowMapperLambda, id);
+	public ResponseDto findInstructorById(int id) {
+		ResponseDto response = new ResponseDto();		
+		try {
+			response.setData(jdbcTemplate.queryForObject(Queries.GET_INSTRUCTOR_BY_ID, InstructorRowMapper.InstructorRowMapperLambda, id));
+			response.setResponseType(ResponseType.SUCCESS);
+		} catch (Exception e) {
+			response.setResponseType(ResponseType.FAILURE);
+			response.setMsg(e.toString());
+		}
+		return response;
+ 
 	}
 
-//	@Override
-//	public void addInstructor(Instructor instructor) {
-//		jdbcTemplate.update(Queries.CREATE_INSTRUCTOR, instructor.getUserId(), instructor.isActive());		
-//	}
-
-//	@Override
-//	public void updateInstructor(Instructor instructor) {
-//		jdbcTemplate.update(Queries.UPDATE_INSTRUCTOR,instructor.getInstructorId());
-//	}
-
 	@Override
-	public void deleteInstructor(int id) {
-		jdbcTemplate.update(Queries.DELETE_INSTRUCTOR, id);
+	public ResponseDto deleteInstructor(int id) {
+		ResponseDto response = new ResponseDto();		
+		try {
+			jdbcTemplate.update(Queries.DELETE_INSTRUCTOR, id);
+			response.setResponseType(ResponseType.SUCCESS);
+		} catch (Exception e) {
+			response.setResponseType(ResponseType.FAILURE);
+			response.setMsg(e.toString());
+		}
+		return response;
 		
 	}
 
 	@Override
-	public List<Instructor> findInstructorByCourseId(int id) {
-		return jdbcTemplate.query(Queries.GET_INSTRUCTORS_BY_COURSE, InstructorRowMapper.InstructorRowMapperLambda, id);
+	public ResponseDto findInstructorByCourseId(int id) {
+		ResponseDto response = new ResponseDto();		
+		try {
+			response.setData(jdbcTemplate.query(Queries.GET_INSTRUCTORS_BY_COURSE, InstructorRowMapper.InstructorRowMapperLambda, id));
+			response.setResponseType(ResponseType.SUCCESS);
+		} catch (Exception e) {
+			response.setResponseType(ResponseType.FAILURE);
+			response.setMsg(e.toString());
+		}
+		return response;
+ 
 	}
 
 }

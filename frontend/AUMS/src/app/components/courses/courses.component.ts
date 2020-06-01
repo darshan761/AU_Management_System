@@ -9,6 +9,7 @@ import { ManageCourseComponent } from '../manage-course/manage-course.component'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { TrainingService } from 'src/app/providers/trainingService/training.service';
 import { UserService } from 'src/app/providers/userService/user.service';
+import { ApiResponse } from 'src/app/models/ApiResponse';
 
 @Component({
   selector: 'app-courses',
@@ -24,14 +25,14 @@ export class CoursesComponent implements OnInit {
   filteredCourseList : Observable<Course[]>;
   myControl = new FormControl();
 
-  constructor(private courseService: CourseService, private trainingService: TrainingService,private userService:UserService) { }
+  constructor(private courseService: CourseService, private trainingService: TrainingService, private userService: UserService) { }
 
   ngOnInit() {
     // this.courseService.getAllCourse().subscribe((data: Course) => this.CourseList );
     this.isShowDiv.fill( true);
-    this.courseService.getAllCourse().subscribe((data: any[])=>{
-      console.log(data);
-      this.CourseList = data;
+    this.courseService.getAllCourse().subscribe((response: ApiResponse) => {
+      console.log(response);
+      this.CourseList = response.data;
       this.filteredCourseList = this.myControl.valueChanges
       .pipe(
         startWith(''),
@@ -49,15 +50,15 @@ export class CoursesComponent implements OnInit {
 
   showTraining(courseId){
     // this.isShowDiv[index] = !this.isShowDiv[index];
-    this.trainingService.getTrainingByInstructor(courseId).subscribe((data:any)=>{
-      this.TrainingList = data;
+    this.trainingService.getTrainingByInstructor(courseId).subscribe((response: ApiResponse)=>{
+      this.TrainingList = response.data;
     });
   }
 
   showInstructor(courseId, index){
     this.isShowDiv[index] = !this.isShowDiv[index];
-    this.userService.getInstructorByCourse(courseId).subscribe((data:any)=>{
-      this.InstructorList = data;
+    this.userService.getInstructorByCourse(courseId).subscribe((response: ApiResponse)=>{
+      this.InstructorList = response.data;
       this.showTraining(courseId);
     });
   }

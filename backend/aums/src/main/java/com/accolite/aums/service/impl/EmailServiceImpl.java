@@ -13,8 +13,12 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import com.accolite.aums.dao.impl.CourseDaoImpl;
+import com.accolite.aums.dto.ResponseDto;
+import com.accolite.aums.enums.ResponseType;
 import com.accolite.aums.models.Course;
 import com.accolite.aums.models.Email;
+import com.accolite.aums.queries.Queries;
+import com.accolite.aums.rowmapper.TrainingMaterialRowMapper;
 
 /**
  * @author darshan
@@ -23,30 +27,33 @@ import com.accolite.aums.models.Email;
  */
 @Service
 public class EmailServiceImpl {
-	
+
 	@Autowired
 	private JavaMailSender javaMailSender;
-	
+
 	@Autowired
 	private CourseDaoImpl courseDao;
 
-   
-    public void sendEmail(Email email) throws MailException, MessagingException {
-    	
-    	
-    	MimeMessage msg = javaMailSender.createMimeMessage();
+	public ResponseDto sendEmail(Email email) throws MailException, MessagingException {
 
-        // true = multipart message
-        MimeMessageHelper helper = new MimeMessageHelper(msg, true);
-        
+		ResponseDto response = new ResponseDto();
+		try {
+			MimeMessage msg = javaMailSender.createMimeMessage();
 
-        Course course = courseDao.findCourseById(email.getCourseId());
-        helper.setTo(email.getRecepient());
-        helper.setSubject(email.getSubject());
-        helper.setText("Please check the portal for training material.\n course: "+course.getCourseName()+"\n"+" by "+ email.getInstructor());
-      
+			MimeMessageHelper helper = new MimeMessageHelper(msg, true);
 
-        javaMailSender.send(msg);
-    }
+			ResponseDto courseResponse = courseDao.findCourseById(email.getCourseId());
+			helper.setTo(email.getRecepient());
+			helper.setSubject(email.getSubject());
+			helper.setText("Please check the portal for training material.\n course: "
+					+ ((Course) courseResponse.getData()).getCourseName() + "\n" + " by " + email.getInstructor());
+			javaMailSender.send(msg);
+			response.setResponseType(ResponseType.SUCCESS);
+		} catch (Exception e) {
+			response.setResponseType(ResponseType.FAILURE);
+			response.setMsg(e.toString());
+		}
+		return response;
+
+	}
 }
-

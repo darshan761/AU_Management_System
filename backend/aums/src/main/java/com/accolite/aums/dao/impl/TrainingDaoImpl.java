@@ -10,8 +10,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.accolite.aums.dao.TrainingDao;
+import com.accolite.aums.dto.ResponseDto;
+import com.accolite.aums.enums.ResponseType;
 import com.accolite.aums.models.Training;
 import com.accolite.aums.queries.Queries;
+import com.accolite.aums.rowmapper.InstructorRowMapper;
 import com.accolite.aums.rowmapper.TrainingRowMapper;
 
 /**
@@ -25,30 +28,57 @@ public class TrainingDaoImpl implements TrainingDao {
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public List<Training> getAllTrainings() {
-		return jdbcTemplate.query(Queries.GET_ALL_TRAINING, TrainingRowMapper.TrainingRowMapperLambda);
-	}
-
-	@Override
-	public Training findTrainingById(int id) {
-		return jdbcTemplate.queryForObject(Queries.GET_TRAINING_BY_ID, TrainingRowMapper.TrainingRowMapperLambda, id);
-	}
-
-	@Override
-	public void addTraining(Training training) {
-		jdbcTemplate.update(Queries.CREATE_TRAINING, training.getCourseId(), training.getInstructorId(), training.getFeedback());
+	public ResponseDto getAllTrainings() { 
 		
+		ResponseDto response = new ResponseDto();		
+		try {
+			response.setData(jdbcTemplate.query(Queries.GET_ALL_TRAINING, TrainingRowMapper.TrainingRowMapperLambda));
+			response.setResponseType(ResponseType.SUCCESS);
+		} catch (Exception e) {
+			response.setResponseType(ResponseType.FAILURE);
+			response.setMsg(e.toString());
+		}
+		return response;
 	}
 
 	@Override
-	public void updateTraining(Training training) {
-		jdbcTemplate.update(Queries.UPDATE_TRAINING,  training.getCourseId(), training.getInstructorId(), training.getFeedback(),training.getTrainingId());
-
+	public ResponseDto findTrainingById(int id) {
+ 
+		ResponseDto response = new ResponseDto();		
+		try {
+			response.setData(jdbcTemplate.queryForObject(Queries.GET_TRAINING_BY_ID, TrainingRowMapper.TrainingRowMapperLambda, id));
+			response.setResponseType(ResponseType.SUCCESS);
+		} catch (Exception e) {
+			response.setResponseType(ResponseType.FAILURE);
+			response.setMsg(e.toString());
+		}
+		return response;
 	}
 
 	@Override
-	public void deleteTraining(int id) {
-		jdbcTemplate.update(Queries.DELETE_TRAINING, id);
+	public ResponseDto addTraining(Training training) {
+		ResponseDto response = new ResponseDto();		
+		try {
+			jdbcTemplate.update(Queries.CREATE_TRAINING, training.getCourseId(), training.getInstructorId(), training.getFeedback());
+			response.setResponseType(ResponseType.SUCCESS);
+		} catch (Exception e) {
+			response.setResponseType(ResponseType.FAILURE);
+			response.setMsg(e.toString());
+		}
+		return response;
+	}
+
+	@Override
+	public ResponseDto deleteTraining(int id) {
+		ResponseDto response = new ResponseDto();		
+		try {
+			jdbcTemplate.update(Queries.DELETE_TRAINING, id);
+			response.setResponseType(ResponseType.SUCCESS);
+		} catch (Exception e) {
+			response.setResponseType(ResponseType.FAILURE);
+			response.setMsg(e.toString());
+		}
+		return response;
 	}
 
 

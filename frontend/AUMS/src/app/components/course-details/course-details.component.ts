@@ -5,6 +5,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ManageCourseComponent } from '../manage-course/manage-course.component';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { ApiResponse } from 'src/app/models/ApiResponse';
 
 @Component({
   selector: 'app-course-details',
@@ -35,15 +36,15 @@ export class CourseDetailsComponent implements OnInit {
   ngOnInit() {
     this.router.params.subscribe(params => {
       this.courseId = this.data;
-      this.courseService.getCourseById(this.courseId).subscribe((data:any)=>{
-      console.log(data);
-      this.course = data;
+      this.courseService.getCourseById(this.courseId).subscribe((response:ApiResponse)=>{
+      console.log(response);
+      this.course = response.data;
       this.courseForm.setValue({
-        courseName: data.courseName,
-        courseDesc: data.courseDesc,
-        courseSkill: data.courseSkill,
-        coursePrerequisites: data.coursePrerequisites,
-        courseLocation: data.courseLocation,
+        courseName: response.data.courseName,
+        courseDesc: response.data.courseDesc,
+        courseSkill: response.data.courseSkill,
+        coursePrerequisites: response.data.coursePrerequisites,
+        courseLocation: response.data.courseLocation,
         courseId: this.courseId
       });
     });

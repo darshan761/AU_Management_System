@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.accolite.aums.dto.ResponseDto;
 import com.accolite.aums.models.Course;
 import com.accolite.aums.service.impl.CourseServiceImpl;
 
@@ -30,47 +30,47 @@ public class CourseController {
 	private CourseServiceImpl courseService;
 
 	@GetMapping("/")
-	public List<Course> getAllCourses() {
+	public ResponseDto getAllCourses() {
 		
 		return courseService.getAllCourses();
 	}
 	
 	@GetMapping("/{id}")
-	public Course getCourse(@PathVariable("id") int id) {
+	public ResponseDto getCourse(@PathVariable("id") int id) {
 		
 		return courseService.findCourseById(id);
 	}
 	
 	@GetMapping("/creator/{id}")
-	public List<Course> getCourseByCreatorId(@PathVariable("id") int id) {
+	public ResponseDto getCourseByCreatorId(@PathVariable("id") int id) {
 		
 		return courseService.findCoursesByUserId(id);
 	}
 	
 	@GetMapping("/instructor/{id}")
-	public List<Course> getCourseByInstructorId(@PathVariable("id") int id) {
+	public ResponseDto getCourseByInstructorId(@PathVariable("id") int id) {
 		
 		return courseService.findCoursesByInstructorId(id);
 	}
 	
 	@GetMapping("/count")
-	public int getCourseCount() {
+	public ResponseDto getCourseCount() {
 		return courseService.getCourseCount();
 	}
 	
 	@PostMapping("/add")
-	public void addCourse(@RequestBody Course course) {
-		courseService.addCourse(course);
+	public ResponseDto addCourse(@RequestBody Course course) {
+		return courseService.addCourse(course);
 	}
 	
 	@PostMapping("/save")
-	public void updateCourse(@RequestBody Course course) {
-		courseService.updateCourse(course);
+	public ResponseDto updateCourse(@RequestBody Course course) {
+		return courseService.updateCourse(course);
 	}
 	
 	@DeleteMapping("/delete/{id}")
-	public void deleteCourse(@PathVariable("id") int id) {
-		courseService.deleteCourse(id);
+	public ResponseDto deleteCourse(@PathVariable("id") int id) {
+		return courseService.deleteCourse(id);
 	}
 	
 }
