@@ -20,7 +20,7 @@
 
                 <button mat-stroked-button (click)="openDialog(course.courseId)" color="accent"> <mat-icon color="accent" >add</mat-icon> Add Training</button>
                 <button mat-stroked-button (click)="showTraining(course.courseId, i)" color="accent"><mat-icon color="accent" > visibility</mat-icon> View Training</button>
-                <!-- <mat-icon color="primary">delete</mat-icon> -->
+
             </div>
         </mat-card-actions>
 
@@ -36,13 +36,6 @@
                     </td>
                 </tr>
             </table>
-            <!-- <p *ngFor="let training of TrainingList;let j= index">
-                <span *ngIf="training.courseId == course.courseId">
-                            <mat-icon color="primary">file_copy</mat-icon> <a (click)="downloadFile(training.file, training.fileType)">{{training.fileName}}</a>
-                             <mat-icon (click)="deleteTraining(training.fileId)">delete_outline</mat-icon>                
-                </span>
-
-            </p> -->
 
             <span *ngIf="TrainingList.length != 0">
                     <hr>

@@ -59,9 +59,9 @@ public class CourseDaoImpl implements CourseDao {
 		
 		ResponseDto response = new ResponseDto();		
 		try {
-			jdbcTemplate.update(Queries.CREATE_COURSE, course.getCourseName(), course.getCourseDesc(),
+			response.setAdditionalData(jdbcTemplate.update(Queries.CREATE_COURSE, course.getCourseName(), course.getCourseDesc(),
 					course.getCourseSkill(), course.getCoursePrerequisites(), course.getCourseLocation(),
-					course.getCreatorId());
+					course.getCreatorId()));
 			response.setResponseType(ResponseType.SUCCESS);
 		} catch (Exception e) {
 			response.setResponseType(ResponseType.FAILURE);
@@ -77,8 +77,8 @@ public class CourseDaoImpl implements CourseDao {
 		
 		ResponseDto response = new ResponseDto();		
 		try {
-			jdbcTemplate.update(Queries.UPDATE_COURSE, course.getCourseName(), course.getCourseDesc(),
-					course.getCourseSkill(), course.getCoursePrerequisites(), course.getCourseLocation(), course.getCourseId());
+			response.setAdditionalData(jdbcTemplate.update(Queries.UPDATE_COURSE, course.getCourseName(), course.getCourseDesc(),
+					course.getCourseSkill(), course.getCoursePrerequisites(), course.getCourseLocation(), course.getCourseId()));
 			response.setResponseType(ResponseType.SUCCESS);
 		} catch (Exception e) {
 			response.setResponseType(ResponseType.FAILURE);
@@ -93,7 +93,7 @@ public class CourseDaoImpl implements CourseDao {
 		
 		ResponseDto response = new ResponseDto();		
 		try {
-			jdbcTemplate.update(Queries.DELETE_COURSE, id);
+			response.setAdditionalData(jdbcTemplate.update(Queries.DELETE_COURSE, id));
 			response.setResponseType(ResponseType.SUCCESS);
 		} catch (Exception e) {
 			response.setResponseType(ResponseType.FAILURE);
@@ -135,6 +135,22 @@ public class CourseDaoImpl implements CourseDao {
 		ResponseDto response = new ResponseDto();		
 		try {
 			response.setData(jdbcTemplate.queryForObject(Queries.GET_COURSE_COUNT, Integer.class));
+			response.setResponseType(ResponseType.SUCCESS);
+		} catch (Exception e) {
+			response.setResponseType(ResponseType.FAILURE);
+			response.setMsg(e.toString());
+		}
+		return response;
+	}
+
+	/**
+	 * @param id
+	 * @return
+	 */
+	public ResponseDto getCourseVersion(int id) {
+		ResponseDto response = new ResponseDto();		
+		try {
+			response.setData(jdbcTemplate.query(Queries.GET_COURSE_VERSION, CourseRowMapper.CourseRowMapperLambda, id));
 			response.setResponseType(ResponseType.SUCCESS);
 		} catch (Exception e) {
 			response.setResponseType(ResponseType.FAILURE);

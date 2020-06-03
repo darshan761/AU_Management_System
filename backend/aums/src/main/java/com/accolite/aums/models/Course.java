@@ -4,6 +4,8 @@
 package com.accolite.aums.models;
 
 
+import java.sql.Timestamp;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,5 +23,6 @@ public class Course {
     private String courseLocation ;
     private String courseSkill;
     private String coursePrerequisites;
+    private Timestamp modifiedAt;
     
 }

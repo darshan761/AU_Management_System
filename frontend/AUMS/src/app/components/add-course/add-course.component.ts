@@ -32,7 +32,7 @@ export class AddCourseComponent implements OnInit {
   addCourse() {
     this.courseService.addCourse(this.courseForm.value);
     this.openSnackBar('Added Successfully', 'Done!');
-    // this.router.navigate([`/manage`]);
+    this.router.navigate([`/manage`]);
   }
 
   openSnackBar(message: string, action: string) {

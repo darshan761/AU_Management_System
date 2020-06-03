@@ -62,4 +62,13 @@ public class CourseServiceImpl implements CourseService{
 	public ResponseDto getCourseCount() {
 		return courseDao.getCourseCount();
 	}
+
+	/**
+	 * @param id
+	 * @return
+	 */
+	public ResponseDto getCourseVersion(int id) {
+		// TODO Auto-generated method stub
+		return courseDao.getCourseVersion(id);
+	}
 }

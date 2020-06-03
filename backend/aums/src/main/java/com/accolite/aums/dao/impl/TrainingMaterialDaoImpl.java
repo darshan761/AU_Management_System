@@ -90,7 +90,7 @@ public class TrainingMaterialDaoImpl implements TrainingMaterialDao {
 		
 		ResponseDto response = new ResponseDto();
 		try {
-			jdbcTemplate.update(Queries.DELETE_TRAINING_MATERIAL, id);
+			response.setAdditionalData(jdbcTemplate.update(Queries.DELETE_TRAINING_MATERIAL, id));
 			response.setResponseType(ResponseType.SUCCESS);
 		} catch (Exception e) {
 			response.setResponseType(ResponseType.FAILURE);

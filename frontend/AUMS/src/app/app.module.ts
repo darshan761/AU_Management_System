@@ -22,6 +22,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { CoursesComponent } from './components/courses/courses.component';
 import {MatTableModule} from '@angular/material/table';
+import {MatSortModule} from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material';
 import {MatCardModule} from '@angular/material/card';
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -37,6 +38,8 @@ import { MatFileUploadModule } from 'angular-material-fileupload';
 import { ChartsModule } from 'ng2-charts';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { FormsModule } from '@angular/forms';
+import { TrainingVersionDetailsComponent } from './components/training-version-details/training-version-details.component';
+import { TrainingMaterialComponent } from './components/training-material/training-material.component';
 
 
 export function configs(){
@@ -65,7 +68,9 @@ export function configs(){
     TrainingDetailsComponent,
     AddCourseComponent,
     PageNotFoundComponent,
-    DragDropDirective
+    DragDropDirective,
+    TrainingVersionDetailsComponent,
+    TrainingMaterialComponent
     ],
   imports: [
     BrowserModule,
@@ -75,6 +80,7 @@ export function configs(){
     MatButtonModule,
     MatIconModule,
     MatSelectModule,
+    MatSortModule,
     MatAutocompleteModule,
     ReactiveFormsModule,
     MatFormFieldModule,
@@ -102,7 +108,9 @@ export function configs(){
   ],
     entryComponents: [
         InstructorComponent,
-        TrainingComponent
+        TrainingComponent,
+        TrainingVersionDetailsComponent,
+        TrainingMaterialComponent
     ],
   bootstrap: [AppComponent]
 })

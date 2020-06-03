@@ -2,49 +2,61 @@
 <mat-toolbar color="primary">
     All Courses
 </mat-toolbar>
-<div class="search">
-    <mat-icon>search</mat-icon>
-    <mat-form-field class="example-full-width">
-        <mat-label>Search by Course Name</mat-label>
-        <input type="text" matInput [formControl]="myControl">
-    </mat-form-field>
+<mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia">
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+
+    <table mat-table [dataSource]="dataSource" matSort>
+
+        <ng-container matColumnDef="courseId">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+            <td mat-cell *matCellDef="let row"> {{row.courseId}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="courseName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+            <td mat-cell *matCellDef="let row"> {{row.courseName}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="courseDesc">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+            <td mat-cell *matCellDef="let row"> {{row.courseDesc}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="courseLocation">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Location </th>
+            <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.courseLocation}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="coursePrerequisites">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Prerequisites </th>
+            <td mat-cell *matCellDef="let row"> {{row.coursePrerequisites}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="courseSkill">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Skills </th>
+            <td mat-cell *matCellDef="let row"> {{row.courseSkill}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="training">
+            <th mat-header-cell *matHeaderCellDef> Training </th>
+            <td mat-cell *matCellDef="let row"><button mat-stroked-button (click)="openTrainingDialog(row.courseId)" color="accent">view Training Info</button>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="version">
+            <th mat-header-cell *matHeaderCellDef> Versions </th>
+            <td mat-cell *matCellDef="let row"> <button mat-stroked-button (click)="openVersionDialog(row.courseId)" color="accent"><mat-icon color="accent" > visibility</mat-icon> Versions</button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+        </tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
 </div>
-
-<p *ngFor="let course of filteredCourseList| async; let i = index">
-    <mat-card class="example-card">
-        <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>{{course.courseName}}</mat-card-title>
-            <mat-card-subtitle>{{course.courseDesc}}</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-            <p>Location:
-                <mat-chip color="primary" selected>{{course.courseLocation}}</mat-chip>
-            </p>
-            <p>Skills:
-                <mat-chip color="primary" selected>{{course.courseSkill}}</mat-chip>
-            </p>
-            <p>prerequisites:
-                <mat-chip color="primary" selected>{{course.coursePrerequisites}}</mat-chip>
-            </p>
-        </mat-card-content>
-        <button mat-stroked-button (click)="showInstructor(course.courseId,i)" color="accent">view Training Info</button>
-        <div *ngIf="!isShowDiv[i]">
-            <div *ngFor="let instructor of InstructorList">
-                <span *ngIf="instructor.courseId == course.courseId">
-                        <mat-icon color="primary">person</mat-icon> {{instructor.userName}}          
-                </span>
-                <div *ngFor="let training of TrainingList;let j= index">
-                    <div *ngFor="let t of training">
-                        <span *ngIf="t.instructorId == instructor.userId">
-                                <mat-icon color="primary">file_copy</mat-icon> <a (click)="downloadFile(t.file, t.fileType)">{{t.fileName}}</a>
-                        </span>
-                    </div>
-                </div>
-                <!-- <span *ngIf="checkIfNoMaterialUpload(instructor.instructorId)">No Training Material uploaded yet</span> -->
-            </div>
-            <span *ngIf="InstructorList.length == 0">No Instructor Assigned Yet</span>
-        </div>
-    </mat-card>
-
-</p>

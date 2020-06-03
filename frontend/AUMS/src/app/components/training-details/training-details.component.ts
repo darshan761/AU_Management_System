@@ -7,6 +7,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormControl, Validators } from '@angular/forms';
 import { ApiResponse } from 'src/app/models/ApiResponse';
+import { TrainingVersionDetailsComponent } from '../training-version-details/training-version-details.component';
 
  class Email {
 	subject: string;
@@ -102,5 +103,7 @@ export class TrainingDetailsComponent implements OnInit {
       duration: 5000,
     });
   }
+
+
 
 }

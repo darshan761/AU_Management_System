@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CourseService } from 'src/app/providers/courseService/course.service';
 import { UserService } from 'src/app/providers/userService/user.service';
 
@@ -14,6 +14,7 @@ import { Course } from 'src/app/models/Course';
 import { FormControl } from '@angular/forms';
 import { startWith, map } from 'rxjs/operators';
 import { ApiResponse } from 'src/app/models/ApiResponse';
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 
 // export interface DialogData {
 //   animal: string;
@@ -26,20 +27,37 @@ import { ApiResponse } from 'src/app/models/ApiResponse';
   styleUrls: ['./manage-course.component.css']
 })
 export class ManageCourseComponent implements OnInit {
+
+  displayedColumns: string[] = ['courseId', 'courseName', 'courseDesc', 'courseLocation', 'coursePrerequisites', 'courseSkill', 'edit', 'delete', 'add' ,'view'];
   CourseList = [ ];
   InstructorList = [ ];
-  filteredCourseList : Observable<Course[]>;
-  isShowDiv: boolean[]= new Array(100);
   myControl = new FormControl();
+  dataSource: MatTableDataSource<Course>;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(private snackBar: MatSnackBar, private courseService: CourseService, private userService: UserService, public dialog: MatDialog) { 
+  }
+
+  ngOnInit() {
+    this.courseService.getCourseByCreatorId().subscribe((response: ApiResponse) => {
+      console.log(response);
+      this.CourseList = response.data;
+      this.dataSource = new MatTableDataSource(this.CourseList);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    });
   }
 
   openDialog(courseId): void {
     const dialogRef = this.dialog.open(InstructorComponent, {
       width: '60%',
       height: '40%',
-      data: courseId
+      data: {
+        courseId : courseId,
+        action : 'assign'
+      }
+
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -47,9 +65,26 @@ export class ManageCourseComponent implements OnInit {
     });
   }
 
+  openInstructorDialog(courseId): void {
+    const dialogRef = this.dialog.open(InstructorComponent, {
+      width: '60%',
+      height: '70%',
+      data: {
+        courseId : courseId,
+        action : 'view'
+      }
+
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+
   openCreateDialog() {
     const dialogRef = this.dialog.open(AddCourseComponent, {
-      width: '60%',
+      width: '50%',
       height: '90%'
     });
 
@@ -60,7 +95,7 @@ export class ManageCourseComponent implements OnInit {
 
   openViewCourseDialog( courseId) {
     const dialogRef = this.dialog.open(CourseDetailsComponent, {
-      width: '60%',
+      width: '50%',
       height: '90%',
       data: courseId
     });
@@ -70,40 +105,7 @@ export class ManageCourseComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    this.isShowDiv.fill( true);
-    this.courseService.getCourseByCreatorId().subscribe((response: ApiResponse) => {
-      console.log(response);
-      this.CourseList = response.data;
-      this.filteredCourseList = this.myControl.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => typeof value === 'string' ? value : value.userEmail),
-        map(name => name ? this._filter(name) : this.CourseList.slice())
-      );
-    });
-  }
 
-  private _filter(name: string) {
-    const filterValue = name.toLowerCase();
-    console.log(name);
-    return this.CourseList.filter(course => course.courseName.toLowerCase().indexOf(filterValue) === 0);
-  }
-
-  showInstructor(courseId, index){
-    this.isShowDiv[index] = !this.isShowDiv[index];
-    this.userService.getInstructorByCourse(courseId).subscribe((response: ApiResponse)=>{
-      this.InstructorList = response.data;
-    });
-  }
-
-  deleteInstructor(trainingId){
-    if(confirm('You Sure want to delete the Instructor?')){
-      this.userService.deleteInstructor(trainingId);
-      this.openSnackBar('deleted Successfully', 'Done!');
-      this.ngOnInit();
-    }
-  }
 
   deleteCourse(courseId) {
     console.log(courseId);
@@ -118,6 +120,15 @@ export class ManageCourseComponent implements OnInit {
     this.snackBar.open(message, action, {
       duration: 5000,
     });
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
 }

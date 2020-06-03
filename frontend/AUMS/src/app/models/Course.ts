@@ -1,4 +1,5 @@
 import { Instructor } from './Instructor';
+import { Timestamp } from 'rxjs/internal/operators/timestamp';
 
 export class Course {
     courseId: number;
@@ -7,4 +8,5 @@ export class Course {
     courseLocation: string;
     coursePrerequisites: string;
     instructor: Instructor[];
+    modifiedAt: string;
 }

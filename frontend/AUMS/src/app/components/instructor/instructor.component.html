@@ -1,16 +1,39 @@
-<h1 mat-dialog-title>Assign Instructor</h1>
-<form class="example-form" [formGroup]>
-    <mat-form-field class="example-full-width">
-        <mat-label>Instructor Name</mat-label>
-        <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto">
-        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                {{option.userEmail}}
-            </mat-option>
-        </mat-autocomplete>
-    </mat-form-field>
-</form>
-<div mat-dialog-actions>
-    <button mat-stroked-button mat-button (click)="onNoClick()">Cancel</button>
-    <button mat-stroked-button mat-button [disabled]="!myControl.valid" (click)="assignInstructor()">Assign</button>
+<div *ngIf="checkAssign()">
+    <h1 mat-dialog-title>Assign Instructor</h1>
+    <form class="example-form" [formGroup]>
+        <mat-form-field class="example-full-width">
+            <mat-label>Instructor Name</mat-label>
+            <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                    {{option.userEmail}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+    </form>
+    <div mat-dialog-actions>
+        <button mat-stroked-button mat-button (click)="onNoClick()">Cancel</button>
+        <button mat-stroked-button mat-button [disabled]="!myControl.valid" (click)="assignInstructor()">Assign</button>
+    </div>
+</div>
+
+
+
+<div *ngIf="checkView()">
+    <h1 mat-dialog-title>Manage Instructor</h1>
+    <hr>
+    <table style="width: 100%">
+        <tr *ngFor="let instructor of InstructorList">
+            <th *ngIf="instructor.courseId == courseId">
+                <mat-icon color="primary">person</mat-icon> {{instructor.userName}}
+            </th>
+            <th id="delete" *ngIf="instructor.courseId == courseId">
+                <mat-icon color="black" (click)="deleteInstructor(instructor.trainingId)">delete</mat-icon>
+            </th>
+            <hr>
+        </tr>
+    </table>
+
+    <h5 *ngIf="InstructorList.length == 0">No Instructor Assigned yet</h5>
+
 </div>

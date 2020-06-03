@@ -30,6 +30,7 @@ public class CourseRowMapper {
 		course.setCourseSkill(rs.getString(ColumnNames.COURSE_SKILLS));
 		course.setCoursePrerequisites(rs.getString(ColumnNames.COURSE_PREREQUISITES));
 		course.setCreatorId(rs.getInt(ColumnNames.CREATOR_ID));
+		course.setModifiedAt(rs.getTimestamp(ColumnNames.MODIFIED_AT));
 		return course;
 		
 	};

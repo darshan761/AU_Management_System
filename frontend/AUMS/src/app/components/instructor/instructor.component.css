@@ -7,3 +7,29 @@
 .example-full-width {
     width: 100%;
 }
+
+.mat-icon {
+    cursor: pointer;
+}
+
+.mat-icon:hover {
+    color: red;
+}
+
+#delete {
+    text-align: center;
+}
+
+th {
+    font-size: 24px;
+    border: 2px solid #ddd;
+    padding: 10px;
+}
+
+th:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+th:hover {
+    background-color: #ddd;
+}

@@ -59,7 +59,7 @@ public class TrainingDaoImpl implements TrainingDao {
 	public ResponseDto addTraining(Training training) {
 		ResponseDto response = new ResponseDto();		
 		try {
-			jdbcTemplate.update(Queries.CREATE_TRAINING, training.getCourseId(), training.getInstructorId(), training.getFeedback());
+			response.setAdditionalData(jdbcTemplate.update(Queries.CREATE_TRAINING, training.getCourseId(), training.getInstructorId(), training.getFeedback()));
 			response.setResponseType(ResponseType.SUCCESS);
 		} catch (Exception e) {
 			response.setResponseType(ResponseType.FAILURE);
@@ -72,7 +72,7 @@ public class TrainingDaoImpl implements TrainingDao {
 	public ResponseDto deleteTraining(int id) {
 		ResponseDto response = new ResponseDto();		
 		try {
-			jdbcTemplate.update(Queries.DELETE_TRAINING, id);
+			response.setAdditionalData(jdbcTemplate.update(Queries.DELETE_TRAINING, id));
 			response.setResponseType(ResponseType.SUCCESS);
 		} catch (Exception e) {
 			response.setResponseType(ResponseType.FAILURE);

@@ -2,57 +2,80 @@
 <mat-toolbar color="primary">
     Manage Courses
 </mat-toolbar>
-<div class="search">
-    <mat-icon class="search-icon">search</mat-icon>
-    <mat-form-field class="example-full-width">
-        <mat-label> Search by Course Name</mat-label>
-        <input type="text" matInput [formControl]="myControl">
-    </mat-form-field>
+
+<mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia">
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+
+    <table mat-table [dataSource]="dataSource" matSort>
+
+        <ng-container matColumnDef="courseId">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+            <td mat-cell *matCellDef="let row"> {{row.courseId}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="courseName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+            <td mat-cell *matCellDef="let row"> {{row.courseName}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="courseDesc">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+            <td mat-cell *matCellDef="let row"> {{row.courseDesc}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="courseLocation">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Location </th>
+            <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.courseLocation}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="coursePrerequisites">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Prerequisites </th>
+            <td mat-cell *matCellDef="let row"> {{row.coursePrerequisites}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="courseSkill">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Skills </th>
+            <td mat-cell *matCellDef="let row"> {{row.courseSkill}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="edit">
+            <th mat-header-cell *matHeaderCellDef> Edit </th>
+            <td mat-cell *matCellDef="let row"><button mat-stroked-button (click)="openViewCourseDialog(row.courseId)" color="accent"> <mat-icon color="accent"> edit</mat-icon> </button>
+
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef> Delete </th>
+            <td mat-cell *matCellDef="let row"> <button mat-stroked-button (click)="deleteCourse(row.courseId)" color="accent"> <mat-icon color="accent" >delete</mat-icon> </button>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="add">
+            <th mat-header-cell *matHeaderCellDef> Add </th>
+            <td mat-cell *matCellDef="let row"> <button mat-stroked-button (click)="openDialog(row.courseId)" color="accent"><mat-icon color="accent" >person_add</mat-icon> </button>
+            </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="view">
+            <th mat-header-cell *matHeaderCellDef> Instructors </th>
+            <td mat-cell *matCellDef="let row"> <button mat-stroked-button (click)="openInstructorDialog(row.courseId)" color="accent"><mat-icon color="accent" >visibility</mat-icon> </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+        </tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
 </div>
-<p *ngFor="let course of filteredCourseList | async ; let i = index">
-    <mat-card class="example-card">
-        <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>{{course.courseName}}</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <p>
-                {{course.courseDesc}}
-            </p>
-        </mat-card-content>
-        <mat-card-actions>
-            <div class="example-button-container">
 
-                <button mat-stroked-button (click)="openViewCourseDialog(course.courseId)" color="accent"> <mat-icon color="accent"> edit</mat-icon> Edit Course</button>
-
-                <button mat-stroked-button (click)="deleteCourse(course.courseId)" color="accent"> <mat-icon color="accent" >delete</mat-icon> Delete course</button>
-
-                <button mat-stroked-button (click)="openDialog(course.courseId)" color="accent"><mat-icon color="accent" >person_add</mat-icon> Add Instructor</button>
-
-                <button mat-stroked-button (click)="showInstructor(course.courseId, i)" color="accent"><mat-icon color="accent" >visibility</mat-icon> View Instructors</button>
-            </div>
-        </mat-card-actions>
-        <div *ngIf="!isShowDiv[i]">
-            <hr>
-            <table style="width: 100%">
-                <tr *ngFor="let instructor of InstructorList">
-                    <th *ngIf="instructor.courseId == course.courseId">
-
-                        <mat-icon color="primary">person</mat-icon> {{instructor.userName}}
-                    </th>
-                    <th *ngIf="instructor.courseId == course.courseId">
-                        <mat-icon (click)="deleteInstructor(instructor.trainingId)">delete_outline</mat-icon>
-                    </th>
-                </tr>
-            </table>
-
-            <h5 *ngIf="InstructorList.length == 0">No Instructor Assigned yet</h5>
-
-        </div>
-
-    </mat-card>
-
-</p>
 
 <button class="add" mat-fab color="accent" (click)="openCreateDialog()">
         <mat-icon>add</mat-icon>

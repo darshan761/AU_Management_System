@@ -58,7 +58,7 @@ public class InstructorDaoImpl implements InstructorDao{
 	public ResponseDto deleteInstructor(int id) {
 		ResponseDto response = new ResponseDto();		
 		try {
-			jdbcTemplate.update(Queries.DELETE_INSTRUCTOR, id);
+			response.setAdditionalData(jdbcTemplate.update(Queries.DELETE_INSTRUCTOR, id));
 			response.setResponseType(ResponseType.SUCCESS);
 		} catch (Exception e) {
 			response.setResponseType(ResponseType.FAILURE);

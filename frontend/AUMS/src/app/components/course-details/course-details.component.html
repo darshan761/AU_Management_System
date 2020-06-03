@@ -1,4 +1,6 @@
 <form [formGroup]="courseForm" layout="row" layout-align="center center" (ngSubmit)="saveCourse()">
+    <h4>EDIT COURSE</h4>
+
     <p>
         <mat-form-field appearance="outline">
             <mat-label>Course Title</mat-label>
@@ -34,13 +36,13 @@
             <mat-icon matSuffix>edit</mat-icon>
         </mat-form-field>
     </p>
-    <p>
+    <div>
         <button mat-fab color="accent" type="button" (click)="enable()" aria-label="Example icon button with a edit icon">
                 <mat-icon>edit</mat-icon>
-            </button>
+            </button> &nbsp; &nbsp;
         <button mat-fab color="accent" [disabled]="!courseForm.valid" type="submit" aria-label="Example icon button with a edit icon">
                 <mat-icon>save</mat-icon>
         </button>
-    </p>
+    </div>
 
 </form>

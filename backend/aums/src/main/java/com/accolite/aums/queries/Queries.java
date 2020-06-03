@@ -30,6 +30,7 @@ public class Queries {
 	public static final String GET_COURSES_OF_TRAINER = "SELECT * from course JOIN training ON course.course_id = training.course_id and training.instructor_id = ? AND course.deleted_at IS NULL AND training.deleted_at IS NULL";
 	
 	public static final String GET_COURSE_COUNT = "SELECT COUNT(*) from course where deleted_at IS NULL";
+	public static final String GET_COURSE_VERSION = "SELECT * from course_history where course_id = ?";
 	
 	public static final String GET_ALL_INSTRUCTORS = "SELECT * FROM user JOIN instructor ON user.user_id = instructor.instructor_id AND instructor.deleted_at IS NULL";
 	public static final String GET_INSTRUCTOR_BY_ID = "SELECT * FROM user JOIN instructor ON user.user_id = instructor.instructor_id where user.user_id=? AND instructor.deleted_at IS NULL";

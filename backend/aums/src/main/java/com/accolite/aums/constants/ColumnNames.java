@@ -30,6 +30,8 @@ public class ColumnNames {
 	public static final String COURSE_PREREQUISITES = "course_prerequisites";
 	public static final String COURSE_LOCATION = "course_location";
 	public static final String CREATOR_ID = "creator_id";
+	public static final String MODIFIED_AT = "modified_at";
+
 	
 	// Training Table Columns
 	public static final String TRAINING_ID = "training_id";
