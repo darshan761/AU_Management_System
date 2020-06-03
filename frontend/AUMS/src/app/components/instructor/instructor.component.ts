@@ -36,7 +36,7 @@ export class InstructorComponent  implements OnInit{
     @Optional() @Inject(MAT_DIALOG_DATA) public data: number,
     private userService: UserService) {
       this.userService.getAllUsers().subscribe((response:any) =>{
-        this.userList = response;
+        this.userList = response.data;
         this.filteredOptions = this.myControl.valueChanges
         .pipe(
           startWith(''),

@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class CourseService {
 
-  userId = sessionStorage.getItem('userId');
+  userId = +sessionStorage.getItem('userId');
   headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
   private ROOT_COURSE = '/api/course/';

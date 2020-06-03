@@ -48,18 +48,42 @@ export class CoursesComponent implements OnInit {
     return this.CourseList.filter(course => course.courseName.toLowerCase().indexOf(filterValue) === 0);
   }
 
-  showTraining(courseId){
+  showTraining(courseId, instructorId){
     // this.isShowDiv[index] = !this.isShowDiv[index];
-    this.trainingService.getTrainingByInstructor(courseId).subscribe((response: ApiResponse)=>{
-      this.TrainingList = response.data;
+    this.trainingService.getTrainingByInstructorID(courseId, instructorId).subscribe((response: ApiResponse)=>{
+      console.log("dataaaa",response.data);
+      if(response.data.length != 0) {
+        this.TrainingList.push(response.data);
+        console.log(this.TrainingList);
+      }
     });
+  }
+
+  checkIfNoMaterialUpload(instructorId){
+    let count = 0;
+    
+    for(let t of this.TrainingList){
+      
+      for(let i of t){
+        console.log("hola",i.instructorId ,instructorId);
+        if(i.instructorId != instructorId){
+          count++;
+        }
+      }
+    }
+    console.log(count,this.TrainingList.length);
+    if(count === this.TrainingList.length) return true;
+    else return false;
   }
 
   showInstructor(courseId, index){
     this.isShowDiv[index] = !this.isShowDiv[index];
     this.userService.getInstructorByCourse(courseId).subscribe((response: ApiResponse)=>{
       this.InstructorList = response.data;
-      this.showTraining(courseId);
+      this.TrainingList = [];
+      for(let instructor of this.InstructorList){
+        this.showTraining(courseId, instructor.userId);
+      }
     });
   }
 

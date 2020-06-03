@@ -1,5 +1,6 @@
 .example-card {
     max-width: 600px;
+    /* padding: 5px; */
 }
 
 .example-header-image {
@@ -10,8 +11,8 @@
 .mat-card {
     margin: auto;
     width: 60%;
-    box-shadow: 5px 5px 5px 5px #aaaaaa;
-    border-radius: 25px;
+    box-shadow: 5px 3px 5px 3px #aaaaaa;
+    /* border-radius: 25px; */
 }
 
 
@@ -23,4 +24,9 @@
 .mat-icon:hover {
     cursor: pointer;
     color: red;
+}
+
+.send-email {
+    display: flex;
+    justify-content: center;
 }

@@ -3,18 +3,17 @@
     Manage Courses
 </mat-toolbar>
 <div class="search">
-    <mat-icon>search</mat-icon>
+    <mat-icon class="search-icon">search</mat-icon>
     <mat-form-field class="example-full-width">
-        <mat-label>Search by Course Name</mat-label>
+        <mat-label> Search by Course Name</mat-label>
         <input type="text" matInput [formControl]="myControl">
     </mat-form-field>
 </div>
 <p *ngFor="let course of filteredCourseList | async ; let i = index">
     <mat-card class="example-card">
         <mat-card-header>
-            <!-- <div mat-card-avatar class="example-header-image"></div> -->
+            <div mat-card-avatar class="example-header-image"></div>
             <mat-card-title>{{course.courseName}}</mat-card-title>
-            <button mat-stroked-button (click)="showInstructor(course.courseId, i)" color="accent">view Instructors</button>
         </mat-card-header>
         <mat-card-content>
             <p>
@@ -23,21 +22,31 @@
         </mat-card-content>
         <mat-card-actions>
             <div class="example-button-container">
-                <mat-icon color="accent" (click)="openViewCourseDialog(course.courseId)">visibility</mat-icon>
-                &nbsp;
-                <mat-icon color="accent" (click)="deleteCourse(course.courseId)">delete</mat-icon>
-                &nbsp;
-                <mat-icon color="accent" (click)="openDialog(course.courseId)">person_add</mat-icon>
+
+                <button mat-stroked-button (click)="openViewCourseDialog(course.courseId)" color="accent"> <mat-icon color="accent"> edit</mat-icon> Edit Course</button>
+
+                <button mat-stroked-button (click)="deleteCourse(course.courseId)" color="accent"> <mat-icon color="accent" >delete</mat-icon> Delete course</button>
+
+                <button mat-stroked-button (click)="openDialog(course.courseId)" color="accent"><mat-icon color="accent" >person_add</mat-icon> Add Instructor</button>
+
+                <button mat-stroked-button (click)="showInstructor(course.courseId, i)" color="accent"><mat-icon color="accent" >visibility</mat-icon> View Instructors</button>
             </div>
         </mat-card-actions>
         <div *ngIf="!isShowDiv[i]">
-            <p *ngFor="let instructor of InstructorList">
-                <span *ngIf="instructor.courseId == course.courseId">
-                    <mat-icon color="primary">person</mat-icon> {{instructor.userName}}
-                     <mat-icon (click)="deleteInstructor(instructor.trainingId)">delete_outline</mat-icon>                
-                </span>
-            </p>
-            <span *ngIf="InstructorList.length == 0">NO INstructor Assigned yet</span>
+            <hr>
+            <table style="width: 100%">
+                <tr *ngFor="let instructor of InstructorList">
+                    <th *ngIf="instructor.courseId == course.courseId">
+
+                        <mat-icon color="primary">person</mat-icon> {{instructor.userName}}
+                    </th>
+                    <th *ngIf="instructor.courseId == course.courseId">
+                        <mat-icon (click)="deleteInstructor(instructor.trainingId)">delete_outline</mat-icon>
+                    </th>
+                </tr>
+            </table>
+
+            <h5 *ngIf="InstructorList.length == 0">No Instructor Assigned yet</h5>
 
         </div>
 

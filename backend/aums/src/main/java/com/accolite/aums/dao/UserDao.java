@@ -3,21 +3,20 @@
  */
 package com.accolite.aums.dao;
 
-import java.util.List;
-
-import com.accolite.aums.models.User;
+import com.accolite.aums.dto.ResponseDto;
 
 /**
  * @author darshan
  *
  */
 public interface UserDao {
-	 public List<User> getAllUsers();
+	
+	 public ResponseDto getAllUsers();
 	 
-	 public User findUserById(int id);
+	 public ResponseDto findUserById(int id);
 	 
-	 public User findUserByEmail(String email);
+	 public ResponseDto findUserByEmail(String email);
 	 
-	 public void deleteUser(int id);
+	 public ResponseDto deleteUser(int id);
 
 }

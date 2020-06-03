@@ -9,16 +9,18 @@ import java.sql.SQLException;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.accolite.aums.constants.ColumnNames;
+import com.accolite.aums.models.Course;
 import com.accolite.aums.models.User;
 
 /**
  * @author darshan
  *
  */
-public class UserRowMapper implements RowMapper<User> {
+public class UserRowMapper {
 
-	@Override
-	public User mapRow(ResultSet rs, int rowNum) throws SQLException {
+	private UserRowMapper() {}
+	
+	public static final RowMapper<User> UserRowMapperLambda = (rs, rowNum) -> {
 		User user = new User();
 		user.setUserId(rs.getInt(ColumnNames.USER_ID));
 		user.setUserEmail(rs.getString(ColumnNames.USER_EMAIL));
@@ -27,6 +29,6 @@ public class UserRowMapper implements RowMapper<User> {
 		user.setUserLocation(rs.getString(ColumnNames.USER_LOCATION));
 		user.setUserImage(rs.getBlob(ColumnNames.USER_IMAGE));
 		return user;
-	}
+	};
 
 }

@@ -3,13 +3,11 @@
  */
 package com.accolite.aums.service.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.accolite.aums.dao.impl.UserDaoImpl;
-import com.accolite.aums.models.User;
+import com.accolite.aums.dto.ResponseDto;
 import com.accolite.aums.service.UserService;
 
 /**
@@ -24,17 +22,17 @@ public class UserServiceImpl implements UserService {
 	private UserDaoImpl userDao;
 
 	@Override
-	public List<User> getAllUsers() {
+	public ResponseDto getAllUsers() {
 		return userDao.getAllUsers();
 	}
 
 	@Override
-	public User findUserById(int id) {
+	public ResponseDto findUserById(int id) {
 		return userDao.findUserById(id);
 	}
 	
 	@Override
-	public User findUserByEmail(String email) {
+	public ResponseDto findUserByEmail(String email) {
 		return userDao.findUserByEmail(email);
 	}
 

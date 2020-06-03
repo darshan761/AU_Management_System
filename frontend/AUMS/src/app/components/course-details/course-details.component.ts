@@ -36,7 +36,7 @@ export class CourseDetailsComponent implements OnInit {
   ngOnInit() {
     this.router.params.subscribe(params => {
       this.courseId = this.data;
-      this.courseService.getCourseById(this.courseId).subscribe((response:ApiResponse)=>{
+      this.courseService.getCourseById(this.courseId).subscribe((response: ApiResponse) => {
       console.log(response);
       this.course = response.data;
       this.courseForm.setValue({

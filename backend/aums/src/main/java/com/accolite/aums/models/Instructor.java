@@ -13,8 +13,6 @@ import lombok.Setter;
  *
  */
 @Getter @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class Instructor extends User {
 
 	private int instructorId;

@@ -15,6 +15,11 @@ export class TrainingService {
     return this.http.get('api/training/material/'+courseId+'/'+this.userId );
   }
 
+  getTrainingByInstructorID(courseId, instructorId) {
+    console.log(courseId, instructorId);
+    return this.http.get('api/training/material/'+courseId+'/'+instructorId );
+  }
+
   deleteTraining(fileId) {
     this.http.delete('api/training/material/delete/'+ fileId ).subscribe();
   }

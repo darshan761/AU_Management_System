@@ -3,9 +3,7 @@
  */
 package com.accolite.aums.service;
 
-import java.util.List;
-
-import com.accolite.aums.models.User;
+import com.accolite.aums.dto.ResponseDto;
 
 /**
  * @author darshan
@@ -13,11 +11,11 @@ import com.accolite.aums.models.User;
  */
 public interface UserService {
 
-	public List<User> getAllUsers();
+	public ResponseDto getAllUsers();
 
-	public User findUserById(int id);
+	public ResponseDto findUserById(int id);
 
-	public User findUserByEmail(String email);
+	public ResponseDto findUserByEmail(String email);
 
 
 }

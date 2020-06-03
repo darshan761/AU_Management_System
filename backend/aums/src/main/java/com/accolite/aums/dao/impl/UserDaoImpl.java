@@ -13,7 +13,11 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.accolite.aums.dao.UserDao;
+import com.accolite.aums.dto.ResponseDto;
+import com.accolite.aums.enums.ResponseType;
 import com.accolite.aums.models.User;
+import com.accolite.aums.queries.Queries;
+import com.accolite.aums.rowmapper.CourseRowMapper;
 import com.accolite.aums.rowmapper.UserRowMapper;
 
 /**
@@ -28,33 +32,59 @@ public class UserDaoImpl implements UserDao {
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public List<User> getAllUsers() {
-		String query = "SELECT * from user";
-		RowMapper<User> rowMapper = new UserRowMapper();
-
-		return jdbcTemplate.query(query, rowMapper);
+	public ResponseDto getAllUsers() {
+		
+		ResponseDto response = new ResponseDto();		
+		try {
+			response.setData(jdbcTemplate.query(Queries.GET_ALL_USERS, UserRowMapper.UserRowMapperLambda));
+			response.setResponseType(ResponseType.SUCCESS);
+		} catch (Exception e) {
+			response.setResponseType(ResponseType.FAILURE);
+			response.setMsg(e.toString());
+		}
+		return response;
 	}
 
 	@Override
-	public User findUserById(int id) {
-		String query = "SELECT * FROM user WHERE user_id = ?";
-		RowMapper<User> rowMapper = new BeanPropertyRowMapper<>(User.class);
-
-		return jdbcTemplate.queryForObject(query, rowMapper, id);
+	public ResponseDto findUserById(int id) {
+		
+		ResponseDto response = new ResponseDto();		
+		try {
+			response.setData(jdbcTemplate.queryForObject(Queries.GET_USER_BY_ID, UserRowMapper.UserRowMapperLambda, id));
+			response.setResponseType(ResponseType.SUCCESS);
+		} catch (Exception e) {
+			response.setResponseType(ResponseType.FAILURE);
+			response.setMsg(e.toString());
+		}
+		return response;
 	}
 
 	@Override
-	public User findUserByEmail(String email) {
-		String query = "SELECT * FROM user WHERE user_email = ?";
-		RowMapper<User> rowMapper = new BeanPropertyRowMapper<>(User.class);
-
-		return jdbcTemplate.queryForObject(query, rowMapper, email);
+	public ResponseDto findUserByEmail(String email) {
+		ResponseDto response = new ResponseDto();		
+		try {
+			response.setData(jdbcTemplate.queryForObject(Queries.GET_USER_BY_EMAIL, UserRowMapper.UserRowMapperLambda, email));
+			response.setResponseType(ResponseType.SUCCESS);
+		} catch (Exception e) {
+			response.setResponseType(ResponseType.FAILURE);
+			response.setMsg(e.toString());
+		}
+		return response;
+ 
 	}
 
 	@Override
-	public void deleteUser(int id) {
-		String query = "DELETE FROM user WHERE user_id=?";
-		jdbcTemplate.update(query, id);
+	public ResponseDto deleteUser(int id) {
+		ResponseDto response = new ResponseDto();		
+		try {
+			jdbcTemplate.update(Queries.DELETE_USER, id);
+			response.setResponseType(ResponseType.SUCCESS);
+		} catch (Exception e) {
+			response.setResponseType(ResponseType.FAILURE);
+			response.setMsg(e.toString());
+		}
+		return response;
+		
 	}
 
 }

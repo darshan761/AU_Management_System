@@ -55,7 +55,7 @@ public class TrainingMaterialController {
 	}
 	
 	@PostMapping("/add")
-	public ResponseDto addTraining(@RequestParam("file[]") MultipartFile[] file, @RequestParam("courseId") Integer courseId,
+	public ResponseDto addTrainingMaterial(@RequestParam("file[]") MultipartFile[] file, @RequestParam("courseId") Integer courseId,
             @RequestParam("instructorId") int instructorId) throws SerialException, IOException, SQLException {
 		return trainingMaterialService.addTrainingMaterial(file, courseId, instructorId);
 	}

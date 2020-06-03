@@ -14,6 +14,11 @@ public class Queries {
 	private Queries() {
 
 	}
+	
+	public static final String GET_ALL_USERS = "SELECT * from user";
+	public static final String GET_USER_BY_EMAIL = "SELECT * FROM user WHERE user_email = ?";
+	public static final String GET_USER_BY_ID = "SELECT * FROM user WHERE user_id = ?";
+	public static final String DELETE_USER = "DELETE FROM user WHERE user_id=?";
 
 	public static final String GET_ALL_COURSES = "SELECT * from course WHERE deleted_at IS NULL";
 	public static final String GET_COURSE_BY_ID = "SELECT * FROM course WHERE course_id = ? AND deleted_at IS NULL";

@@ -58,6 +58,7 @@ public class CourseServiceImpl implements CourseService{
 		return courseDao.findCoursesByInstructorId(id);
 	}
 	
+	@Override
 	public ResponseDto getCourseCount() {
 		return courseDao.getCourseCount();
 	}

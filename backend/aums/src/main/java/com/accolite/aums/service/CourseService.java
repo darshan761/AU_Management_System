@@ -31,4 +31,6 @@ public interface CourseService {
 	 * @return
 	 */
 	 public ResponseDto findCoursesByInstructorId(int id);
+	 
+	 public ResponseDto getCourseCount();
 }

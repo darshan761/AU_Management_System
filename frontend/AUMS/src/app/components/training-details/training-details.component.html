@@ -5,7 +5,7 @@
 <li *ngFor="let course of CourseList; let i = index">
     <mat-card class="example-card">
         <mat-card-header>
-            <!-- <div mat-card-avatar class="example-header-image"></div> -->
+            <div mat-card-avatar class="example-header-image"></div>
             <mat-card-title>{{course.courseName}}</mat-card-title>
             <!-- <mat-card-subtitle>{{course.skills}}</mat-card-subtitle> -->
         </mat-card-header>
@@ -17,22 +17,40 @@
 
         <mat-card-actions>
             <div class="example-button-container">
-                <mat-icon color="primary" (click)="openDialog(course.courseId)">add</mat-icon>
-                <button mat-stroked-button (click)="showTraining(course.courseId, i)" color="accent">view Training</button>
+
+                <button mat-stroked-button (click)="openDialog(course.courseId)" color="accent"> <mat-icon color="accent" >add</mat-icon> Add Training</button>
+                <button mat-stroked-button (click)="showTraining(course.courseId, i)" color="accent"><mat-icon color="accent" > visibility</mat-icon> View Training</button>
                 <!-- <mat-icon color="primary">delete</mat-icon> -->
             </div>
         </mat-card-actions>
 
         <div *ngIf="!isShowDiv[i]">
-            <p *ngFor="let training of TrainingList;let j= index">
+            <hr>
+            <table width="100%">
+                <tr *ngFor="let training of TrainingList;let j= index">
+                    <td *ngIf="training.courseId == course.courseId">
+                        <mat-icon color="primary">file_copy</mat-icon> <a (click)="downloadFile(training.file, training.fileType)">{{training.fileName}}</a>
+                    </td>
+                    <td *ngIf="training.courseId == course.courseId">
+                        <mat-icon (click)="deleteTraining(training.fileId)">delete_outline</mat-icon>
+                    </td>
+                </tr>
+            </table>
+            <!-- <p *ngFor="let training of TrainingList;let j= index">
                 <span *ngIf="training.courseId == course.courseId">
                             <mat-icon color="primary">file_copy</mat-icon> <a (click)="downloadFile(training.file, training.fileType)">{{training.fileName}}</a>
                              <mat-icon (click)="deleteTraining(training.fileId)">delete_outline</mat-icon>                
-                        </span>
-            </p>
+                </span>
+
+            </p> -->
+
             <span *ngIf="TrainingList.length != 0">
-                    <input type="email" matInput [formControl]="myControl" placeholder="Enter EmailID">
-                    <button mat-stroked-button [disabled]="!myControl.valid" (click)="sendEmail(course.courseId)" color="accent">Send Email</button>
+                    <hr>
+                <div class="send-email">
+                        <input type="email" matInput [formControl]="myControl" placeholder="Enter EmailID">
+                        <button mat-stroked-button [disabled]="!myControl.valid" (click)="sendEmail(course.courseId)" color="accent">Send Email</button>
+                </div>
+                    
             </span>
             <span *ngIf="TrainingList.length == 0">NO Training Material uploaded</span>
         </div>

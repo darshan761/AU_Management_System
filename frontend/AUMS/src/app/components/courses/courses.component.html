@@ -18,9 +18,6 @@
             <mat-card-subtitle>{{course.courseDesc}}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
-            <p>
-                {{course.courseDesc}}
-            </p>
             <p>Location:
                 <mat-chip color="primary" selected>{{course.courseLocation}}</mat-chip>
             </p>
@@ -33,19 +30,20 @@
         </mat-card-content>
         <button mat-stroked-button (click)="showInstructor(course.courseId,i)" color="accent">view Training Info</button>
         <div *ngIf="!isShowDiv[i]">
-            <p *ngFor="let instructor of InstructorList">
+            <div *ngFor="let instructor of InstructorList">
                 <span *ngIf="instructor.courseId == course.courseId">
                         <mat-icon color="primary">person</mat-icon> {{instructor.userName}}          
                 </span>
-                <li *ngFor="let training of TrainingList;let j= index">
-
-                    <!-- <span *ngIf="training.instuctorId == instructor.userId"> -->
-                    <mat-icon color="primary">file_copy</mat-icon> <a (click)="downloadFile(training.file, training.fileType)">{{training.fileName}}</a>
-                    <!-- </span> -->
-                </li>
-            </p>
-            <span *ngIf="InstructorList.length == 0">NO Instructor Assigned Yet</span>
-
+                <div *ngFor="let training of TrainingList;let j= index">
+                    <div *ngFor="let t of training">
+                        <span *ngIf="t.instructorId == instructor.userId">
+                                <mat-icon color="primary">file_copy</mat-icon> <a (click)="downloadFile(t.file, t.fileType)">{{t.fileName}}</a>
+                        </span>
+                    </div>
+                </div>
+                <!-- <span *ngIf="checkIfNoMaterialUpload(instructor.instructorId)">No Training Material uploaded yet</span> -->
+            </div>
+            <span *ngIf="InstructorList.length == 0">No Instructor Assigned Yet</span>
         </div>
     </mat-card>
 

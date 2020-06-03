@@ -5,6 +5,7 @@ package com.accolite.aums.controller;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -21,12 +22,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import com.accolite.aums.dto.ResponseDto;
 import com.accolite.aums.models.Course;
 import com.accolite.aums.service.impl.CourseServiceImpl;
+import com.accolite.aums.utils.Utils;
 
 /**
  * @author darshan
@@ -57,7 +57,7 @@ public class CourseControllerTest {
 		
 		mockMvc.perform(get("/api/course/1")).andDo(print())
 	    .andExpect(status().isOk())
-	    .andExpect(jsonPath("$['data'].courseName", is(course.getCourseName())));
+	    .andExpect(jsonPath("$.data.courseName", is(course.getCourseName())));
 	}
 	
 	@Test
@@ -84,7 +84,7 @@ public class CourseControllerTest {
 		
 		mockMvc.perform(get("/api/course/")).andDo(print())
 	    .andExpect(status().isOk())
-	    .andExpect(jsonPath("$['data'].length()",is(2)));
+	    .andExpect(jsonPath("$.data.length()",is(2)));
 	}
 	
 	@Test
@@ -99,9 +99,97 @@ public class CourseControllerTest {
 		
 		when(courseService.addCourse(course)).thenReturn(response);
 		
-//		mockMvc.perform(post("/api/course/add")
-//				.contentType(MediaType.APPLICATION_JSON)
-//				.andEx
+		mockMvc.perform(post("/api/course/add")
+			    .content(Utils.asJsonString(course))
+				.contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON))
+				.andDo(print())
+				.andExpect(status().isOk())
+				.andReturn();
+
+	}
+	
+	@Test
+	public void updateCourse() throws Exception {
+		
+		ResponseDto response = new ResponseDto();
+		Course course = new Course();
+		course.setCourseId(1);
+		course.setCourseName("React");
+		course.setCourseDesc("Frontend Library");
+		response.setData(course);
+		
+		when(courseService.updateCourse(course)).thenReturn(response);
+		
+		mockMvc.perform(post("/api/course/save")
+				 	.content(Utils.asJsonString(course))
+					.contentType(MediaType.APPLICATION_JSON)
+					.accept(MediaType.APPLICATION_JSON))
+					.andExpect(status().isOk())
+					.andReturn();
+	}
+	
+	@Test
+	public void deleteCourse() throws Exception {
+		ResponseDto response = new ResponseDto();
+		Course course = new Course();
+		course.setCourseId(1);
+		course.setCourseName("React");
+		course.setCourseDesc("Frontend Library");
+		response.setData(course);
+		
+		when(courseService.deleteCourse(1)).thenReturn(response);
+		mockMvc.perform(delete("/api/course/delete/2")
+				.contentType(MediaType.APPLICATION_JSON)
+				.characterEncoding("utf-8"))
+				.andExpect(status().isOk())
+				.andReturn();
+	}
+	
+	@Test
+	public void getCourseByCreatorId() throws Exception {
+		
+		ResponseDto response = new ResponseDto();
+		Course course = new Course();
+		course.setCourseId(1);
+		course.setCourseName("React");
+		course.setCourseDesc("Frontend Library");
+		response.setData(course);
+		
+		when(courseService.findCoursesByUserId(1)).thenReturn(response);
+		mockMvc.perform(get("/api/course/creator/1")
+				.contentType(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.data.courseName", is(course.getCourseName())));
+	}
+	
+	@Test
+	public void getCourseByInstructorId() throws Exception {
+		ResponseDto response = new ResponseDto();
+		Course course = new Course();
+		course.setCourseId(1);
+		course.setCourseName("React");
+		course.setCourseDesc("Frontend Library");
+		response.setData(course);
+		
+		when(courseService.findCoursesByInstructorId(1)).thenReturn(response);
+		mockMvc.perform(get("/api/course/instructor/1")
+				.contentType(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.data.courseName", is(course.getCourseName())));
+	}
+	
+	@Test
+	public void getCourseCount() throws Exception {
+		ResponseDto response = new ResponseDto();
+		int count = 2;
+		response.setData(count);
+		
+		when(courseService.getCourseCount()).thenReturn(response);
+		mockMvc.perform(get("/api/course/count/")
+				.contentType(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.data", is(2)));
 	}
 
 }

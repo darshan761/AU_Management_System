@@ -13,8 +13,6 @@ import lombok.Setter;
  *
  */
 @Getter @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class Training {
 	
 	private int trainingId;
