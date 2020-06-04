@@ -48,10 +48,6 @@ export class CourseService {
     return this.http.get(this.ROOT_COURSE+'/count');
   }
 
-  getVersionData(courseId) {
-    return this.http.get(this.ROOT_COURSE+'/version/'+courseId);
-  }
-
   updateCourse(course) {
     this.http.post(this.ROOT_COURSE + '/save', course).subscribe(data =>{
       console.log(data);

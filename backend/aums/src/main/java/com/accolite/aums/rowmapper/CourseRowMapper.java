@@ -29,6 +29,8 @@ public class CourseRowMapper {
 		course.setCourseLocation(rs.getString(ColumnNames.COURSE_LOCATION));
 		course.setCourseSkill(rs.getString(ColumnNames.COURSE_SKILLS));
 		course.setCoursePrerequisites(rs.getString(ColumnNames.COURSE_PREREQUISITES));
+		course.setCourseMonth(rs.getString(ColumnNames.COURSE_MONTH));
+		course.setCourseYear(rs.getString(ColumnNames.COURSE_YEAR));
 		course.setCreatorId(rs.getInt(ColumnNames.CREATOR_ID));
 		course.setModifiedAt(rs.getTimestamp(ColumnNames.MODIFIED_AT));
 		return course;

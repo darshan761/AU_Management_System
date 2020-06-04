@@ -66,6 +66,12 @@ public class TrainingMaterialController {
 		return trainingMaterialService.deleteTrainingMaterial(id);
 	}
 	
+	@GetMapping("/version/{id}")
+	public ResponseDto getTrainingVersion(@PathVariable("id") int id) {
+		
+		return trainingMaterialService.getTrainingVersion(id);
+	}
+	
 	@PostMapping("/mail")
 	public ResponseDto sendEmail(@RequestBody Email email) throws MailException, MessagingException {
 		return emailService.sendEmail(email);

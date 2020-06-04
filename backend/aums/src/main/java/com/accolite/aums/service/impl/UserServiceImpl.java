@@ -25,11 +25,6 @@ public class UserServiceImpl implements UserService {
 	public ResponseDto getAllUsers() {
 		return userDao.getAllUsers();
 	}
-
-	@Override
-	public ResponseDto findUserById(int id) {
-		return userDao.findUserById(id);
-	}
 	
 	@Override
 	public ResponseDto findUserByEmail(String email) {

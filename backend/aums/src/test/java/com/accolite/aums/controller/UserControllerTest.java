@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -40,18 +41,33 @@ public class UserControllerTest {
 
 	@MockBean
 	private UserServiceImpl userService;
-
-	@Test
-	public void getUserById() throws Exception {
-
-		ResponseDto response = new ResponseDto();
-		User user = new User();
+	
+	ResponseDto response = new ResponseDto();
+	User user = new User();
+	User user2 = new User();
+	List<User> userList = new ArrayList<>();
+	
+	@BeforeEach
+	public void init() {
+		
 		user.setUserId(1);
 		user.setUserDesignation("Designation");
 		user.setUserEmail("email");
 		user.setUserLocation("location");
-		response.setData(user);
 		
+		user2.setUserId(2);
+		user2.setUserDesignation("Designation");
+		user2.setUserEmail("email");
+		user2.setUserLocation("location");
+		
+		userList.add(user);
+		userList.add(user2);
+	}
+
+	@Test
+	public void getUserByEmail() throws Exception {
+		
+		response.setData(user);
 		
 		when(userService.findUserByEmail("email")).thenReturn(response);
 		
@@ -62,24 +78,8 @@ public class UserControllerTest {
 	
 	@Test
 	public void getAllUser() throws Exception {
-
-		ResponseDto response = new ResponseDto();
-		User user1 = new User();
-		user1.setUserId(1);
-		user1.setUserDesignation("Designation");
-		user1.setUserEmail("email");
-		user1.setUserLocation("location");
-		
-		User user2 = new User();
-		user2.setUserId(2);
-		user2.setUserDesignation("Designation");
-		user2.setUserEmail("email");
-		user2.setUserLocation("location");
-		
-		List<User> user = new ArrayList<>();
-		user.add(user1);
-		user.add(user2);
-		response.setData(user);
+			
+		response.setData(userList);
 		
 		when(userService.getAllUsers()).thenReturn(response);
 		

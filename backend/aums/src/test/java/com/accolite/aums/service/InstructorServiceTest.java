@@ -17,6 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -42,11 +43,14 @@ public class InstructorServiceTest {
     @InjectMocks
     private InstructorServiceImpl instructorService;
 	
-	@Test
-	public void getInstructorById() throws Exception {
+    ResponseDto response = new ResponseDto();
+	Instructor instructor = new Instructor();
+	Instructor instructor2 = new Instructor();
+	List<Instructor> instructorList = new ArrayList<>();
 
-		ResponseDto response = new ResponseDto();
-		Instructor instructor = new Instructor();
+	@BeforeEach
+	public void init() {
+
 		instructor.setInstructorId(1);
 		instructor.setCourseId(2);
 		instructor.setUserName("Name");
@@ -54,6 +58,22 @@ public class InstructorServiceTest {
 		instructor.setUserDesignation("Designation");
 		instructor.setUserEmail("email");
 		instructor.setUserLocation("location");
+		
+		instructor2.setInstructorId(3);
+		instructor2.setCourseId(7);
+		instructor2.setUserName("Name");
+		instructor2.setTrainingId(8);
+		instructor2.setUserDesignation("Designation");
+		instructor2.setUserEmail("email");
+		instructor2.setUserLocation("location");
+		
+		instructorList.add(instructor);
+		instructorList.add(instructor2);
+	}
+    
+	@Test
+	public void getInstructorById() throws Exception {
+
 		response.setData(instructor);	
 		
 		when(instructorService.findInstructorById(1)).thenReturn(response);
@@ -69,29 +89,7 @@ public class InstructorServiceTest {
 	@Test
 	public void getAllInstructor() throws Exception {
 
-		ResponseDto response = new ResponseDto();
-		Instructor instructor1 = new Instructor();
-		instructor1.setInstructorId(1);
-		instructor1.setCourseId(2);
-		instructor1.setUserName("Name");
-		instructor1.setTrainingId(3);
-		instructor1.setUserDesignation("Designation");
-		instructor1.setUserEmail("email");
-		instructor1.setUserLocation("location");
-		
-		Instructor instructor2 = new Instructor();
-		instructor2.setInstructorId(3);
-		instructor2.setCourseId(7);
-		instructor2.setUserName("Name");
-		instructor2.setTrainingId(8);
-		instructor2.setUserDesignation("Designation");
-		instructor2.setUserEmail("email");
-		instructor2.setUserLocation("location");
-		
-		List<Instructor> instructor = new ArrayList<>();
-		instructor.add(instructor1);
-		instructor.add(instructor2);
-		response.setData(instructor);
+		response.setData(instructorList);
 		
 		when(instructorDao.getAllInstructors()).thenReturn(response);
 		
@@ -104,16 +102,6 @@ public class InstructorServiceTest {
 	
 	@Test
 	public void getInstructorByCourse() throws Exception {
-
-		ResponseDto response = new ResponseDto();
-		Instructor instructor = new Instructor();
-		instructor.setInstructorId(1);
-		instructor.setCourseId(2);
-		instructor.setUserName("Name");
-		instructor.setTrainingId(3);
-		instructor.setUserDesignation("Designation");
-		instructor.setUserEmail("email");
-		instructor.setUserLocation("location");
 		response.setData(instructor);
 		
 		when(instructorDao.findInstructorByCourseId(2)).thenReturn(response);

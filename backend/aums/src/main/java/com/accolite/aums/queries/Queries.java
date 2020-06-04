@@ -22,8 +22,8 @@ public class Queries {
 
 	public static final String GET_ALL_COURSES = "SELECT * from course WHERE deleted_at IS NULL";
 	public static final String GET_COURSE_BY_ID = "SELECT * FROM course WHERE course_id = ? AND deleted_at IS NULL";
-	public static final String CREATE_COURSE = "INSERT INTO course(course_name, course_desc, course_skills, course_prerequisites, course_location, creator_id) VALUES(?, ?, ?, ?, ?, ?)";
-	public static final String UPDATE_COURSE = "UPDATE course SET course_name=?, course_desc=?, course_skills=?, course_prerequisites=?, course_location=? WHERE course_id =?";
+	public static final String CREATE_COURSE = "INSERT INTO course(course_name, course_desc, course_skills, course_prerequisites, course_location, course_month, course_year, creator_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+	public static final String UPDATE_COURSE = "UPDATE course SET course_name=?, course_desc=?, course_skills=?, course_prerequisites=?, course_location=?, course_month=?,course_year=? WHERE course_id =?";
 	public static final String DELETE_COURSE = "UPDATE course SET deleted_at=now() WHERE course_id=? ";
 	
 	public static final String GET_COURSES_OF_CREATOR = "SELECT * from course where course.creator_id = ? AND course.deleted_at IS NULL";
@@ -46,6 +46,7 @@ public class Queries {
 	public static final String GET_ALL_TRAINING_MATERIAL = "SELECT * from training_material where deleted_at IS NULL";
 	public static final String GET_TRAINING_MATERIAL_BY_IDS = "SELECT * FROM training_material join training ON training.training_id = training_material.training_id WHERE training.course_id = ? and training.instructor_id=? AND training_material.deleted_at IS NULL";
 	public static final String GET_TRAINING_ID_FROM_MATERIAL = "SELECT DISTINCT training_id FROM training JOIN course ON training.course_id = course.course_id where training.course_id =? and training.instructor_id =? and training.deleted_at IS NULL";
-	public static final String CREATE_TRAINING_MATERIAL = "INSERT INTO training_material(training_id, training_file, training_file_name, training_file_type, training_file_size) VALUES(?,?,?,?,?)";
-	public static final String DELETE_TRAINING_MATERIAL = "UPDATE training_material SET deleted_at=now() WHERE training_file_id=?";
+	public static final String CREATE_TRAINING_MATERIAL = "INSERT INTO training_material(training_id, training_file, training_file_name, training_file_type, training_file_size, uploaded_at) VALUES(?,?,?,?,?,now())";
+	public static final String DELETE_TRAINING_MATERIAL = "DELETE from training_material WHERE training_file_id=?";
+	public static final String GET_TRAINING_VERSION = "SELECT * from training_material_history join training on training_material_history.training_id = training.training_id AND training.course_id =?";
 }

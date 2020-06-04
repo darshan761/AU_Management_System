@@ -48,4 +48,12 @@ public class TrainingMaterialServiceImpl implements TrainingMaterialService {
 		return trainingMaterialDao.addTrainingMaterial(file, courseId, instructorId);
 	}
 
+	/**
+	 * @param id
+	 * @return
+	 */
+	public ResponseDto getTrainingVersion(int id) {
+		return trainingMaterialDao.getTrainingVersion(id);
+	}
+
 }

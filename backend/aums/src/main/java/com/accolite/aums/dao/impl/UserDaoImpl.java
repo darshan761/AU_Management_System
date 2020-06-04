@@ -45,19 +45,6 @@ public class UserDaoImpl implements UserDao {
 		return response;
 	}
 
-	@Override
-	public ResponseDto findUserById(int id) {
-		
-		ResponseDto response = new ResponseDto();		
-		try {
-			response.setData(jdbcTemplate.queryForObject(Queries.GET_USER_BY_ID, UserRowMapper.UserRowMapperLambda, id));
-			response.setResponseType(ResponseType.SUCCESS);
-		} catch (Exception e) {
-			response.setResponseType(ResponseType.FAILURE);
-			response.setMsg(e.toString());
-		}
-		return response;
-	}
 
 	@Override
 	public ResponseDto findUserByEmail(String email) {
@@ -71,20 +58,6 @@ public class UserDaoImpl implements UserDao {
 		}
 		return response;
  
-	}
-
-	@Override
-	public ResponseDto deleteUser(int id) {
-		ResponseDto response = new ResponseDto();		
-		try {
-			jdbcTemplate.update(Queries.DELETE_USER, id);
-			response.setResponseType(ResponseType.SUCCESS);
-		} catch (Exception e) {
-			response.setResponseType(ResponseType.FAILURE);
-			response.setMsg(e.toString());
-		}
-		return response;
-		
 	}
 
 }

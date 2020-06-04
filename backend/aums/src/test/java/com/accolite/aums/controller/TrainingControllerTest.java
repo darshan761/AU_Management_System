@@ -15,6 +15,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -41,18 +42,33 @@ public class TrainingControllerTest {
 
 	@MockBean
 	private TrainingServiceImpl trainingService;
-
-	@Test
-	public void getTrainingById() throws Exception {
-
-		ResponseDto response = new ResponseDto();
-		Training training = new Training();
+	
+	ResponseDto response = new ResponseDto();
+	Training training = new Training();
+	Training training2 = new Training();
+	List<Training> trainingList = new ArrayList<>();
+	
+	@BeforeEach
+	public void init() {
+	
 		training.setCourseId(1);
 		training.setInstructorId(2);
 		training.setTrainingId(3);
 		training.setFeedback("feedback");
-		response.setData(training);
 		
+		training2.setCourseId(1);
+		training2.setInstructorId(2);
+		training2.setTrainingId(3);
+		training2.setFeedback("feedback");
+		
+		trainingList.add(training);
+		trainingList.add(training2);
+	}
+
+	@Test
+	public void getTrainingById() throws Exception {
+
+		response.setData(training);
 		
 		when(trainingService.findTrainingById(3)).thenReturn(response);
 		
@@ -63,24 +79,8 @@ public class TrainingControllerTest {
 	
 	@Test
 	public void getAllTraining() throws Exception {
-
-		ResponseDto response = new ResponseDto();
-		Training training1 = new Training();
-		training1.setCourseId(1);
-		training1.setInstructorId(2);
-		training1.setTrainingId(3);
-		training1.setFeedback("feedback");
-		
-		Training training2 = new Training();
-		training2.setCourseId(1);
-		training2.setInstructorId(2);
-		training2.setTrainingId(3);
-		training2.setFeedback("feedback");
-		
-		List<Training> training = new ArrayList<>();
-		training.add(training1);
-		training.add(training2);
-		response.setData(training);
+	
+		response.setData(trainingList);
 		
 		when(trainingService.getAllTrainings()).thenReturn(response);
 		
@@ -91,13 +91,7 @@ public class TrainingControllerTest {
 	
 	@Test
 	public void addTraining() throws Exception {
-
-		ResponseDto response = new ResponseDto();
-		Training training = new Training();
-		training.setCourseId(1);
-		training.setInstructorId(2);
-		training.setTrainingId(3);
-		training.setFeedback("feedback");
+		
 		response.setData(training);
 		
 		when(trainingService.addTraining(training)).thenReturn(response);
@@ -114,12 +108,7 @@ public class TrainingControllerTest {
 	
 	@Test
 	public void deleteTraining() throws Exception {
-		ResponseDto response = new ResponseDto();
-		Training training = new Training();
-		training.setCourseId(1);
-		training.setInstructorId(2);
-		training.setTrainingId(3);
-		training.setFeedback("feedback");
+
 		response.setData(training);
 		
 		when(trainingService.deleteTraining(3)).thenReturn(response);

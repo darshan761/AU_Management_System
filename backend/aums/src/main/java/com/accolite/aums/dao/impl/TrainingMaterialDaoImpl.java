@@ -100,4 +100,16 @@ public class TrainingMaterialDaoImpl implements TrainingMaterialDao {
 
 	}
 
+	public ResponseDto getTrainingVersion(int id) {
+		ResponseDto response = new ResponseDto();
+		try {
+			response.setData(jdbcTemplate.query(Queries.GET_TRAINING_VERSION,TrainingMaterialRowMapper.TrainingMaterialRowMapperLambda, id));
+			response.setResponseType(ResponseType.SUCCESS);
+		} catch (Exception e) {
+			response.setResponseType(ResponseType.FAILURE);
+			response.setMsg(e.toString());
+		}
+		return response;
+	}
+
 }

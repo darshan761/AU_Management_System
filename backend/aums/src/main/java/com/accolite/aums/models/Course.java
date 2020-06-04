@@ -23,6 +23,8 @@ public class Course {
     private String courseLocation ;
     private String courseSkill;
     private String coursePrerequisites;
+    private String courseMonth;
+    private String courseYear;
     private Timestamp modifiedAt;
     
 }

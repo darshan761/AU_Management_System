@@ -1,22 +1,52 @@
 <app-navbar></app-navbar>
-<h3>Name: {{data.name}}</h3>
-<h3>
-    Email: {{data.email}}
-</h3>
-<h1>Courses Added: {{count}}</h1>
+
 <div class="row">
-    <div class="col-sm-6" style="display: block">
-        <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"></canvas>
+    <div class="col-sm-4 card">
+        <h1>
+            <mat-icon>person</mat-icon> {{data.name}}</h1>
+        <hr>
+        <p class="title">
+            <mat-icon>email</mat-icon>&nbsp;{{data.email}}</p>
     </div>
 
-    <div class="col-sm-6" style="display: block">
-        <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="doughnutChartType"></canvas>
+    <div class="col-sm-3 card">
+        <h1> Courses</h1>
+        <hr>
+        <h1>{{count}}</h1>
+    </div>
+    <div class="col-sm-3 card">
+        <h1> Instructors</h1>
+        <hr>
+        <h1>{{count}}</h1>
     </div>
 </div>
 
+
 <div class="row">
+    <div class="col-sm-6" style="display: block;  padding: 20px">
+        <div class="graph">
+            <h1>Courses By Location</h1>
+            <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"></canvas>
+        </div>
+    </div>
+
+    <div class="col-sm-6" style="display: block; padding: 20px">
+        <div class="graph">
+            <h1>Courses By Year</h1>
+            <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType">
+                      </canvas>
+        </div>
+    </div>
+    <!-- <div class="col-sm-6" style="display: block">
+        <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="doughnutChartType"></canvas>
+    </div> -->
+</div>
+
+<!-- <div class="row">
+    
     <div style="display: block; width:80%; padding: 20px">
+            <h1>Courses By Year</h1>
         <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType">
               </canvas>
     </div>
-</div>
+</div> -->

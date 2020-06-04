@@ -13,7 +13,8 @@ import io.cucumber.junit.CucumberOptions;
  *
  */
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "classpath:features", plugin = {"pretty", "json:target/cucumber-report.json"})
+@CucumberOptions(features =  {"classpath:features"},plugin = {"pretty", "html:target/cucumber/bagbasics"},
+glue = {"com.accolite.aums.cucumber.stepdefs"})
 public class CucumberTest {
 
 }

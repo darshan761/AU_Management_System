@@ -1,35 +1,36 @@
-.example-icon {
-    padding: 0 14px;
-}
-
-a {
-    color: aliceblue;
-    padding: 10px;
-}
-
-a:hover {
-    text-decoration: none;
-    background-color: white;
-}
-
-a:focus {
-    text-decoration: none;
-    background-color: white;
-}
-
-.example-header-image {
-    background-size: contain;
-    float: right;
-}
-
-.mat-icon:hover {
-    cursor: pointer;
-}
-
-a:hover {
-    color: black;
-}
-
-.mat-icon {
-    float: left;
-}
+    .example-icon {
+        padding: 0 14px;
+    }
+    
+    a {
+        color: aliceblue;
+        padding: 10px;
+    }
+    
+    a:hover {
+        text-decoration: none;
+        color: #FE4081;
+        background-color: white;
+        /* border-radius: 20%; */
+    }
+    
+    .mat-card-avatar {
+        font-size: 30px;
+    }
+    
+    .example-header-image {
+        background-size: contain;
+    }
+    
+    .example-spacer {
+        width: 40%;
+    }
+    
+    .mat-icon:hover {
+        cursor: pointer;
+        color: black;
+    }
+    
+    .mat-icon {
+        font-size: 37px;
+    }

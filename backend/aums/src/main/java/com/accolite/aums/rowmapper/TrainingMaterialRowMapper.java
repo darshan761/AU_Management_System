@@ -28,7 +28,8 @@ public class TrainingMaterialRowMapper {
 		trainingMaterial.setCourseId(rs.getInt(ColumnNames.COURSE_ID));
 		trainingMaterial.setInstructorId(rs.getInt(ColumnNames.INSTRUCTOR_ID));
 		trainingMaterial.setFile(rs.getBlob(ColumnNames.FILE).getBytes(1, (int)rs.getBlob(ColumnNames.FILE).length()));	
-		
+		trainingMaterial.setUploadedAt(rs.getTimestamp(ColumnNames.UPLOADED_AT));
+		trainingMaterial.setDeletedAt(rs.getTimestamp(ColumnNames.DELETED_AT));
 		return trainingMaterial;
 		
 	};

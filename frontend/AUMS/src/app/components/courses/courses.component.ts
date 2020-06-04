@@ -22,7 +22,7 @@ import { TrainingMaterialComponent } from '../training-material/training-materia
 })
 export class CoursesComponent implements OnInit {
 
-  displayedColumns: string[] = ['courseId', 'courseName', 'courseDesc', 'courseLocation', 'coursePrerequisites', 'courseSkill', 'training', 'version'];
+  displayedColumns: string[] = ['courseId', 'courseName', 'courseDesc', 'courseMonth', 'courseLocation', 'coursePrerequisites', 'courseSkill', 'training', 'version'];
   CourseList = [];
   TrainingList = [ ];
   InstructorList = [];
@@ -48,22 +48,10 @@ export class CoursesComponent implements OnInit {
     });
   }
 
-  showTraining(courseId, instructorId){
-    // this.isShowDiv[index] = !this.isShowDiv[index];
-    this.trainingService.getTrainingByInstructorID(courseId, instructorId).subscribe((response: ApiResponse)=>{
-      console.log("dataaaa",response.data);
-      if(response.data.length != 0) {
-        this.TrainingList.push(response.data);
-        console.log(this.TrainingList);
-      }
-    });
-  }
-
-
   openVersionDialog(courseId): void {
     const dialogRef = this.dialog.open(TrainingVersionDetailsComponent, {
-      width: '600px',
-      height: '350px',
+      width: '80%',
+      height: '80%',
       data: courseId
     });
 
@@ -74,8 +62,8 @@ export class CoursesComponent implements OnInit {
 
   openTrainingDialog(courseId): void {
     const dialogRef = this.dialog.open(TrainingMaterialComponent, {
-      width: '600px',
-      height: '350px',
+      width: '50%',
+      height: '70%',
       data: courseId
     });
 

@@ -3,11 +3,9 @@
  */
 package com.accolite.aums.models;
 
-import java.io.File;
+import java.sql.Timestamp;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -21,7 +19,8 @@ public class TrainingMaterial  {
 	private int fileId;
 	private int instructorId;
 	private int courseId;
-	
+	private Timestamp uploadedAt;
+	private Timestamp deletedAt;
 	private byte[] file;
 	private String fileName;
 	private String fileType;

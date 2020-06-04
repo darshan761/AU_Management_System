@@ -15,12 +15,44 @@
     </p>
 
     <p>
-        <mat-form-field appearance="outline">
+        <!-- <mat-form-field appearance="outline">
             <mat-label>Course Location</mat-label>
             <input matInput placeholder="Eg: Mumbai,Bengaluru,etc" formControlName="courseLocation">
             <mat-icon matSuffix>edit</mat-icon>
+        </mat-form-field> -->
+        <mat-form-field appearance="outline">
+            <mat-label>Course Location</mat-label>
+            <mat-select formControlName="courseLocation">
+                <mat-option *ngFor="let location of locations" [value]="location">
+                    {{location}}
+                </mat-option>
+            </mat-select>
         </mat-form-field>
     </p>
+
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Course Month</mat-label>
+            <mat-select formControlName="courseMonth">
+                <mat-option *ngFor="let month of months" [value]="month">
+                    {{month}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </p>
+
+
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Course Year</mat-label>
+            <mat-select formControlName="courseYear">
+                <mat-option *ngFor="let year of years" [value]="year">
+                    {{year}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </p>
+
     <p>
         <mat-form-field appearance="outline">
             <mat-label>Course PreRequisites</mat-label>

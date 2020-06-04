@@ -7,6 +7,10 @@
     background-size: cover;
 }
 
+.contain {
+    padding: 15px;
+}
+
 .mat-card {
     margin: auto;
     width: 95%;
@@ -15,8 +19,9 @@
 }
 
 .add {
-    bottom: 100px;
+    bottom: 75px;
     float: right;
+    right: 70px;
     position: fixed;
 }
 

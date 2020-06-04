@@ -48,6 +48,7 @@ public class EmailServiceImpl {
 			helper.setText("Please check the portal for training material.\n course: "
 					+ ((Course) courseResponse.getData()).getCourseName() + "\n" + " by " + email.getInstructor());
 			javaMailSender.send(msg);
+			response.setAdditionalData(1);
 			response.setResponseType(ResponseType.SUCCESS);
 		} catch (Exception e) {
 			response.setResponseType(ResponseType.FAILURE);

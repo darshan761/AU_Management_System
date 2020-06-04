@@ -75,10 +75,4 @@ public class CourseController {
 		return courseService.deleteCourse(id);
 	}
 	
-	@GetMapping("/version/{id}")
-	public ResponseDto getCourseVersion(@PathVariable("id") int id) {
-		
-		return courseService.getCourseVersion(id);
-	}
-	
 }

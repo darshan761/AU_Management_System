@@ -1,18 +1,13 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row>
 
-        <span>AUMS</span>
-        <span class="example-spacer"></span>
+        <span>AUMS</span>&nbsp;&nbsp;
         <a class="example-icon" routerLink="/home">Home </a>
         <a class="example-icon" routerLink="/manage">Manage Courses</a>
         <a class="example-icon" routerLink="/training">Assigned Courses</a>
         <a class="example-icon" routerLink="/courses">View All Courses</a>
-
+        <span class="example-spacer">  </span>
+        <a [ngStyle]="{'background-image': getUrl()}" mat-card-avatar class="example-header-image"></a>&nbsp;&nbsp;
         <mat-icon color="white" (click)="logout()">exit_to_app</mat-icon>
-
-        <a [ngStyle]="{'background-image': getUrl()}" mat-card-avatar class="example-header-image"></a>
-
-
-
     </mat-toolbar-row>
 </mat-toolbar>

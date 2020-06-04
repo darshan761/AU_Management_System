@@ -16,6 +16,7 @@ export class LoginService {
     await this.http.get(this.GET_USER + response.email).subscribe((response: ApiResponse)=>{
     this.user = response.data;
     sessionStorage.setItem('userId', this.user.userId);
+    console.log(sessionStorage.getItem('userId'));
     });
   }
 

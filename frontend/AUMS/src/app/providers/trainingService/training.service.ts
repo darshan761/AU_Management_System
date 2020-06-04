@@ -24,6 +24,10 @@ export class TrainingService {
     this.http.delete('api/training/material/delete/'+ fileId ).subscribe();
   }
 
+  getVersionData(courseId) {
+    return this.http.get('api/training/material/version/'+courseId);
+  }
+
   sendMail(email) {
     return this.http.post('api/training/material/mail', email);
   }

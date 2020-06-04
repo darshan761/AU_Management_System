@@ -4,30 +4,28 @@
 package com.accolite.aums.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.accolite.aums.dao.impl.TrainingMaterialDaoImpl;
 import com.accolite.aums.dto.ResponseDto;
-import com.accolite.aums.models.Training;
 import com.accolite.aums.models.TrainingMaterial;
 import com.accolite.aums.service.impl.TrainingMaterialServiceImpl;
+import com.accolite.aums.utils.Utils;
 
 /**
  * @author darshan
@@ -42,18 +40,33 @@ public class TrainingMaterialServiceTest {
     @InjectMocks
     private TrainingMaterialServiceImpl trainingMaterialService;
 
-	@Test
-	public void getTrainingMaterialById() throws Exception {
+    ResponseDto response = new ResponseDto();
+	TrainingMaterial trainingMaterial = new TrainingMaterial();
+	TrainingMaterial trainingMaterial2 = new TrainingMaterial();
+	List<TrainingMaterial> trainingMaterialList = new ArrayList<>();
 
-		ResponseDto response = new ResponseDto();
-		TrainingMaterial trainingMaterial = new TrainingMaterial();
+	@BeforeEach
+	public void init() {
 		trainingMaterial.setCourseId(1);
 		trainingMaterial.setFileId(2);
 		trainingMaterial.setFileName("file");
 		trainingMaterial.setFileType("pdf");
 		trainingMaterial.setInstructorId(3);
-		response.setData(trainingMaterial);
 		
+		trainingMaterial2.setCourseId(2);
+		trainingMaterial2.setFileId(4);
+		trainingMaterial2.setFileName("file");
+		trainingMaterial2.setFileType("pdf");
+		trainingMaterial2.setInstructorId(8);
+		
+		trainingMaterialList.add(trainingMaterial);
+		trainingMaterialList.add(trainingMaterial2);
+	}
+    
+	@Test
+	public void getTrainingMaterialById() throws Exception {
+
+		response.setData(trainingMaterial);
 		
 		when(trainingMaterialDao.findTrainingMaterialById(1, 3)).thenReturn(response);
 		
@@ -69,26 +82,8 @@ public class TrainingMaterialServiceTest {
 	
 	@Test
 	public void getAllTrainingMaterial() throws Exception {
-
-		ResponseDto response = new ResponseDto();
-		TrainingMaterial trainingMaterial1 = new TrainingMaterial();
-		trainingMaterial1.setCourseId(1);
-		trainingMaterial1.setFileId(2);
-		trainingMaterial1.setFileName("file");
-		trainingMaterial1.setFileType("pdf");
-		trainingMaterial1.setInstructorId(3);
 		
-		TrainingMaterial trainingMaterial2 = new TrainingMaterial();
-		trainingMaterial2.setCourseId(2);
-		trainingMaterial2.setFileId(4);
-		trainingMaterial2.setFileName("file");
-		trainingMaterial2.setFileType("pdf");
-		trainingMaterial2.setInstructorId(8);
-		
-		List<TrainingMaterial> trainingMaterial = new ArrayList<>();
-		trainingMaterial.add(trainingMaterial1);
-		trainingMaterial.add(trainingMaterial2);
-		response.setData(trainingMaterial);
+		response.setData(trainingMaterialList);
 		
 		when(trainingMaterialDao.getAllTrainingMaterials()).thenReturn(response);
 		
@@ -98,30 +93,21 @@ public class TrainingMaterialServiceTest {
         .isEqualTo(2);
 	}
 	
-//	@Test
-//	public void addTrainingMaterial() throws Exception {
-//
-//		ResponseDto response = new ResponseDto();
-//		TrainingMaterial trainingMaterial = new TrainingMaterial();
-//		trainingMaterial.setCourseId(1);
-//		trainingMaterial.setFileId(2);
-//		trainingMaterial.setFileName("file");
-//		trainingMaterial.setFileType("pdf");
-//		trainingMaterial.setInstructorId(3);
-//		response.setData(trainingMaterial);
-//		MultipartFile[] file = null;
-//		
-//		when(trainingMaterialService.addTrainingMaterial(file,trainingMaterial.getCourseId(),trainingMaterial.getInstructorId())).thenReturn(response);
-//		
-//		mockMvc.perform(post("/api/training/material/add")
-//				.content(Utils.asJsonString(trainingMaterial))
-//				.contentType(MediaType.APPLICATION_JSON)
-//				.accept(MediaType.APPLICATION_JSON))
-//				.andDo(print())
-//				.andExpect(status().isOk())
-//				.andReturn();
-//	}
-//	
+	@Test
+	public void addTrainingMaterial() throws Exception {
+
+response.setData(trainingMaterialList);
+		
+		MultipartFile[] file = null;
+		response.setAdditionalData(1);
+		when(trainingMaterialDao.addTrainingMaterial(file, 1, 2)).thenReturn(response);
+		
+		ResponseDto responseFound = trainingMaterialService.addTrainingMaterial(file, 1, 2);
+    	assertThat(responseFound.getAdditionalData())
+        .isEqualTo(1);
+
+	}
+	
 	
 	@Test
 	public void deleteTrainingMaterial() throws Exception {
@@ -130,5 +116,19 @@ public class TrainingMaterialServiceTest {
 		trainingMaterialService.deleteTrainingMaterial(trainingId);
 		
 		verify(trainingMaterialDao, times(2)).deleteTrainingMaterial(trainingId);
+	}
+	
+	@Test
+	public void getTrainingVersion() throws Exception {
+		response.setData(trainingMaterial);
+		
+		when(trainingMaterialDao.getTrainingVersion(1)).thenReturn(response);
+		
+		int courseId = 1;
+    	
+    	ResponseDto responseFound = trainingMaterialService.getTrainingVersion(1);
+    	TrainingMaterial trainingMaterialFound = (TrainingMaterial) responseFound.getData();
+    	assertThat(trainingMaterialFound.getFileId())
+        .isEqualTo(2);
 	}
 }

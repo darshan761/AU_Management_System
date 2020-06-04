@@ -1,5 +1,18 @@
-<p>training-version-details works!</p>
+<p>Previous Version</p>
 
-<div *ngFor="let c of course">
-    {{c.modifiedAt}} {{c.courseName}} {{c.courseDesc}} {{c.courseLocation}} {{c.coursePrerequisites}} {{c.courseSkill}}
-</div>
+<table *ngIf="fileDetails.length != 0" width="100%">
+    <tr>
+        <th>File</th>
+        <th> Uploaded At</th>
+        <th>Deleted At</th>
+        <th>Instructor ID</th>
+    </tr>
+    <tr *ngFor="let file of fileDetails">
+        <td><a (click)="downloadFile(file.file, file.fileType)">{{file.fileName}} </a></td>
+        <td> {{file.uploadedAt}} </td>
+        <td>{{file.deletedAt}}</td>
+        <td>{{file.instructorId}}</td>
+    </tr>
+</table>
+
+<h3 *ngIf="fileDetails.length == 0"> No version Found</h3>

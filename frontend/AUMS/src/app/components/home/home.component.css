@@ -1,0 +1,33 @@
+    .card {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        /* background-color: #EcEcEc; */
+        /* max-width: 30%; */
+        height: 180px;
+        margin: 20px;
+        /* margin: auto; */
+        text-align: left;
+    }
+    
+    .graph {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        padding: 10px;
+    }
+    
+    .row {
+        padding: 10px;
+    }
+    
+    hr {
+        font-size: 5px;
+    }
+    
+    .title {
+        color: black;
+        font-size: 18px;
+        display: flex;
+    }
+    
+    .mat-icon {
+        font-size: 24px;
+        align-self: flex-end;
+    }

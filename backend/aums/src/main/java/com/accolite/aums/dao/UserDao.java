@@ -12,11 +12,7 @@ import com.accolite.aums.dto.ResponseDto;
 public interface UserDao {
 	
 	 public ResponseDto getAllUsers();
-	 
-	 public ResponseDto findUserById(int id);
-	 
+	 	 
 	 public ResponseDto findUserByEmail(String email);
 	 
-	 public ResponseDto deleteUser(int id);
-
 }

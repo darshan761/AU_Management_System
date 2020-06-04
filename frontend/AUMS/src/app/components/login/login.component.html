@@ -1,10 +1,16 @@
-<div style="display: flex; align-items: center; justify-content:center;">
-    <h3 style="font-family: montserrat">SignIn to AUMS</h3>
-</div>
-<div style="height: 10rem; display: flex; align-items: center; justify-content:center;">
+<div class="contain">
+    <div class="login">
+        <div>
+            <img src="https://media-fastly.hackerearth.com/media/companies/c753dd7-Accolite-logo.png" class="img-fluid" alt="Responsive image">
 
-    <button (click)="SignIn('google')" mat-button style="padding: 1rem; border:1px black solid">
-<mat-icon style="width: 50px; height:30px; "
-          svgIcon="logo"></mat-icon> Login With Google
-</button>
+        </div>
+
+        <div style="height: 10rem; display: flex; align-items: center; justify-content:center;">
+
+            <button (click)="SignIn('google')" mat-button style="padding: 1rem; border:1px black solid">
+            <mat-icon style="width: 50px; height:30px;"
+                      svgIcon="logo"></mat-icon> Login With Google
+            </button>
+        </div>
+    </div>
 </div>

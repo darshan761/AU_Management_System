@@ -4,6 +4,7 @@
 package com.accolite.aums.controller;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -15,7 +16,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -38,47 +41,47 @@ public class CourseControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
-
+	
 	@MockBean
 	private CourseServiceImpl courseService;
+	
+	ResponseDto response = new ResponseDto();
+	Course course = new Course();
+	Course course2 = new Course();
+	List<Course> courseList = new ArrayList<>();
+	
+	@BeforeEach
+	public void init() {
+		course.setCourseId(1);
+		course.setCourseName("React");
+		course.setCourseDesc("Frontend Library");
+		
+		course2.setCourseId(2);
+		course2.setCourseName("Angular");
+		course2.setCourseDesc("Frontend Library");
+		
+		courseList.add(course);
+		courseList.add(course2);	
+	}
 
 	@Test
 	public void getCourseById() throws Exception {
 
-		ResponseDto response = new ResponseDto();
-		Course course = new Course();
-		course.setCourseId(1);
-		course.setCourseName("React");
-		course.setCourseDesc("Frontend Library");
 		response.setData(course);
-		
 		
 		when(courseService.findCourseById(1)).thenReturn(response);
 		
 		mockMvc.perform(get("/api/course/1")).andDo(print())
 	    .andExpect(status().isOk())
 	    .andExpect(jsonPath("$.data.courseName", is(course.getCourseName())));
+		
+
 	}
 	
 	@Test
 	public void getAllCourse() throws Exception {
 
-		ResponseDto response = new ResponseDto();
-		Course course1 = new Course();
-		course1.setCourseId(1);
-		course1.setCourseName("React");
-		course1.setCourseDesc("Frontend Library");
-		
-		
-		Course course2 = new Course();
-		course2.setCourseId(2);
-		course2.setCourseName("Angular");
-		course2.setCourseDesc("Frontend Library");
-		
-		List<Course> course = new ArrayList<>();
-		course.add(course1);
-		course.add(course2);
-		response.setData(course);
+		response.setData(courseList);
 		
 		when(courseService.getAllCourses()).thenReturn(response);
 		
@@ -90,11 +93,6 @@ public class CourseControllerTest {
 	@Test
 	public void addCourse() throws Exception {
 
-		ResponseDto response = new ResponseDto();
-		Course course = new Course();
-		course.setCourseId(1);
-		course.setCourseName("React");
-		course.setCourseDesc("Frontend Library");
 		response.setData(course);
 		
 		when(courseService.addCourse(course)).thenReturn(response);
@@ -106,17 +104,12 @@ public class CourseControllerTest {
 				.andDo(print())
 				.andExpect(status().isOk())
 				.andReturn();
-
+		
 	}
 	
 	@Test
 	public void updateCourse() throws Exception {
-		
-		ResponseDto response = new ResponseDto();
-		Course course = new Course();
-		course.setCourseId(1);
-		course.setCourseName("React");
-		course.setCourseDesc("Frontend Library");
+
 		response.setData(course);
 		
 		when(courseService.updateCourse(course)).thenReturn(response);
@@ -131,11 +124,7 @@ public class CourseControllerTest {
 	
 	@Test
 	public void deleteCourse() throws Exception {
-		ResponseDto response = new ResponseDto();
-		Course course = new Course();
-		course.setCourseId(1);
-		course.setCourseName("React");
-		course.setCourseDesc("Frontend Library");
+		
 		response.setData(course);
 		
 		when(courseService.deleteCourse(1)).thenReturn(response);
@@ -148,12 +137,7 @@ public class CourseControllerTest {
 	
 	@Test
 	public void getCourseByCreatorId() throws Exception {
-		
-		ResponseDto response = new ResponseDto();
-		Course course = new Course();
-		course.setCourseId(1);
-		course.setCourseName("React");
-		course.setCourseDesc("Frontend Library");
+
 		response.setData(course);
 		
 		when(courseService.findCoursesByUserId(1)).thenReturn(response);
@@ -165,11 +149,7 @@ public class CourseControllerTest {
 	
 	@Test
 	public void getCourseByInstructorId() throws Exception {
-		ResponseDto response = new ResponseDto();
-		Course course = new Course();
-		course.setCourseId(1);
-		course.setCourseName("React");
-		course.setCourseDesc("Frontend Library");
+	
 		response.setData(course);
 		
 		when(courseService.findCoursesByInstructorId(1)).thenReturn(response);
@@ -181,7 +161,7 @@ public class CourseControllerTest {
 	
 	@Test
 	public void getCourseCount() throws Exception {
-		ResponseDto response = new ResponseDto();
+		
 		int count = 2;
 		response.setData(count);
 		

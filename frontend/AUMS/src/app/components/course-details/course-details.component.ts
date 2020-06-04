@@ -14,6 +14,10 @@ import { ApiResponse } from 'src/app/models/ApiResponse';
 })
 export class CourseDetailsComponent implements OnInit {
 
+  months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  years = ['2020','2019','2018','2017','2016','2015','2014','2013','2012'];
+  locations=['Mumbai','Bengaluru','Hyderabad','Delhi','Chennai','Gurugram'];
+
   isDisabled = true;
   courseId: any;
   course: any;
@@ -27,6 +31,8 @@ export class CourseDetailsComponent implements OnInit {
     courseSkill: new FormControl('', Validators.required),
     coursePrerequisites: new FormControl('', Validators.required),
     courseLocation: new FormControl('', Validators.required),
+    courseMonth: new FormControl('', Validators.required),
+    courseYear: new FormControl('', Validators.required),
     courseId: new FormControl('', Validators.required)
   });
 
@@ -45,6 +51,8 @@ export class CourseDetailsComponent implements OnInit {
         courseSkill: response.data.courseSkill,
         coursePrerequisites: response.data.coursePrerequisites,
         courseLocation: response.data.courseLocation,
+        courseMonth: response.data.courseMonth,
+        courseYear: response.data.courseYear,
         courseId: this.courseId
       });
     });

@@ -28,7 +28,7 @@ import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 })
 export class ManageCourseComponent implements OnInit {
 
-  displayedColumns: string[] = ['courseId', 'courseName', 'courseDesc', 'courseLocation', 'coursePrerequisites', 'courseSkill', 'edit', 'delete', 'add' ,'view'];
+  displayedColumns: string[] = ['courseId', 'courseName', 'courseDesc', 'courseMonth','courseLocation', 'coursePrerequisites', 'courseSkill', 'edit', 'delete', 'add' ,'view'];
   CourseList = [ ];
   InstructorList = [ ];
   myControl = new FormControl();
@@ -37,6 +37,7 @@ export class ManageCourseComponent implements OnInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(private snackBar: MatSnackBar, private courseService: CourseService, private userService: UserService, public dialog: MatDialog) { 
+  
   }
 
   ngOnInit() {

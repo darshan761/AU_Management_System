@@ -18,6 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -43,11 +44,27 @@ public class CourseServiceTest {
     @InjectMocks
     private CourseServiceImpl courseService;
     
+    ResponseDto response = new ResponseDto();
+	Course course = new Course();
+	Course course2 = new Course();
+	List<Course> courseList = new ArrayList<>();
+    
+    @BeforeEach
+	public void init() {
+		course.setCourseId(1);
+		course.setCourseName("React");
+		course.setCourseDesc("Frontend Library");
+		
+		course2.setCourseId(2);
+		course2.setCourseName("Angular");
+		course2.setCourseDesc("Frontend Library");
+		course2.setCreatorId(2);
+		courseList.add(course);
+		courseList.add(course2);	
+	}
+    
     @Test
     void findCourseById() {
-    	Course course = new Course();
-    	course.setCourseId(1);
-    	ResponseDto response = new ResponseDto();
     	response.setData(course);
     	
     	when(courseDao.findCourseById(1)).thenReturn(response);
@@ -61,22 +78,7 @@ public class CourseServiceTest {
     
     @Test
     void findAllCourse() {
-    	ResponseDto response = new ResponseDto();
-		Course course1 = new Course();
-		course1.setCourseId(1);
-		course1.setCourseName("React");
-		course1.setCourseDesc("Frontend Library");
-		
-		
-		Course course2 = new Course();
-		course2.setCourseId(2);
-		course2.setCourseName("Angular");
-		course2.setCourseDesc("Frontend Library");
-		
-		List<Course> course = new ArrayList<>();
-		course.add(course1);
-		course.add(course2);
-		response.setData(course);
+		response.setData(courseList);
     	
     	when(courseDao.getAllCourses()).thenReturn(response);
     	
@@ -88,11 +90,7 @@ public class CourseServiceTest {
     
     @Test
     void addCourse() {
-    	ResponseDto response = new ResponseDto();
-		Course course = new Course();
-		course.setCourseId(1);
-		course.setCourseName("React");
-		course.setCourseDesc("Frontend Library");
+
 		response.setData(course);
 		
 		when(courseDao.addCourse(course)).thenReturn(response);
@@ -105,11 +103,6 @@ public class CourseServiceTest {
     @Test
 	public void updateCourse() throws Exception {
 		
-		ResponseDto response = new ResponseDto();
-		Course course = new Course();
-		course.setCourseId(1);
-		course.setCourseName("React");
-		course.setCourseDesc("Frontend Library");
 		response.setData(course);
 		
 		when(courseDao.updateCourse(course)).thenReturn(response);
@@ -132,11 +125,7 @@ public class CourseServiceTest {
 	@Test
 	public void getCourseByCreatorId() throws Exception {
 		
-		Course course = new Course();
-    	course.setCourseId(1);
-    	course.setCreatorId(2);
-    	ResponseDto response = new ResponseDto();
-    	response.setData(course);
+    	response.setData(course2);
     	
     	when(courseDao.findCoursesByUserId(2)).thenReturn(response);
     	int id = 2;
@@ -149,9 +138,7 @@ public class CourseServiceTest {
 	
 	@Test
 	public void getCourseByInstructorId() throws Exception {
-		Course course = new Course();
-    	course.setCourseId(1);
-    	ResponseDto response = new ResponseDto();
+
     	response.setData(course);
     	
     	when(courseDao.findCoursesByInstructorId(1)).thenReturn(response);
@@ -165,7 +152,6 @@ public class CourseServiceTest {
 	
 	@Test
 	public void getCourseCount() throws Exception {
-		ResponseDto response = new ResponseDto();
 		int count = 2;
 		response.setData(count);
 		

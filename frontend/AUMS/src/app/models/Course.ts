@@ -6,6 +6,8 @@ export class Course {
     courseName: string;
     courseSkill: string;
     courseLocation: string;
+    courseMonth: string;
+    courseYear: string;
     coursePrerequisites: string;
     instructor: Instructor[];
     modifiedAt: string;

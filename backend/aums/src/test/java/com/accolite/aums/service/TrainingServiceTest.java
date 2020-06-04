@@ -11,6 +11,7 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -35,16 +36,32 @@ public class TrainingServiceTest {
     @InjectMocks
     private TrainingServiceImpl trainingService;
     
-    @Test
-    void findTrainingById() {
-    	ResponseDto response = new ResponseDto();
-		Training training = new Training();
+    ResponseDto response = new ResponseDto();
+	Training training = new Training();
+	Training training2 = new Training();
+	List<Training> trainingList = new ArrayList<>();
+	
+	@BeforeEach
+	public void init() {
+	
 		training.setCourseId(1);
 		training.setInstructorId(2);
 		training.setTrainingId(3);
 		training.setFeedback("feedback");
+		
+		training2.setCourseId(1);
+		training2.setInstructorId(2);
+		training2.setTrainingId(3);
+		training2.setFeedback("feedback");
+		
+		trainingList.add(training);
+		trainingList.add(training2);
+	}
+    
+    @Test
+    void findTrainingById() {
+ 
 		response.setData(training);
-
     	
     	when(trainingDao.findTrainingById(3)).thenReturn(response);
     	int id = 3;
@@ -57,23 +74,8 @@ public class TrainingServiceTest {
     
     @Test
     void findAllTraining() {
-    	ResponseDto response = new ResponseDto();
-		Training training1 = new Training();
-		training1.setCourseId(1);
-		training1.setInstructorId(2);
-		training1.setTrainingId(3);
-		training1.setFeedback("feedback");
-		
-		Training training2 = new Training();
-		training2.setCourseId(1);
-		training2.setInstructorId(2);
-		training2.setTrainingId(3);
-		training2.setFeedback("feedback");
-		
-		List<Training> training = new ArrayList<>();
-		training.add(training1);
-		training.add(training2);
-		response.setData(training);
+
+		response.setData(trainingList);
     	
     	when(trainingDao.getAllTrainings()).thenReturn(response);
     	
@@ -85,12 +87,7 @@ public class TrainingServiceTest {
     
     @Test
     void addTraining() {
-    	ResponseDto response = new ResponseDto();
-		Training training = new Training();
-		training.setCourseId(1);
-		training.setInstructorId(2);
-		training.setTrainingId(3);
-		training.setFeedback("feedback");
+
 		response.setData(training);
 		
 		when(trainingDao.addTraining(training)).thenReturn(response);

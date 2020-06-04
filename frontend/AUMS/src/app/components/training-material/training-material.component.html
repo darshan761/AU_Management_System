@@ -1,14 +1,27 @@
 <div *ngFor="let instructor of InstructorList">
-    <span *ngIf="instructor.courseId == data">
-                <mat-icon color="primary">person</mat-icon> {{instructor.userName}}          
-        </span>
-    <div *ngFor="let training of TrainingList;let j= index">
-        <div *ngFor="let t of training">
-            <span *ngIf="t.instructorId == instructor.userId">
-                        <mat-icon color="primary">file_copy</mat-icon> <a (click)="downloadFile(t.file, t.fileType)">{{t.fileName}}</a>
-                </span>
+
+
+    <div class="card" *ngIf="instructor.courseId == data">
+
+        <h3>
+            <mat-icon color="primary">person</mat-icon> {{instructor.userName}}
+        </h3>
+
+        <div *ngFor="let training of TrainingList;let j= index">
+            <hr>
+            <div *ngFor="let t of training">
+                <div *ngIf="t.instructorId == instructor.userId">
+                    <a (click)="downloadFile(t.file, t.fileType)">
+                        <mat-icon color="primary">file_copy</mat-icon> {{t.fileName}}</a>
+                </div>
+            </div>
         </div>
+
     </div>
     <!-- <span *ngIf="checkIfNoMaterialUpload(instructor.instructorId)">No Training Material uploaded yet</span> -->
 </div>
-<span *ngIf="InstructorList.length == 0">No Instructor Assigned Yet</span>
+<div class="card" *ngIf="InstructorList.length == 0">
+    <h3>
+        No Instructor Assigned Yet
+    </h3>
+</div>
