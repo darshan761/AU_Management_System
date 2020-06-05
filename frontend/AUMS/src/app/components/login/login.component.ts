@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService, GoogleLoginProvider } from 'angular-6-social-login';
+import { AuthService, GoogleLoginProvider, SocialUser } from 'angular-6-social-login';
 import { LoginService } from 'src/app/providers/loginService/login.service';
 import { Router } from '@angular/router';
 import { Users } from 'src/app/models/Users';
@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
 
   response;
   googleLogoURL = 'https://raw.githubusercontent.com/fireflysemantics/logo/master/Google.svg';
-  users = new Users();
+  user: SocialUser;
   userfromEmail: any;
 
   constructor(
@@ -34,17 +34,26 @@ export class LoginComponent implements OnInit {
 
   public async SignIn(provider: string) {
     let platformProvider;
-    if(provider === 'google') {
+    if (provider === 'google') {
       platformProvider = GoogleLoginProvider.PROVIDER_ID;
     }
 
     this.OAuth.signIn(platformProvider).then(users => {
       console.log(users);
-      this.loginService.Savesresponse(users);
-      sessionStorage.setItem('userEmail', users.email);
-      sessionStorage.setItem('userName', users.name);
-      sessionStorage.setItem('userImg', users.image);
+      this.user = users;
+      this.saveUser(this.user);
+      // this.loginService.Savesresponse(users);
+      // sessionStorage.setItem('userEmail', users.email);
+      // sessionStorage.setItem('userName', users.name);
+      // sessionStorage.setItem('userImg', users.image);
       this.router.navigate([`/home`]);
     });
   }
+
+   saveUser(users: SocialUser) {
+    this.loginService.Savesresponse(users);
+    sessionStorage.setItem('userEmail', users.email);
+    sessionStorage.setItem('userName', users.name);
+    sessionStorage.setItem('userImg', users.image);
+   }
 }

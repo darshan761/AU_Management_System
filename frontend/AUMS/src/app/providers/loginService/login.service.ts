@@ -12,8 +12,8 @@ export class LoginService {
 
   constructor(private http: HttpClient) { }
 
-  async Savesresponse(response) {
-    await this.http.get(this.GET_USER + response.email).subscribe((response: ApiResponse)=>{
+   Savesresponse(response) {
+    this.http.get(this.GET_USER + response.email).subscribe((response: ApiResponse)=>{
     this.user = response.data;
     sessionStorage.setItem('userId', this.user.userId);
     console.log(sessionStorage.getItem('userId'));
