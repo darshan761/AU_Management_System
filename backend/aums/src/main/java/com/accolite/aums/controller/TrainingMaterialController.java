@@ -5,13 +5,10 @@ package com.accolite.aums.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 
 import javax.mail.MessagingException;
-import javax.sql.rowset.serial.SerialException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.MailException;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +21,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.accolite.aums.dto.ResponseDto;
 import com.accolite.aums.models.Email;
-import com.accolite.aums.models.TrainingMaterial;
 import com.accolite.aums.service.impl.EmailServiceImpl;
 import com.accolite.aums.service.impl.TrainingMaterialServiceImpl;
 
@@ -56,7 +52,7 @@ public class TrainingMaterialController {
 	
 	@PostMapping("/add")
 	public ResponseDto addTrainingMaterial(@RequestParam("file[]") MultipartFile[] file, @RequestParam("courseId") Integer courseId,
-            @RequestParam("instructorId") int instructorId) throws SerialException, IOException, SQLException {
+            @RequestParam("instructorId") int instructorId) throws IOException, SQLException {
 		return trainingMaterialService.addTrainingMaterial(file, courseId, instructorId);
 	}
 	
@@ -73,7 +69,7 @@ public class TrainingMaterialController {
 	}
 	
 	@PostMapping("/mail")
-	public ResponseDto sendEmail(@RequestBody Email email) throws MailException, MessagingException {
+	public ResponseDto sendEmail(@RequestBody Email email) throws MessagingException {
 		return emailService.sendEmail(email);
 	}
 }

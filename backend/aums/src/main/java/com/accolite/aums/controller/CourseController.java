@@ -3,8 +3,7 @@
  */
 package com.accolite.aums.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +25,6 @@ import com.accolite.aums.service.impl.CourseServiceImpl;
 @RequestMapping("api/course")
 public class CourseController {
 	
-    private static final Logger LOGGER = LoggerFactory.getLogger(CourseController.class);
 	
 	@Autowired
 	private CourseServiceImpl courseService;

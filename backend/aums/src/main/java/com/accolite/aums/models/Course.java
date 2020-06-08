@@ -8,12 +8,13 @@ import java.sql.Timestamp;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * @author darshan
  *
  */
-@Getter @Setter
+@Getter @Setter @ToString
 public class Course {
 
 	private int courseId;

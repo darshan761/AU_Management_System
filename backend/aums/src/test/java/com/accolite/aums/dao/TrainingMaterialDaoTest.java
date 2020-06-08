@@ -156,5 +156,28 @@ public class TrainingMaterialDaoTest {
 
 		verify(jdbcTemplate, times(2)).update(Queries.DELETE_TRAINING_MATERIAL, 3);
 	}
+	
+	@Test
+	public void getTrainingVersion() {
+	when(jdbcTemplate.query(Queries.GET_TRAINING_VERSION,
+			TrainingMaterialRowMapper.TrainingMaterialRowMapperLambda, 1)).thenReturn(trainingMaterialList);
+		
+    	
+    	response = trainingMaterialDao.getTrainingVersion(1);
+    	List<TrainingMaterial> trainingMaterialFound = (List<TrainingMaterial>) response.getData();
+    	assertEquals(2, trainingMaterialFound.size());
+       
+    	doThrow(new RuntimeException()).when(jdbcTemplate).query(Queries.GET_TRAINING_VERSION,
+    			TrainingMaterialRowMapper.TrainingMaterialRowMapperLambda, 1);
+
+    	response = trainingMaterialDao.getTrainingVersion(1);
+
+		assertEquals(ResponseType.FAILURE, response.getResponseType());
+
+		verify(jdbcTemplate, times(2)).query(Queries.GET_TRAINING_VERSION,
+    			TrainingMaterialRowMapper.TrainingMaterialRowMapperLambda, 1);
+    	
+		
+	}
 
 }

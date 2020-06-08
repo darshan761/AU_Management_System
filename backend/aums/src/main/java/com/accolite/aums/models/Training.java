@@ -3,16 +3,15 @@
  */
 package com.accolite.aums.models;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * @author darshan
  *
  */
-@Getter @Setter
+@Getter @Setter @ToString
 public class Training {
 	
 	private int trainingId;

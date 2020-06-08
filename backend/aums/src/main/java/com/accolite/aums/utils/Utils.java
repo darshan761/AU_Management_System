@@ -3,6 +3,7 @@
  */
 package com.accolite.aums.utils;
 
+import com.accolite.aums.exception.JSONParseException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
@@ -10,11 +11,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  *
  */
 public class Utils {
-	public static String asJsonString(final Object obj) {
+	
+	private Utils() {}
+	
+	public static String asJsonString(final Object obj) throws JSONParseException {
 	    try {
 	        return new ObjectMapper().writeValueAsString(obj);
 	    } catch (Exception e) {
-	        throw new RuntimeException(e);
+	        throw new JSONParseException(e.getMessage());
 	    }
 	}
 }

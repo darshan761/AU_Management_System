@@ -3,7 +3,6 @@
  */
 package com.accolite.aums.dao;
 
-import java.util.List;
 
 import com.accolite.aums.dto.ResponseDto;
 import com.accolite.aums.models.Course;

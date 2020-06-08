@@ -6,7 +6,6 @@ package com.accolite.aums.rowmapper;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.accolite.aums.constants.ColumnNames;
-import com.accolite.aums.models.Course;
 import com.accolite.aums.models.Instructor;
 
 /**

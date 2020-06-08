@@ -6,8 +6,6 @@ package com.accolite.aums.service.impl;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import javax.sql.rowset.serial.SerialException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -44,7 +42,8 @@ public class TrainingMaterialServiceImpl implements TrainingMaterialService {
 	}
 
 	@Override
-	public ResponseDto addTrainingMaterial(MultipartFile[] file, int courseId, int instructorId) throws SerialException, IOException, SQLException {
+	public ResponseDto addTrainingMaterial(MultipartFile[] file, int courseId, int instructorId)
+			throws IOException, SQLException {
 		return trainingMaterialDao.addTrainingMaterial(file, courseId, instructorId);
 	}
 

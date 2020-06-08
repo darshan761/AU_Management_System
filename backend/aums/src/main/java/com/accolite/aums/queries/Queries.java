@@ -3,7 +3,6 @@
  */
 package com.accolite.aums.queries;
 
-import org.springframework.jdbc.core.PreparedStatementCreator;
 
 /**
  * @author darshan
@@ -23,7 +22,7 @@ public class Queries {
 	public static final String GET_ALL_COURSES = "SELECT * from course WHERE deleted_at IS NULL";
 	public static final String GET_COURSE_BY_ID = "SELECT * FROM course WHERE course_id = ? AND deleted_at IS NULL";
 	public static final String CREATE_COURSE = "INSERT INTO course(course_name, course_desc, course_skills, course_prerequisites, course_location, course_month, course_year, creator_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
-	public static final String UPDATE_COURSE = "UPDATE course SET course_name=?, course_desc=?, course_skills=?, course_prerequisites=?, course_location=?, course_month=?,course_year=? WHERE course_id =?";
+	public static final String UPDATE_COURSE = "UPDATE course SET course_name=?, course_desc=?, course_skills=?, course_prerequisites=?, course_location=?, course_month=?,course_year=?, modified_at=now() WHERE course_id =?";
 	public static final String DELETE_COURSE = "UPDATE course SET deleted_at=now() WHERE course_id=? ";
 	
 	public static final String GET_COURSES_OF_CREATOR = "SELECT * from course where course.creator_id = ? AND course.deleted_at IS NULL";

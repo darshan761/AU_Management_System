@@ -5,12 +5,13 @@ package com.accolite.aums.models;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * @author darshan
  *
  */
-@Getter @Setter
+@Getter @Setter @ToString
 public class Email {
 	
 	private String subject;

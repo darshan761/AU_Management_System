@@ -7,7 +7,6 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -17,8 +16,7 @@ import com.accolite.aums.dto.ResponseDto;
 import com.accolite.aums.enums.ResponseType;
 import com.accolite.aums.models.Course;
 import com.accolite.aums.models.Email;
-import com.accolite.aums.queries.Queries;
-import com.accolite.aums.rowmapper.TrainingMaterialRowMapper;
+import com.accolite.aums.service.EmailService;
 
 /**
  * @author darshan
@@ -26,7 +24,8 @@ import com.accolite.aums.rowmapper.TrainingMaterialRowMapper;
  *
  */
 @Service
-public class EmailServiceImpl {
+public class EmailServiceImpl implements EmailService{
+	
 
 	@Autowired
 	private JavaMailSender javaMailSender;
@@ -34,7 +33,8 @@ public class EmailServiceImpl {
 	@Autowired
 	private CourseDaoImpl courseDao;
 
-	public ResponseDto sendEmail(Email email) throws MailException, MessagingException {
+	@Override
+	public ResponseDto sendEmail(Email email) throws MessagingException {
 
 		ResponseDto response = new ResponseDto();
 		try {

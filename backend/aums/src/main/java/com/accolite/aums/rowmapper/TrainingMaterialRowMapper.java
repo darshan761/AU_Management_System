@@ -3,7 +3,6 @@
  */
 package com.accolite.aums.rowmapper;
 
-import java.util.Base64;
 
 import org.springframework.jdbc.core.RowMapper;
 
